@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Cursor / local agent noise
+.cursor/
+
+# Python / env (if experiments appear later)
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+
+# OS / junk
+Thumbs.db
+Desktop.ini
+
+# Logs & temp
+*.log
+*.tmp
+.cache/
