@@ -1,0 +1,160 @@
+# Titulos de trabajos estudiantiles - CoNaIISI 2024
+
+Fuente: `/Users/alejorojas/facu/memorias2024.md`
+
+## Trabajos de Catedra de 1 a 3
+
+- Drones: Potenciando las capacidades de las fuerzas de seguridad en Rosario
+- CIUDADES INTELIGENTES: Aplicacion de Inteligencia Artificial en camaras de seguridad
+- Construyendo un mundo conectado: El papel de IoT en la sociedad moderna
+- Potenciando la Busqueda e Indexacion en Bases de Datos a traves del uso de un LLM y Procesamiento del Lenguaje Natural.
+- Ajuste Optimo de Hiperparametros con Algoritmos Geneticos
+- Desarrollo de robot social IoT con analisis de emociones mediante inteligencia artificial
+- Sistema de simulacion para creditos
+- Seguridad en APIs: Identificacion y Mitigacion de Vulnerabilidades Criticas
+- La tecnologia al limite - ¿Y si las IAs cobran vida?
+- Emprendiendo con Impacto: Inclusion y Sostenibilidad mediante Filamento Reciclado
+- Clasificacion de tuits con machine learning y personalizacion de contenidos usando algoritmos geneticos
+- Problemas de Seguridad en Blockchain
+- Modelo y comportamiento del indice S&P 500 estudiado a traves de la teoria del caos
+- Aplicacion de tecnologias para analizar el suelo agricola y optimizar el uso de agroquimicos
+- PENTESTING & ETHICAL HACKING Implementacion de Ciberseguridad para Mejorar el Centro de Computo de la Universidad Tecnologica Nacional - Facultad Regional La Plata
+- Blockchain en la economia digital
+- Viaje al Pasado Ambiental VR: Experimenta los Cambios del Planeta
+- Ficha Medica Universitaria Virtual
+- Uso de la IA en la deteccion y diagnostico de enfermedades
+- Aleatoriedad en la criptoseguridad y LavaRand
+- Desarrollo de una Blockchain desde Cero Fundamentos y Ejemplo en Python
+- Blockchain: Una Herramienta para la Democratizacion Efectiva
+- Implementacion de tecnologias en la educacion
+- Seguridad Informatica en la Era Post-COVID: Comparativa y analisis de los antivirus
+- Machine Learning en la Automatizacion del Transporte: Realidades en Seguridad, Privacidad y Eficiencia
+- Desarrollo de un Sistema de Gestion de Pasajes para una Empresa de Transporte Urbano
+- La deteccion de Lobesia Botrana mediante uso de la Inteligencia Artificial
+- Optimizacion de clasificadores de arritmias mediante algoritmos geneticos
+- Internet de las Cosas y la conciencia de Seguridad
+- Impacto de la IA en el Tratamiento Psicologico y Psiquiatrico
+- Microservicios y Sistemas Distribuidos: Escalabilidad, Resiliencia y Monitoreo con Kubernetes
+- Prejuicios e Imparcialidades en las Inteligencias Artificiales
+- Algoritmos de las Redes Sociales y su Impacto en la Salud Mental
+- Billeteras virtuales
+- Deteccion de fallos electricos en plaquetas electronicas a traves de analisis de imagenes
+- Inteligencia artificial: su uso en el diseño grafico y branding de marca
+- Eficiencia Energetica en Alumbrado Publico mediante Sensores de Luz
+- Implementacion de una Camara Infrarroja en la Raspberry Pi
+- Analisis de Datos y Redes Sociales: Evaluacion de Politicas para la Prevencion del Suicidio
+- Privacidad y Seguridad en Sistemas de Salud Electronica.
+- Videojuegos como Herramienta Terapeutica para la Salud Mental
+- La implementacion de laboratorios virtuales en la educacion tecnologica argentina
+- Utilizacion de Algoritmos Geneticos para optimizar parques eolicos sujetos a restricciones geograficas
+- Estrategias para integrar ChatGPT de manera efectiva en el aula de ingles a traves de metodologias activas
+
+## Trabajos de Catedra de 4 en adelante
+
+- Terapia de exposicion con realidad virtual y redes de sensores para el tratamiento de trastorno de estres postraumatico e insomnio
+- Identificacion de Focos de Infeccion de Dengue mediante Reconocimiento y Clasificacion de Imagenes con Integracion de Geolocalizacion
+- Inteligencia Artificial aplicada a la separacion de residuos solidos urbanos
+- Deteccion de Manipulacion de Imagenes y Videos mediante Redes Neuronales Convolucionales: Un Enfoque en DeepFakes
+- Inteligencia Artificial para la Prevencion de Ataques Ciberneticos: Aplicacion de Algoritmos de Machine Learning en la Ciberseguridad
+- Redes neuronales convolucionales y generativas para la deteccion de la calidad del limon
+- Estrategias Metodologicas para la Modernizacion de Centros de Datos Gubernamentales
+- Exploracion Prospectiva de las Redes Neuronales Artificiales
+- Deteccion y Monitoreo de Vehiculos en Tiempo Real
+- Planificacion de inscripciones: administracion de recursos en el servidor de peticiones usando pronosticos, inventario y programacion lineal.
+- Huertas diseñadas a medida con Programacion Lineal para estudiantes de la Universidad Tecnologica Nacional
+- Ciberseguridad y Auditoria de Sistemas sobre Billeteras Virtuales en Argentina
+- Analisis y prediccion del precio del Bitcoin a traves de fractales
+- Comparativa de Eficiencia entre Klipper y Marlin en Impresion 3D: Un Estudio de Rendimiento y Optimizacion
+- Analisis de Tareas y Seguimiento del Progreso de Alumnos mediante Inteligencia Artificial
+- Evaluacion de calidad de textos generados por IA: estudio aplicado a la generacion de narraciones para videojuegos
+- Buenas practicas desde la Ingenieria de Software para el uso de WordPress
+- Hojas de rutas de aprendizajes basadas en metodologias agil
+
+## Trabajos de Investigacion de Estudiantes extra-catedra
+
+- Deteccion Temprana de Retinopatia Diabetica mediante Algoritmos de Inteligencia Artificial
+- COBIT aplicado a la Reingenieria de Procesos de Negocios
+- La percepcion de los estudiantes sobre el aula invertida en una facultad de ingenieria
+- Aplicacion de las redes convolucionales y sistema experto en la deteccion de enfermedades en las plantaciones de frutilla
+- Integracion y Despliegue Continuo de Microservicios con GitHub, Docker y Portainer
+- Cuantificacion de la superficie de bosques secundarios mediante analisis de imagenes satelitales en el departamento O'Higgins, provincia del Chaco, Argentina
+- Aplicacion de Autoencoders en la Deteccion de Amenazas Internas: Estrategias y Resultados
+- Integracion de Modelos de Lenguaje de Gran Escala para la automatizacion de respuestas en Centros de Operaciones de Seguridad
+- Trabajar en equipo con Agile Driven Education: Percepcion de estudiantes de Ingenieria en Sistemas de Informacion
+- Implementacion de un Sistema de Reconocimiento Emocional Facial con Python y OpenCV
+- Acercamiento a los Sistemas Paralelo/Distribuidos
+- Revision de Ataques Contra la Seguridad de Redes Zigbee
+- Desarrollo de una aplicacion movil para la clasificacion de ganado en la provincia de Catamarca
+- Guia para implementar un Plan de Seguridad y Contingencia: Pasos para Proteger Infraestructuras Criticas
+- Implementacion de Ollama + Milvus en Arquitectura RAG Basada en Microservicios Dockerizados
+- Aplicacion de LLMs y KGs para la Interpretacion de Bases de Datos Relacionales
+- Administracion cientifica del proceso de produccion de una empresa de panificacion artesanal
+- Resolucion de algoritmos utilizando IA generativas
+- Analisis Tecnico Comparativo de Software para la Resolucion de Problemas de Optimizacion en Modelizacion Matematica
+- Implementacion de buenas practicas de ciberseguridad en PyMES
+- Armado de una base de datos con imagenes satelitales SAR de embarcaciones con informacion AIS
+- Aplicacion del modelo de Gestion del Conocimiento de Wiig para el proceso de cosecha en la industria citricola del limon
+- Sistematizacion del conocimiento: Aplicacion del Modelo Paniagua-Lopez en la Cosecha del Limon en Tucuman
+- Interpretacion de LSA con Inteligencia Artificial
+- Gestion del Conocimiento en procesos operativos de la industria citricola de la provincia de Tucuman segun el modelo de Angulo y Negron
+- Implementacion Modelos de Lenguaje para la creacion de rubricas analiticas
+- Ciberseguridad en la Internet de las Cosas: Soluciones Basadas en IA y Blockchain para la Deteccion y Prevencion de Intrusiones
+- Analisis de Herramientas de Simulacion en Teoria de Colas para la Optimizacion de la Gestion de Legajos Judiciales
+- Inclusion de tecnologias IoT y Ciencia de datos en la produccion ganadera
+- Iniciativas Tecnologicas para la Transparencia en Argentina: Un Relevamiento de Herramientas Gubernamentales
+
+## Trabajos de Final de Carrera
+
+- Simulador Visual Interactivo de Sistemas de Control para Entornos Academicos
+- ASTRA: Sistema Integrado de Soporte para Equipos SCRUM
+- Tecnologias emergentes en el periodismo deportivo: La implementacion de Planner.tv
+- Avances y tecnologias emergentes en la gestion del trabajo vitivinicola en la region de Cuyo.
+- Implementacion de plataforma de gestion centralizada de publicaciones y precios para hospedajes
+- Creacion de una aplicacion para el acompañamiento de la lecto-escritura de los niños (Literacy Manual)
+- Desarrollo de un Sistema para el Calculo del Nivel de Radiacion Espacial en un Punto de un Satelite
+- Implementacion de un sistema de reconocimiento de prendas en tiempo real para mejorar la experiencia vivida en desfiles y eventos de moda
+- AdaptarIA: la plataforma de aprendizaje para adaptacion de contenidos que pone la inteligencia artificial al servicio de la educacion
+- Hubber: Plataforma centralizada de informacion y consultas sobre Regulaciones y Certificaciones para el Comercio Internacional
+- Sistema de Seguimiento de Graduados Integrado con Analisis de Datos y Generacion de Estadisticas
+- D-IAgnostic: Sistema basado en Inteligencia Artificial para la Interpretacion de Imagenes de Tomografia Computarizada del Riñon en la Deteccion de Litiasis Renal.
+- El poder del viento: una iniciativa digital para fomentar la energia eolica en la epoca de transicion energetica
+- Reingenieria del sistema de gestion de un departamento de ingenieria electronica
+- OrdenaVoz: Sistema para gestion de pedidos de comidas rapidas comandado por voz.
+- AvistAR: Plataforma de registro de avistajes de animales silvestres y recoleccion de datos geograficos
+- Optimizacion de Rutinas Medicas a traves de la Automatizacion de Analisis Clinicos mediante Sistemas Inteligentes
+- Proyecto Guido Asistente para personas con discapacidad visual
+- Orian: Sistema de Soporte en Inversiones de Activos Financieros y No Financieros
+- Getting Better. Sistema de Apoyo y Seguimiento para Tratamientos Psicologicos
+- CabinetPlanner. Sistema de planificacion y gestion de pedidos de amoblamientos.
+- El Impacto de la Inteligencia Artificial en la Deteccion de Enfermedades Dermatologicas
+- El Papel de la Inteligencia Artificial en el Apoyo a la Terapia Cognitivo-Conductual a traves del Analisis de Emociones y Sentimientos
+- Tatool: Facilitando el alquiler de herramientas para un consumo mas sostenible
+- FlowCraft. Sistema de gestion de clubes deportivos
+- Flavour Fellow - Sistema de Gestion de Recetas Culinarias
+- Aplicacion de Redes Neuronales
+- Manopedia: Aplicacion para el aprendizaje y traduccion de lengua de señas argentino.
+- UrgenSys: Sistema de Gestion de Guardias Hospitalarias
+- SolarIA: Sistema de dimensionamiento de instalaciones de energia fotovoltaica y gestion inteligente de paneles solares
+- LipIA, tu voz con vos
+- Gestion del aprendizaje de un asistente inteligente para proyectos de ingenieria
+- Prototipo para la Exploracion Visual y Prediccion de Relaciones Medicas utilizando Linked Open Data (LOD)
+- Sistema IoT de control de bebederos a larga distancia en campo abierto
+- DRIVEWAY - Sistema para gestion y localizacion de estacionamientos privados.
+- BenkyNote - Sistema de Gestion de Estudio
+- Dislexia y Tecnologia: Explorando Lexi como solucion
+- MentorIA: Sistema de Autoevaluacion
+- INFLUENCIFY
+- Horus Security: Una suite integral de ciberseguridad para dispositivos moviles y PCs
+- MIDI.AI: Solucion Basada en Inteligencia Artificial para la Composicion Musical automatizada de Artistas Emergentes de 18 a 25 Años de la Republica Argentina Utilizando Piano
+- Melody Mentor: Transformando la educacion musical con Realidad Mixta
+- Hear Together
+- VitalTrack - Sistema de Gestion de Historia Clinica Personal
+- Simulacion Clinica
+- GUIO: Una solucion accesible para la navegacion en espacios cerrados y complejos
+- Construccion de un sistema de asistencia de personas con deterioro cognitivo y Alzheimer en sus primeras etapas con apoyo a cuidadores
+- Lumen: Revolucionando el Aula con Inteligencia Artificial
+- Roomy: explorando el uso de la Realidad Aumentada en actividades relacionadas al diseño de interiores y arquitectura
+- Implementacion de factores adicionales de autenticacion a traves de smart contracts
+- Sistema de Gestion del Conocimiento para la Industria Citricola
+- Digitalizacion y Automatizacion de Procesos de la Industria Textil Argentina para PyMES y MicroPyMES
+- Sistema Integrado de Gestion de Excedentes para Mercados Frutihorticolas
