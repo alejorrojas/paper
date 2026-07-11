@@ -9,8 +9,8 @@ See [AGENTS.md](AGENTS.md) for the project map.
 
 - Goal: student paper for CoNaIISI 2026.
 - Preliminary line: effect of **user/environment context** on rigor of generated code; NLA as exploratory extension.
-- Idea docs: `idea_paper_nla_asistentes_codigo.md`, `contexto_conaiisi_2026_paper.md` (Spanish).
-- Local NLA paper: `nla_transformer_circuits_2026.md`.
+- Idea docs: `research/idea_paper_nla_asistentes_codigo.md`, `research/contexto_conaiisi_2026_paper.md` (Spanish).
+- Local NLA paper: `sources/nla/nla_transformer_circuits_2026.md`.
 - NLA currency (checked ~Jul 2026): **not outdated**; published 7 May 2026; `kitft` repo active; no successor that replaces it. CCAO (Chalnev, Mar 2026) is concurrent, not a better replacement.
 
 ---
@@ -127,3 +127,5 @@ It helps for the same class of claims Anthropic makes:
 | 2026-07-11 | Translated AGENTS.md and memory.md to English (user request). |
 | 2026-07-11 | Added `SOUL.md` (personality / vibe per soul.md + user rewrite prompt). Linked from AGENTS.md. |
 | 2026-07-11 | Evolved `SOUL.md`: scientific research assistant identity — AI helping understand AI via NLAs; honor + responsibility; epistemic discipline as core purpose. |
+| 2026-07-11 | Added `README.md`, `.gitignore`; removed `.DS_Store` from git tracking. |
+| 2026-07-11 | Reorganized repo: `research/`, `sources/nla/`, `conference/`; agent docs stay at root. |

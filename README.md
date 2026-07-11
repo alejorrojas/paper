@@ -12,6 +12,16 @@ An AI helping humans understand AI — carefully.
 | [memory.md](memory.md) | Living lab notebook — findings, claims, Neuronpedia notes |
 | [AGENTS.md](AGENTS.md) | Project map, sources, how agents should work |
 
+## Layout
+
+```
+.
+├── AGENTS.md / SOUL.md / memory.md / README.md
+├── research/          # idea notes & CoNaIISI planning
+├── sources/nla/       # primary literature (local copies)
+└── conference/        # titles & proceedings dumps
+```
+
 ## Core idea
 
 Keep functional requirements fixed. Vary only contextual signals (junior vs senior, academic vs production, etc.). Measure code quality with a rubric. Optionally compare black-box outputs with NLA verbalizations of internal activations.
@@ -20,7 +30,7 @@ Keep functional requirements fixed. Vary only contextual signals (junior vs seni
 
 ## Key sources
 
-- Paper: https://transformer-circuits.pub/2026/nla/index.html (local: `nla_transformer_circuits_2026.md`)
+- Paper: https://transformer-circuits.pub/2026/nla/index.html (local: [`sources/nla/nla_transformer_circuits_2026.md`](sources/nla/nla_transformer_circuits_2026.md))
 - Blog: https://www.anthropic.com/research/natural-language-autoencoders
 - Code/checkpoints: https://github.com/kitft/natural_language_autoencoders
 - Demo: https://www.neuronpedia.org/nla
@@ -29,7 +39,9 @@ Keep functional requirements fixed. Vary only contextual signals (junior vs seni
 
 [CoNaIISI 2026](https://conaiisi2026.frre.utn.edu.ar/) — student paper track; submission closes ~28 Aug 2026.
 
+See [`conference/`](conference/) for prior-year titles and proceedings.
+
 ## Repo notes
 
-- Idea/context drafts may still be in Spanish; agent continuity docs (`SOUL.md`, `AGENTS.md`, `memory.md`) are in English.
-- `memorias2023.md` / `memorias2024.md` are large proceedings dumps — don’t load them whole unless searching.
+- Idea/context drafts in `research/` may still be in Spanish; agent continuity docs at the root are in English.
+- `conference/memorias*.md` are large — don’t load them whole unless searching.

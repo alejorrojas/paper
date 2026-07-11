@@ -31,18 +31,28 @@ Operational detail, valid/invalid claims, metrics, and Neuronpedia exploration f
 | **[SOUL.md](SOUL.md)** | **Who you are.** Personality, vibe, boundaries. Read every session; tell the user if you change it. |
 | **[memory.md](memory.md)** | **What you've learned.** Accumulated knowledge, inferences, how to read AVs, progress. Update when substantive work lands. |
 | **[AGENTS.md](AGENTS.md)** | **The job.** This file: project map and working rules. |
-| **[idea_paper_nla_asistentes_codigo.md](idea_paper_nla_asistentes_codigo.md)** | Detailed experimental idea: hypotheses, prompts, rubric, NLA use, titles, CoNaIISI version. (Currently in Spanish.) |
-| **[contexto_conaiisi_2026_paper.md](contexto_conaiisi_2026_paper.md)** | Conference context, lines A/B/C, preliminary decision, next steps, references. (Currently in Spanish.) |
-| **[nla_transformer_circuits_2026.md](nla_transformer_circuits_2026.md)** | Local copy of Anthropic’s technical paper (Transformer Circuits). Primary source for citations. |
-| **[titulos_estudiantiles_conaiisi_2024.md](titulos_estudiantiles_conaiisi_2024.md)** | 2024 student paper titles (benchmark of what CoNaIISI accepts). |
-| `memorias2023.md` / `memorias2024.md` | Full conference proceedings (heavy; use only for targeted precedent search). |
+| **[research/idea_paper_nla_asistentes_codigo.md](research/idea_paper_nla_asistentes_codigo.md)** | Detailed experimental idea: hypotheses, prompts, rubric, NLA use, titles, CoNaIISI version. (Currently in Spanish.) |
+| **[research/contexto_conaiisi_2026_paper.md](research/contexto_conaiisi_2026_paper.md)** | Conference context, lines A/B/C, preliminary decision, next steps, references. (Currently in Spanish.) |
+| **[sources/nla/nla_transformer_circuits_2026.md](sources/nla/nla_transformer_circuits_2026.md)** | Local copy of Anthropic’s technical paper (Transformer Circuits). Primary source for citations. |
+| **[conference/titulos_estudiantiles_conaiisi_2024.md](conference/titulos_estudiantiles_conaiisi_2024.md)** | 2024 student paper titles (benchmark of what CoNaIISI accepts). |
+| `conference/memorias2023.md` / `conference/memorias2024.md` | Full conference proceedings (heavy; use only for targeted precedent search). |
 
 Do not read the full proceedings unless searching for something specific.
+
+## Repo layout
+
+```
+.
+├── AGENTS.md / SOUL.md / memory.md / README.md   # agent continuity (root)
+├── research/     # paper idea & CoNaIISI planning notes
+├── sources/nla/  # primary literature (local copies)
+└── conference/   # CoNaIISI titles & proceedings dumps
+```
 
 ## Canonical NLA sources
 
 1. **Paper:** https://transformer-circuits.pub/2026/nla/index.html  
-   Local: `nla_transformer_circuits_2026.md`
+   Local: `sources/nla/nla_transformer_circuits_2026.md`
 2. **Anthropic blog:** https://www.anthropic.com/research/natural-language-autoencoders
 3. **Code / checkpoints:** https://github.com/kitft/natural_language_autoencoders  
    GitHub handle `kitft`: **Kit Fraser-Taliente** (first author).

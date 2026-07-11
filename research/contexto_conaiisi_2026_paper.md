@@ -30,7 +30,7 @@ De la memoria 2024 se identificaron las siguientes categorias estudiantiles:
 
 En la memoria 2024 se mencionan 159 trabajos estudiantiles. Se extrajeron 145 titulos desde el indice de la seccion estudiantil y quedaron organizados en:
 
-- [titulos_estudiantiles_conaiisi_2024.md](/Users/alejorojas/facu/paper/titulos_estudiantiles_conaiisi_2024.md)
+- [titulos_estudiantiles_conaiisi_2024.md](../conference/titulos_estudiantiles_conaiisi_2024.md)
 
 ## Duda principal sobre que es un paper valido
 
@@ -274,7 +274,7 @@ Extension con NLA:
 
 Esta linea quedo documentada en:
 
-- [idea_paper_nla_asistentes_codigo.md](/Users/alejorojas/facu/paper/idea_paper_nla_asistentes_codigo.md)
+- [idea_paper_nla_asistentes_codigo.md](idea_paper_nla_asistentes_codigo.md)
 
 ## Idea central refinada: contexto del usuario y rigurosidad del codigo generado
 

@@ -1,6 +1,6 @@
 # Titulos de trabajos estudiantiles - CoNaIISI 2024
 
-Fuente: `/Users/alejorojas/facu/memorias2024.md`
+Fuente: `conference/memorias2024.md`
 
 ## Trabajos de Catedra de 1 a 3
 
