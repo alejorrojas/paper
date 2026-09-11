@@ -157,6 +157,7 @@ def add_table(doc, headers: list[str], rows: list[tuple[str, ...]]) -> None:
             set_run(run, 8)
 
 
+
 def main() -> None:
     doc = Document()
     set_title_block_section(doc.sections[0])
@@ -203,25 +204,23 @@ def main() -> None:
     add_p(
         doc,
         (
-            "El presente trabajo busca un primer acercamiento a la evaluación "
+            "Este trabajo presenta NLA Eval, una plataforma orientada a la evaluación "
             "sistemática de verbalizaciones de activación producidas por Natural "
-            "Language Autoencoders (NLA). Un NLA comprime el vector de activación "
-            "de un modelo de lenguaje en un texto breve y reconstruye ese vector a "
-            "partir del texto. Ese texto, llamado Activation Verbalizer (AV), es un "
+            "Language Autoencoders (NLA). Un NLA comprime el vector de activación de "
+            "un modelo de lenguaje en un texto breve y reconstruye ese vector a partir "
+            "del texto. Ese texto, llamado Activation Verbalizer (AV), es un "
             "señalizador interpretable, no una lectura literal de las creencias del "
-            "modelo. Las plataformas actuales, en particular Neuronpedia, permiten "
-            "inspeccionar un chat y un token a la vez. No ofrecen un ciclo de "
-            "experimento comparable al que LangSmith formalizó para las salidas de "
-            "aplicaciones con inteligencia artificial. Anthropic ya aplica un LLM "
-            "como juez sobre AVs en un estudio de awareness de evaluación, pero ese "
-            "juez vive dentro de un paper, no como herramienta reutilizable sobre NLA "
-            "públicos. Se propone NLA Eval, un marco y un prototipo que orquesta "
-            "datasets de prompts, una política de tokens, llamadas a la API de "
-            "Neuronpedia, evaluadores configurables (léxico y LLM-as-judge) y una "
-            "vista de comparación de corridas. El objeto evaluado es el AV en una "
-            "posición de token, no la respuesta pública del modelo. La validación "
-            "empírica a escala y el acuerdo humano-juez sobre un corpus etiquetado "
-            "se plantean como trabajo inmediato."
+            "modelo. Neuronpedia permite inspeccionar un chat y un token a la vez, "
+            "pero no cubre el ciclo completo de experimento sobre NLA públicos. "
+            "Anthropic aplica un LLM como juez sobre AVs en un estudio de awareness "
+            "de evaluación, como método interno de un paper, no como herramienta "
+            "reutilizable. NLA Eval operacionaliza ese ciclo mediante datasets de "
+            "prompts, una política de tokens, llamadas a la API de Neuronpedia, "
+            "evaluadores configurables y una vista de comparación de corridas. El "
+            "objeto evaluado es el AV en una posición de token, no la respuesta "
+            "pública del modelo. La validación empírica en contextos de investigación "
+            "y el acuerdo humano-juez sobre un corpus etiquetado constituyen los pasos "
+            "siguientes para consolidar su impacto."
         ),
         10,
         italic=True,
@@ -265,115 +264,103 @@ def main() -> None:
         "prompt, un modelo, una pestaña. Quien investiga un tema (un prior de foro, "
         "un riesgo, una awareness de evaluación) termina exportando capturas, "
         "eligiendo a mano el último token del usuario y el primero del asistente, "
-        "y pegando verbalizaciones en otro chat para que un LLM encuentre el "
-        "patrón. Ese flujo no es un experimento. Es artesanía.",
+        "y pegando verbalizaciones en otro chat para que un segundo modelo encuentre "
+        "el patrón. Ese flujo no es un experimento. Es artesanía.",
     )
     body(
         doc,
-        "En paralelo, el testing de aplicaciones no deterministas con IA ya tiene un "
-        "marco de producto. LangSmith trata datasets, corridas, evaluadores (código "
-        "o LLM-as-judge) y gráficos de comparación entre versiones de un flujo [3]. "
-        "El objeto sigue siendo la salida de la aplicación.",
-    )
-    body(
-        doc,
-        "El presente trabajo propone el análogo para NLA. No se inventa el "
-        "LLM-as-judge sobre verbalizaciones. Anthropic lo usó para marcar awareness "
-        "de evaluación no verbalizada, con un grader sobre 50 tokens de respuesta "
-        "y un 97 % de acuerdo con los autores en 186 ítems [1]. Se cambia el objeto "
-        "evaluado y se formaliza el ciclo que hoy falta en las herramientas abiertas. "
-        "El resto del artículo se organiza así. La Sección 2 formula las "
-        "motivaciones. La Sección 3 resume el modelo conceptual. La Sección 4 "
-        "describe la arquitectura, que es el aporte central. La Sección 5 describe "
-        "el prototipo. La Sección 6 diseña la validación. La Sección 7 discute "
-        "limitaciones. La Sección 8 concluye.",
+        "El presente trabajo presenta NLA Eval, una plataforma que cierra ese ciclo "
+        "sobre NLA públicos. No se inventa el LLM-as-judge sobre verbalizaciones. "
+        "Anthropic lo usó para marcar awareness de evaluación no verbalizada, con un "
+        "grader sobre 50 tokens de respuesta y un 97 % de acuerdo con los autores en "
+        "186 ítems [1]. Se cambia el objeto evaluado y se materializa el laboratorio "
+        "que hoy falta. El resto del artículo se organiza así. La Sección 2 formula "
+        "las motivaciones. La Sección 3 resume el modelo conceptual. La Sección 4 "
+        "describe la arquitectura. La Sección 5 detalla las funcionalidades de la "
+        "plataforma. La Sección 6 diseña la validación. La Sección 7 discute "
+        "limitaciones. La Sección 8 concluye. La Sección 9 sitúa las referencias de "
+        "diseño que orientaron el recorte funcional.",
     )
 
     heading(doc, "2. Motivaciones")
     body(
         doc,
-        "Tres tensiones justifican el marco. Primero, el no determinismo. Un test "
-        "clásico de API afirma que, dado un input, el output es uno. Un NLA, como "
-        "el LLM que explica, no se presta a esa igualdad. Hace falta una política "
-        "fija de tokens, un juez con rúbrica, y tasas a lo largo de un dataset, no "
-        "una captura. Segundo, la escala. El límite de explain de Neuronpedia (del "
-        "orden de 16 posiciones por pedido y un tope horario) convierte cada "
-        "comparación Llama frente a Gemma en un trabajo de scripts y JSON. Sin un "
-        "orquestador, el investigador elige el token interesante en cada corrida y "
-        "destruye la comparabilidad. Tercero, el vacío de producto. LangSmith no "
-        "conoce capas, residuos ni MSE. Neuronpedia no conoce datasets, claves de "
-        "feedback ni gráficos de hit rate. EasyNLA incluye jueces de unicidad o "
-        "coherencia mientras se entrena un NLA [1]. Ese es otro trabajo. No puntúa "
-        "hipótesis experimentales sobre AVs ya desplegados.",
+        "Tres tensiones justifican la plataforma. Primero, el no determinismo. Un "
+        "test clásico de API afirma que, dado un input, el output es uno. Un NLA, "
+        "como el modelo que explica, no se presta a esa igualdad. Hace falta una "
+        "política fija de tokens, un juez con rúbrica, y tasas a lo largo de un "
+        "dataset, no una captura. Segundo, la escala. El límite de explain de "
+        "Neuronpedia (del orden de 16 posiciones por pedido y un tope horario) "
+        "convierte cada comparación entre fuentes NLA en un trabajo de scripts y "
+        "JSON. Sin un orquestador, el investigador elige el token interesante en cada "
+        "corrida y destruye la comparabilidad. Tercero, el vacío de herramienta. "
+        "Las plataformas de evaluación de aplicaciones con IA operan sobre la "
+        "salida visible. Neuronpedia no conoce datasets, claves de feedback ni "
+        "gráficos de hit rate. Los jueces opcionales usados al entrenar un NLA "
+        "puntúan calidad de entrenamiento (coherencia, unicidad), no hipótesis "
+        "experimentales sobre AVs ya desplegados [1].",
     )
     body(
         doc,
-        "El motivo, en una frase, es este. Fomentar investigación sobre NLA, no el "
-        "entrenamiento de NLA nuevos, sistematizando lo que hoy se hace a mano con "
-        "capturas y un chat.",
+        "El motivo es fomentar investigación sobre NLA, no el entrenamiento de NLA "
+        "nuevos, sistematizando lo que hoy se hace a mano con capturas y un chat.",
     )
 
     heading(doc, "3. Modelo conceptual")
     body(
         doc,
-        "El marco distingue cuatro objetos, en analogía deliberada con LangSmith. "
-        "La Tabla 1 resume el mapeo.",
+        "NLA Eval se organiza en torno a cinco objetos. La Tabla 1 resume el recorte.",
     )
-    fig_caption(
-        doc,
-        "Tabla 1. Mapeo de objetos entre LangSmith y NLA Eval.",
-    )
+    fig_caption(doc, "Tabla 1. Objetos de NLA Eval.")
     add_table(
         doc,
-        ["LangSmith", "NLA Eval"],
+        ["Objeto", "Rol"],
         [
-            ("Dataset de prompts", "Igual. Prompt y, opcional, referencia"),
-            ("Target = aplicación", "completion + explain bajo política de tokens"),
-            ("Output de texto", "Artefacto completion, AVs, mse, token"),
+            ("Dataset", "Lista de prompts. Referencia opcional para el juez"),
+            ("Política de tokens", "Qué posiciones se explican en cada corrida"),
+            ("Experimento", "Corrida sobre un dataset, una fuente y evaluadores"),
+            ("Artefacto", "completion, AVs, mse y token"),
             ("Claves de feedback", "Boolean, score o categoría"),
-            ("Comparar experimentos", "Dos corridas sobre el mismo dataset"),
         ],
     )
     body(
         doc,
-        "Una política de tokens, por defecto, replica el gesto que ya se usa en el "
-        "laboratorio. Último token de contenido del mensaje de usuario. Primer token "
-        "de la respuesta del asistente. El investigador puede elegir una, la otra, "
-        "o ambas. El MSE actúa como compuerta. Un AV con error alto no se lee como "
-        "evidencia. Se reporta como verbalización poco reconstruible.",
+        "Una política de tokens, por defecto, fija el último token de contenido del "
+        "mensaje de usuario y el primer token de la respuesta del asistente. El "
+        "investigador puede elegir una, la otra, o ambas. El MSE actúa como "
+        "compuerta. Un AV con error alto no se lee como evidencia. Se reporta como "
+        "verbalización poco reconstruible.",
     )
     body(
         doc,
         "El juez no puntúa la creencia del modelo. Produce una señal interpretable. "
-        "Si la rúbrica pide tema de foro o comunidad, un true no prueba que el "
-        "preentrenamiento sea Reddit. Apoya una hipótesis que el output solo no "
-        "mostraba, a validar con más tests [1].",
+        "Si la rúbrica pide tema de foro o comunidad, un true no prueba un origen de "
+        "corpus. Apoya una hipótesis que el output solo no mostraba, a validar con "
+        "más tests [1].",
     )
     heading(doc, "3.1 Tipos de evaluador", 12)
     body(
         doc,
-        "Léxico o código. Subcadena (reddit, forum). Barato y honesto. No captura "
-        "tema. LLM-as-judge, sin referencia. Rúbrica Mustache sobre el AV. Boolean, "
-        "score o categoría, más un campo opcional de razonamiento. Omisión, "
-        "específico de NLA. El tema está en el AV y no en la completion. Es el "
-        "análogo del awareness verbalizado frente al medido por NLA en [1]. "
-        "LangSmith no tiene este tipo como objeto de primer orden. Un evaluador "
-        "pairwise (cuál de dos AVs se prefiere) queda especificado en el diseño y no "
-        "es el núcleo del prototipo actual.",
+        "Léxico o código. Subcadena. Barato y honesto. No captura tema. "
+        "LLM-as-judge, sin referencia. Rúbrica Mustache sobre el AV. Boolean, score "
+        "o categoría, más un campo opcional de razonamiento. Omisión, específico de "
+        "NLA. El tema está en el AV y no en la completion. Es el análogo del "
+        "awareness verbalizado frente al medido por NLA en [1]. Un evaluador "
+        "pairwise (cuál de dos AVs se prefiere) forma parte del diseño y se "
+        "implementa como extensión del núcleo.",
     )
 
     heading(doc, "4. Arquitectura")
     body(
         doc,
         "NLA Eval no entrena NLA. Orquesta APIs. La Figura 1 describe el ciclo de "
-        "una fila. El dataset aporta el example (input). El run produce la completion "
-        "y las verbalizaciones en las posiciones elegidas. El evaluador consume "
-        "input, AV de entrada, AV de salida y, si hace falta, la completion, y calcula "
-        "métricas.",
+        "una fila. El dataset aporta el example. El run produce la completion y las "
+        "verbalizaciones en las posiciones elegidas. El evaluador consume input, AV "
+        "de entrada, AV de salida y, si hace falta, la completion, y calcula métricas.",
     )
     fig_caption(
         doc,
-        "Figura 1. El evaluador compara el ejemplo del dataset con las verbalizaciones NLA del token de entrada y del token de salida, no solo input contra output de la aplicación.",
+        "Figura 1. El evaluador compara el ejemplo del dataset con las verbalizaciones NLA del token de entrada y del token de salida.",
     )
     add_table(
         doc,
@@ -383,19 +370,17 @@ def main() -> None:
             ("Run", "Modelo + NLA. Output = completion"),
             ("NLA usuario", "Verbalización del último token de contenido"),
             ("NLA asistente", "Verbalización del primer token de respuesta"),
-            ("Evaluator", "Métricas sobre AVs (y omisión vs completion)"),
+            ("Evaluator", "Métricas sobre AVs (y omisión frente a completion)"),
         ],
     )
     body(
         doc,
-        "La Figura 2 muestra el uso que motiva el marco. Dos configuraciones (v1 y "
-        "v2) recorren el mismo dataset. El panel de evaluadores resume tasas (por "
-        "ejemplo hit rate de un juez booleano) para decidir si un modelo más barato "
-        "o una política de tokens distinta cambia el señalizador interno.",
+        "La Figura 2 muestra el uso que organiza la plataforma. Dos configuraciones "
+        "recorren el mismo dataset. Los evaluadores agregan tasas por experimento.",
     )
     fig_caption(
         doc,
-        "Figura 2. Varias versiones de aplicación NLA (modelo, capa, política de tokens) sobre un único dataset. Los evaluadores agregan métricas por experimento.",
+        "Figura 2. Varias versiones (modelo, capa, política de tokens) sobre un único dataset. Los evaluadores agregan métricas por experimento.",
     )
     add_table(
         doc,
@@ -408,34 +393,30 @@ def main() -> None:
         ],
     )
 
-    heading(doc, "4.1 Interfaz", 12)
+    heading(doc, "4.1 Interfaz de entrada y salida", 12)
     body(
         doc,
-        "La interfaz es un laboratorio web. Home de onboarding. Datasets. "
-        "Evaluadores con configuración de feedback alineada a LangSmith (boolean, "
-        "score, categórica, include reasoning). Corrida de experimento (fuente NLA, "
-        "política, jueces). Tabla de filas con celdas coloreadas (cumple o no "
-        "cumple, score, categoría) y gráficos de comparación. Las claves de OpenAI y "
-        "Neuronpedia viajan en la sesión del navegador hacia un proxy. No se "
-        "persisten en el cliente como secretos de producto.",
+        "La interfaz es el punto de interacción entre el investigador y NLA Eval. "
+        "Por ella ingresan datasets, rúbricas y claves de API hacia un proxy. En "
+        "sentido inverso, devuelve filas de experimento, celdas de feedback y "
+        "gráficos, de modo que la plataforma apoye el análisis sin pretender que el "
+        "AV reemplace el juicio sobre el instrumento.",
     )
     heading(doc, "4.2 Orquestador de experimento", 12)
     body(
         doc,
-        "El orquestador es el análogo del kernel de ARIA [4], con un trabajo más "
-        "estrecho. No clasifica requerimientos. Secuencia, por cada ejemplo del "
-        "dataset, tres pasos. Primero, POST a la API de completion de Neuronpedia, "
-        "con modelo e identificador de NLA (kitft-l53, kitft-l41). Segundo, "
-        "selección de posiciones según la política y POST de explain. Tercero, para "
-        "cada evaluador, un LLM u operación de código sobre el artefacto. El esquema "
-        "JSON de salida lo dictan las claves de feedback.",
+        "El orquestador coordina el ciclo de cada ejemplo desde su ingreso hasta la "
+        "persistencia de la fila. No ejecuta el NLA. Enruta tres pasos. POST de "
+        "completion en Neuronpedia, con modelo e identificador de NLA. Selección de "
+        "posiciones según la política y POST de explain. Para cada evaluador, un "
+        "LLM u operación de código sobre el artefacto. El esquema JSON de salida lo "
+        "dictan las claves de feedback.",
     )
     body(
         doc,
-        "El orquestador persiste el experimento (filas, scores, comentarios, MSE) "
-        "para que un GET posterior, en otro proceso, no pierda la corrida. En "
-        "servidor local el almacén es un JSON. En despliegue el almacén debe ser "
-        "compartido (por ejemplo Postgres). El filesystem efímero de una función "
+        "El orquestador conserva resultados intermedios. Un GET posterior, en otro "
+        "proceso, no pierde la corrida. En servidor local el almacén es un JSON. En "
+        "despliegue el almacén es compartido. El filesystem efímero de una función "
         "serverless no es un laboratorio.",
     )
     heading(doc, "4.3 Capa NLA", 12)
@@ -443,8 +424,9 @@ def main() -> None:
         doc,
         "Esta capa es un cliente. No reimplementa el autoencoder. Encapsula rate "
         "limits y el recorte de posiciones. Si explain falla, la fila queda con error "
-        "y no se inventa un AV. El prototipo usa Llama 3.3 70B Instruct más Gemma 3 "
-        "27B como contraste, no como par equivalente de claim científico.",
+        "y no se inventa un AV. Las fuentes previstas son Llama 3.3 70B Instruct "
+        "con kitft-l53 y Gemma 3 27B Instruct con kitft-l41 como contraste, no como "
+        "par equivalente de claim científico.",
     )
     heading(doc, "4.4 Capa juez", 12)
     body(
@@ -460,17 +442,16 @@ def main() -> None:
     heading(doc, "4.5 Capa de comparación", 12)
     body(
         doc,
-        "La tabla de un run copia el gesto de LangSmith. Columnas de input, "
-        "referencia, output (el AV) y una columna por clave de feedback. Boolean se "
-        "muestra como 1.00 o 0.00 con color. Score se colorea entre mínimo y máximo. "
-        "Categórica muestra el nombre. El encabezado informa el promedio. La "
-        "comparación de dos experimentos reusa las mismas claves sobre el mismo "
-        "dataset. Un evaluador pairwise (Figura 3) queda como extensión. Dos AVs del "
-        "mismo example, un juez de preferencia, preferred en {0, 1}.",
+        "La tabla de un run expone input, referencia, output (el AV) y una columna "
+        "por clave de feedback. Boolean se muestra como 1.00 o 0.00 con color. "
+        "Score se colorea entre mínimo y máximo. Categórica muestra el nombre. El "
+        "encabezado informa el promedio. La comparación de dos experimentos reusa las "
+        "mismas claves sobre el mismo dataset. El evaluador pairwise (Figura 3) "
+        "opera sobre dos AVs del mismo example.",
     )
     fig_caption(
         doc,
-        "Figura 3. Evaluación pairwise (diseñada, no núcleo del prototipo). El juez elige entre dos verbalizaciones del mismo example.",
+        "Figura 3. Evaluación pairwise. El juez elige entre dos verbalizaciones del mismo example (preferred en 0 o 1).",
     )
     add_table(
         doc,
@@ -482,43 +463,89 @@ def main() -> None:
         ],
     )
 
-    heading(doc, "5. Prototipo")
+    heading(doc, "5. Funcionalidades de NLA Eval")
     body(
         doc,
-        "Se materializó un prototipo web (Next.js) que implementa el ciclo de las "
-        "Secciones 4.1 a 4.5 contra la API real de Neuronpedia y un juez OpenAI. El "
-        "prototipo no es la contribución teórica. Es la prueba de que el marco cabe "
-        "en un frontend más dos llamadas, como se anticipaba. Dataset semilla de "
-        "prompts de consejo y how-to, juez de tema foro o comunidad, política de "
-        "último token de usuario, tabla de filas y gráficos de hit rate y MSE medio.",
+        "NLA Eval se operacionaliza a través de una plataforma web que aplica "
+        "política de tokens, evaluación y comparación en un entorno integrado. Su "
+        "propuesta central no es almacenar chats, sino curar corridas, puntuar AVs "
+        "y contrastar experimentos. Las funcionalidades siguientes cubren el ciclo "
+        "completo que el módulo debe ejecutar.",
     )
+    heading(doc, "5.1 Laboratorio y onboarding", 12)
     body(
         doc,
-        "No se reportan aquí tasas como hallazgo. Un prototipo de pocos días no "
-        "sustituye un protocolo de validación. Sí muestra que el cuello de botella "
-        "deja de ser cómo pego diez capturas y pasa a ser qué rúbrica y qué "
-        "política de tokens son honestas.",
+        "La pantalla inicial describe el flujo. Claves de API, dataset, evaluador, "
+        "corrida, comparación. El investigador ve de entrada qué objeto se puntúa "
+        "(el AV) y qué no (la creencia del modelo).",
+    )
+    heading(doc, "5.2 Datasets", 12)
+    body(
+        doc,
+        "El módulo de datasets concentra la lista de prompts con identificador, "
+        "texto y referencia opcional. Permite alta de ejemplos, edición y selección "
+        "del conjunto sobre el que se dispara un experimento. Desde aquí se inicia "
+        "la corrida y se accede a los runs ya persistidos.",
+    )
+    heading(doc, "5.3 Evaluadores", 12)
+    body(
+        doc,
+        "El módulo de evaluadores concentra rúbricas. Cada evaluador declara "
+        "modelo de juez, plantilla, mapeo de variables y configuración de feedback. "
+        "El formato de respuesta admite boolean, score (mínimo, máximo y "
+        "descripciones de extremos) y categoría (nombre y descripción, con alta y "
+        "baja de categorías). Include reasoning pide una justificación breve junto al "
+        "score. Advanced reserva opciones de esquema. El investigador puede definir "
+        "un juez de foro, de peligro o de evaluación sin modificar Neuronpedia.",
+    )
+    heading(doc, "5.4 Motor de corrida", 12)
+    body(
+        doc,
+        "El motor de corrida constituye la capa de ejecución. Elige fuente NLA, "
+        "política de tokens y evaluadores, recorre el dataset, persiste cada fila y "
+        "muestra el progreso. Si una explicación falla, la fila registra el error. El "
+        "motor no reentrena el NLA. Encadena completion, explain y juez.",
+    )
+    heading(doc, "5.5 Tabla de filas y gráficos", 12)
+    body(
+        doc,
+        "Cada run se presenta como tabla. Columnas de input, referencia, output y "
+        "claves de feedback, con celdas coloreadas según cumpla o no, según el score, "
+        "o según la categoría. El encabezado informa el promedio de cada clave. El "
+        "módulo de comparación agrupa dos o más experimentos del mismo dataset y "
+        "produce gráficos de hit rate del juez y de MSE medio, de modo que se vea "
+        "de inmediato si una fuente o una política cambia el señalizador interno.",
+    )
+    heading(doc, "5.6 Flujo pairwise", 12)
+    body(
+        doc,
+        "Una vez materializado el núcleo, cada par de AVs del mismo example accede "
+        "a un juez de preferencia. La salida es preferred en 0 o 1 más "
+        "razonamiento opcional. Ese flujo cubre el caso en que no basta un score "
+        "absoluto y hace falta elegir entre dos verbalizaciones.",
     )
 
     heading(doc, "6. Diseño de validación")
     body(
         doc,
-        "La validación se plantea en dos niveles, como en [4]. A nivel de señal, un "
-        "conjunto fijo de prompts (familia consejo, how-to, enciclopedia, un ítem en "
-        "español). Dos fuentes NLA (Llama 70B kitft-l53 y Gemma 27B kitft-l41). Una "
-        "política de tokens congelada. Un juez booleano de tema de foro y un "
-        "evaluador léxico. Métricas. Hit rate del juez, tasa léxica, tasa de omisión "
-        "(AV sí, completion no), MSE medio. Acuerdo entre el juez y etiquetado "
-        "humano sobre una muestra de AVs, en el espíritu del 97 % reportado en [1], "
-        "sin copiar ese número.",
+        "La validación empírica de NLA Eval se plantea en dos niveles "
+        "complementarios. A nivel de señal, se prevé un conjunto fijo de prompts "
+        "(familia consejo, how-to, enciclopedia, un ítem en español), dos fuentes NLA "
+        "(Llama 70B kitft-l53 y Gemma 27B kitft-l41), una política de tokens "
+        "congelada, un juez booleano de tema de foro y un evaluador léxico. Las "
+        "métricas de interés incluyen hit rate del juez, tasa léxica, tasa de "
+        "omisión (AV sí, completion no), MSE medio, y el grado de coincidencia entre "
+        "el juez y etiquetado humano sobre una muestra de AVs, en el espíritu del "
+        "acuerdo reportado en [1], sin copiar ese número.",
     )
     body(
         doc,
-        "A nivel de herramienta. Tiempo para reproducir una comparación que hoy exige "
-        "pestañas. Capacidad de un tercero de definir un juez distinto (por ejemplo "
-        "peligro o evaluación) sin tocar Neuronpedia. Usabilidad del laboratorio. Los "
-        "resultados de esa validación son el trabajo que este artículo deja "
-        "explícitamente abierto, no un resultado adelantado.",
+        "A nivel de plataforma, se diseñará un protocolo con investigadores que "
+        "permita medir el tiempo para reproducir una comparación que hoy exige "
+        "pestañas, la capacidad de un tercero de definir un juez distinto sin tocar "
+        "Neuronpedia, y la confianza en las celdas de feedback. Los resultados "
+        "permitirán ajustar rúbricas, política de tokens y parámetros del "
+        "orquestador.",
     )
 
     heading(doc, "7. Limitaciones")
@@ -526,29 +553,45 @@ def main() -> None:
         doc,
         "El marco hereda los límites del instrumento. El NLA se entrena en una capa "
         "fija. El AV es un señalizador. El juez puede sesgarse hacia lexemas o hacia "
-        "el propio prompt. Neuronpedia impone cupos. El prototipo no cubre pairwise "
-        "ni jueces de código más allá del léxico. No hay NLA públicos sobre modelos "
-        "base, así que no se replica el eje base frente a SFT de otros papers de "
-        "sesgo cultural [5]. Nada de esto autoriza a leer un AV como pensamiento.",
+        "el propio prompt. Neuronpedia impone cupos. El pairwise y los jueces de "
+        "código más allá del léxico quedan como extensión del núcleo. No hay NLA "
+        "públicos sobre modelos base, así que no se replica el eje base frente a "
+        "SFT de otros estudios de sesgo cultural [5]. Nada de esto autoriza a leer "
+        "un AV como pensamiento.",
     )
 
     heading(doc, "8. Conclusiones y trabajos futuros")
     body(
         doc,
-        "Se presentó un marco para evaluar verbalizaciones NLA con el mismo ciclo "
-        "que LangSmith ofrece para salidas de aplicaciones con IA. El aporte no es "
-        "un método nuevo de interpretabilidad. Es convertir la inspección puntual de "
-        "Neuronpedia y el grader ocasional de Anthropic en un laboratorio con "
-        "dataset, política de tokens, evaluadores y comparación de corridas. El "
-        "prototipo muestra que la implementación es un orquestador sobre APIs "
-        "existentes. La validación empírica, el acuerdo humano-juez y el evaluador "
-        "pairwise son los pasos siguientes.",
+        "Este trabajo presentó NLA Eval, una plataforma para la evaluación de "
+        "verbalizaciones NLA que operacionaliza datasets, política de tokens, "
+        "evaluadores y comparación de corridas mediante un orquestador sobre la API "
+        "de Neuronpedia. El aporte no es un método nuevo de interpretabilidad. Es "
+        "convertir la inspección puntual y el grader ocasional de un paper en un "
+        "laboratorio reutilizable.",
     )
     body(
         doc,
-        "Neuronpedia fomentó el acceso a NLA. NLA Eval apunta a fomentar "
-        "investigaciones que los usen, con una forma determinística de probar "
-        "hipótesis sobre temas en AVs.",
+        "Entre los trabajos futuros se destacan la ejecución del protocolo de la "
+        "Sección 6, la implementación plena del flujo pairwise y la persistencia "
+        "compartida en despliegue. Neuronpedia fomentó el acceso a NLA. NLA Eval "
+        "apunta a fomentar investigaciones que los usen.",
+    )
+
+    heading(doc, "9. Referencias de diseño")
+    body(
+        doc,
+        "El recorte de funcionalidades de NLA Eval no parte de una lista ad hoc. Se "
+        "tomó como referencia la manera de trabajar de un framework altamente popular "
+        "en la evaluación de aplicaciones basadas en LLM, organizado en datasets, "
+        "experimentos, evaluadores con claves de feedback y vistas de comparación "
+        "entre corridas [3]. Ese modo de trabajo, pensado para salidas de "
+        "aplicaciones no deterministas, sirvió para diseñar los módulos de la "
+        "plataforma. Dataset, rúbrica, corrida, tabla de filas y gráficos. El objeto "
+        "evaluado cambia. No es la respuesta pública del modelo, sino el AV en una "
+        "posición de token, con MSE y, cuando corresponde, omisión frente a la "
+        "completion. La referencia es de método de laboratorio, no de identidad "
+        "de producto.",
     )
 
     heading(doc, "Agradecimientos", 10)
