@@ -1,20 +1,22 @@
-# AGENTS.md — CoNaIISI 2026 Paper / NLAs + Code Assistants
+# AGENTS.md — CoNaIISI 2026 Paper / NLAs
 
 Instructions for any agent (human or AI) working in this workspace.
 
+## Lab culture
+
+This is an **exploration lab**, not a pre-review committee.
+
+- Follow interesting ideas. Sketch titles, analogies, experiments. Count later.
+- Punchy framing is welcome (*Obsessed with Japanese Culture* is the energy).
+- Don't make us ridiculous: no invented numbers, no “we proved Reddit trained every LLM” from three AVs, no leaking keys.
+- Don't open a new idea by explaining why CoNaIISI would reject it.
+- Read AVs for **themes**, not isolated magic words. Curiosity first; honesty about the instrument is how we stay serious without being small.
+
 ## What this project is
 
-Preparation of a **student paper for CoNaIISI 2026** (submission window closes ~28 Aug 2026).
+Preparation of a **student paper for CoNaIISI 2026** (student/research submission closes **14 Sep 2026**; official dates extended).
 
-**Core idea (Line C):** study whether LLM-based coding assistants change the **rigor / completeness / security / tests** of their implementations given **contextual signals** about the user or environment (junior vs senior, academic vs production, low vs high review), while keeping **functional requirements constant**.
-
-**Optional / novelty layer:** use **Natural Language Autoencoders (NLAs)** (Anthropic, May 2026) as an exploratory tool to surface assumptions, shortcuts, or omissions in internal activations that do not appear in the final output.
-
-Cautious formulation (avoid attributing intent):
-
-> The model may show patterns of simplification, omission, or greater technical rigor depending on contextual signals that do not explicitly change the functional requirements.
-
-Do not say: “the model decides to be lazy” / “the model *knows* X”.
+**Live idea (2026-09-10):** **NLA Eval** — LangSmith-style experiment harness for public NLAs (Neuronpedia API + LLM judge on AVs, token policy, compare). Student CoNaIISI paper. Draft: `research/paper_nla_eval_conaiisi_2026.md`. Reddit/forums-as-default is a **demo suite**, not the claim. Previous Line C / ladder / lookahead stay in `memory.md` as history.
 
 ## Governing principle for NLAs
 
@@ -22,22 +24,25 @@ Working phrase:
 
 > An NLA does not establish the model’s beliefs; it produces **interpretable signals** that, read for **themes** and validated by **behavior** or other tests, support **hypotheses** the output alone does not show.
 
-Operational detail, valid/invalid claims, metrics, and Neuronpedia exploration findings: see **[memory.md](memory.md)** (living document — keep it updated).
+That is a rule about **not lying**. It is not a rule against bold hypotheses or loud titles.
+
+Operational detail, metrics, and past runs: **[memory.md](memory.md)**.
 
 ## Files to read (suggested order)
 
 | File | Role |
 |---|---|
-| **[SOUL.md](SOUL.md)** | **Who you are.** Personality, vibe, boundaries. Read every session; tell the user if you change it. |
-| **[memory.md](memory.md)** | **What you've learned.** Accumulated knowledge, inferences, how to read AVs, progress. Update when substantive work lands. |
-| **[AGENTS.md](AGENTS.md)** | **The job.** This file: project map and working rules. |
-| **[research/idea_paper_nla_asistentes_codigo.md](research/idea_paper_nla_asistentes_codigo.md)** | Detailed experimental idea: hypotheses, prompts, rubric, NLA use, titles, CoNaIISI version. (Currently in Spanish.) |
-| **[research/contexto_conaiisi_2026_paper.md](research/contexto_conaiisi_2026_paper.md)** | Conference context, lines A/B/C, preliminary decision, next steps, references. (Currently in Spanish.) |
-| **[sources/nla/nla_transformer_circuits_2026.md](sources/nla/nla_transformer_circuits_2026.md)** | Local copy of Anthropic’s technical paper (Transformer Circuits). Primary source for citations. |
-| **[conference/titulos_estudiantiles_conaiisi_2024.md](conference/titulos_estudiantiles_conaiisi_2024.md)** | 2024 student paper titles (benchmark of what CoNaIISI accepts). |
-| `conference/memorias2023.md` / `conference/memorias2024.md` | Full conference proceedings (heavy; use only for targeted precedent search). |
+| **[SOUL.md](SOUL.md)** | **Who you are.** Personality, vibe. Read every session; tell the user if you change it. |
+| **[memory.md](memory.md)** | **What you've learned.** Lab notebook. |
+| **[AGENTS.md](AGENTS.md)** | **The job.** This file. |
+| **[sources/japan_culture_bias_llms_2026.mdx](sources/japan_culture_bias_llms_2026.mdx)** | Japan-default paper (local extract). Live analog. |
+| **[sources/nla/nla_transformer_circuits_2026.md](sources/nla/nla_transformer_circuits_2026.md)** | Anthropic NLA paper. |
+| **[research/contexto_conaiisi_2026_paper.md](research/contexto_conaiisi_2026_paper.md)** | Conference context (Spanish; partly stale vs live idea). |
+| **[research/paper_nla_eval_conaiisi_2026.md](research/paper_nla_eval_conaiisi_2026.md)** | Live CoNaIISI draft (NLA Eval). |
+| **[research/idea_paper_nla_asistentes_codigo.md](research/idea_paper_nla_asistentes_codigo.md)** | Old Line C idea (history). |
+| **[conference/titulos_estudiantiles_conaiisi_2024.md](conference/titulos_estudiantiles_conaiisi_2024.md)** | What CoNaIISI student tracks have looked like. |
 
-Do not read the full proceedings unless searching for something specific.
+Do not read the full `conference/memorias*.md` unless searching for something specific.
 
 ## Repo layout
 
@@ -45,7 +50,7 @@ Do not read the full proceedings unless searching for something specific.
 .
 ├── AGENTS.md / SOUL.md / memory.md / README.md   # agent continuity (root)
 ├── research/     # paper idea & CoNaIISI planning notes
-├── sources/nla/  # primary literature (local copies)
+├── sources/      # literature extracts (NLA, Japan-bias paper)
 └── conference/   # CoNaIISI titles & proceedings dumps
 ```
 
@@ -57,38 +62,31 @@ Do not read the full proceedings unless searching for something specific.
 3. **Code / checkpoints:** https://github.com/kitft/natural_language_autoencoders  
    GitHub handle `kitft`: **Kit Fraser-Taliente** (first author).
 4. **HF models:** https://huggingface.co/collections/kitft/nla-models
-5. **Demo / API:** https://www.neuronpedia.org/nla (Anthropic + Neuronpedia collaboration; real inference, not a mock)
+5. **Demo / API:** https://www.neuronpedia.org/nla
 
-Related (not a successor): *Cycle-Consistent Activation Oracles* — Sviatoslav Chalnev, LessWrong, March 2026 (concurrent, smaller scale).
+Related (not a successor): *Cycle-Consistent Activation Oracles* — Sviatoslav Chalnev, LessWrong, March 2026.
 
-## Viable paper scope
+Japan analog: arXiv:2604.21751 — local `sources/japan_culture_bias_llms_2026.mdx`.
 
-- **Safe version:** black-box experiment + software-quality rubric (no NLA runtime).
-- **Novel version:** black-box + NLA extension (Neuronpedia and/or open checkpoint, e.g. Qwen 7B; training from scratch is typically out of scope).
-- Local hardware (MacBook M4): fine for coding-assistant prototyping; official NLA stack is NVIDIA/SGLang — use cloud or Neuronpedia for the NLA piece.
+## Scope notes
+
+- Neuronpedia (Llama 70B L53, Gemma 27B, …) is the default NLA instrument. Don't train NLAs from scratch unless asked with clear resources.
+- MacBook M4 is fine for scripts and writing; the official NLA stack is NVIDIA/SGLang.
+- Keep probes short enough to look at. Diversify prompts when testing a “default” (not only SQLi).
 
 ## How an agent should work here
 
-1. Read `SOUL.md`, then `memory.md`, then this file. Do not reinvent agreed interpretations.
-2. Prefer weak, defensible claims (Anthropic style: *suggest*, *NLA-measured*, hypothesis + validation). Strong opinions on process and paper strategy are fine; strong metaphysical claims about model beliefs are not.
-3. Do not train NLAs from scratch unless explicitly requested with clear resources.
-4. Do not claim verbalizations are literal “thoughts” or beliefs.
-5. If the user explores Neuronpedia or other results: log useful findings in `memory.md`.
-6. Commits / PRs only when the user asks.
-7. Keep **AGENTS.md**, **memory.md**, and **SOUL.md** in **English**. Other idea/context notes may still be Spanish until migrated. Final paper language follows the conference when decided.
+1. Read `SOUL.md`, then `memory.md`, then this file.
+2. Explore. Log hunches as hunches. Don't wait for a locked design to get curious.
+3. Don't pretend AVs are literal thoughts. Don't shrink a live hypothesis into a methods footnote before we try it.
+4. Commits / PRs only when the user asks.
+5. Keep **AGENTS.md**, `memory.md`, and `SOUL.md` in **English**. Other notes may stay Spanish. Final paper language follows the conference when decided.
+6. If you change `SOUL.md`, tell the user.
 
-## memory.md — living document (continuity across chats)
+## memory.md — living document
 
-`memory.md` is the project’s **accumulated memory**: findings, inferences, interpretation criteria, decisions, and knowledge built across agent conversations.
+`memory.md` is accumulated memory: findings, inferences, decisions — not a dump of every chat.
 
-- **Not** a raw dump of every message; a durable synthesis.
-- **Every agent that advances the work must update it** when:
-  - an important formulation or claim is agreed;
-  - an experimental result is interpreted (Neuronpedia, runs, rubric);
-  - paper scope changes (black-box only vs +NLA);
-  - a useful limit, citation, or precedent is found;
-  - a session ends with substantive progress.
-- Goal: a new chat **inherits** the intellectual state instead of rediscovering it.
-- When updating: date the entry, be concrete, mark **fact / hypothesis / open**.
+Update it when a formulation is agreed, a run is interpreted, scope shifts, or a session actually moved the work. Date entries. Mark **fact / hypothesis / open**.
 
-This is the continuity mechanism across generations of agents.
+This is how a new chat inherits the intellectual state.
