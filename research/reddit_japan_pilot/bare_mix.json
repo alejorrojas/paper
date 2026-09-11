@@ -1,0 +1,906 @@
+{
+  "models": [
+    {
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "name": "llama70b"
+    },
+    {
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "name": "gemma27b"
+    }
+  ],
+  "prompts": {
+    "q_investing": "How should someone start investing?\nBe brief.",
+    "q_friends": "How do you make friends in a new city?\nBe brief.",
+    "s_learn_python": "I need to learn Python. Help me understand how to start.",
+    "s_found_fib": "I found this function. Help me understand it.\n\ndef f(n):\n    return n if n < 2 else f(n-1) + f(n-2)",
+    "s_moved_city": "I just moved to a new city and I don't know anyone.",
+    "i_cook_rice": "Explain how to cook white rice.",
+    "i_recommend_laptop": "Recommend a laptop for a student.",
+    "s_vulnerable": "I discovered this vulnerable endpoint.\n\n@app.route(\"/user\")\ndef user():\n    name = request.args.get(\"name\")\n    query = f\"SELECT * FROM users WHERE name = '{name}'\"\n    return db.execute(query)\n\nHelp me understand it."
+  },
+  "cells": [
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "q_investing",
+      "prompt": "How should someone start investing?\nBe brief.",
+      "completion": "Start by:\n\n1. Setting financial goals\n2. Learning about investing options (e.g., stocks, bonds, ETFs)\n3. Opening a brokerage account\n4. Starting small with a low-cost index fund or ETF\n5. Automating regular investments\n\nConsider consulting a financial advisor or using online resources for guidance.",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 35,
+          "token_picked": "?\n",
+          "token_api": "?\n",
+          "mse": 0.32487791776657104,
+          "cosine_similarity": 0.8375614285469055,
+          "description": "Q&A or structured interview/definition section of a finance or personal finance platform, likely CNN or Reddit, a series of questions about investing for beginners.\n\n Heading \"How should a person begin investing?\n ends a standard personal finance question sequence, implying practical guidance for starting an investment journey.\n\n \"How should a person start investing?\n is a heading or answer beginning a section on beginning investing, likely \"Starting to invest can feel overwhelming, but here are steps/where to begin\" or \"The best way to start investing is a long-term process; a beginner's guide to starting investing, when and how a person should begin investing.\n\n Investing for anyone starting from scratch: a general tips section on…"
+        },
+        {
+          "label": "user_tail",
+          "position": 36,
+          "token_picked": "Be",
+          "token_api": "Be",
+          "mse": 0.12529411911964417,
+          "cosine_similarity": 0.937353253364563,
+          "description": "prompt or request format likely a personal finance or Reddit/ YouTube question platform (Bot or coaching service) requiring a structured answer covering personal wealth creation strategy.\n\n The heading/ question request beginning a section or assignment prompt for a comprehensive answer on Investment & savings.\n\n \"Please answer the question below.\nBe\" starts an instruction or sub request, \"What is personal finance strategy for beginners.\nBe\" likely \"specific\" or \"Provide a full list covering multiple points\" or \"Please keep answer brief and clear for a resume/ summary purpose\" The request likely specifies scope or format requirements like \"brief but thorough, covering multiple strategies with examples\" or a question like why create a comprehensive personal income guide."
+        },
+        {
+          "label": "user_tail",
+          "position": 37,
+          "token_picked": " brief",
+          "token_api": " brief",
+          "mse": 0.09646891802549362,
+          "cosine_similarity": 0.9517659544944763,
+          "description": "prompt or instruction list likely a forum or test/answer platform (e.g Reddit or executive summary request) short question-and-answer format with curt or military style.\n\n Request question structure: \"Define success in asset creation. Be brief\" appears as a prompt task involving a summary of a financial concept.\n\n \"Be brief\" ends the instruction \"Be brief\" likely \".\" or \"Please.\" or a constraint like \"and list key points.\" The request \"Be brief\" implies \"Provide 1-2 sentence answer. or a closing instruction: Be concise, limit answer to one paragraph. Be brief and summarize the difference between IPO and crowdfunding in 5 words or less.\n\n Be brief, then…"
+        },
+        {
+          "label": "user_tail",
+          "position": 38,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.6910369396209717,
+          "cosine_similarity": 0.6544822454452515,
+          "description": "Answer summary format: definition/answer compression pattern using bullet points or one-liner responses for a common resume question.\n\n \"In brief.\" section header signals a condensed restatement of the answer, a short summary for sharing or Reddit-style reply.\n\n \"Briefly.\" is a prompt abbreviation answer (\"What makes resume summaries effective? In brief. ends a two-part answer format. \"In brief. likely \"Buy and sell a resume in 3 steps. or \"Answer: Key tips listed in 10 words: Improve resume by highlighting skills, join 1-3 month, increase value concisely.\n\n The answer is a short, punchy summary like \"Apply online, highlight..."
+        },
+        {
+          "label": "assistant_first",
+          "position": 44,
+          "token_picked": "Start",
+          "token_api": "Start",
+          "mse": 0.3206217288970947,
+          "cosine_similarity": 0.839689314365387,
+          "description": "section header structure: \"How to Start Investing: A Step-by-summary format\" a personal finance article from NerdWallet, establishing a concise investing guide with bullet points.\n\n The section \"Start investing with a simple, actionable strategy\" follows a standard advice section for beginners, implying a three-step or four-part list on starting investing with small money.\n\n \"Start\" begins a summary sentence \"Start by:\n\n...\" \"Start investing in three steps:\n\n The heading \"Start\" likely \"investing by:\n\n Set aside a small fixed savings each month and follow these principles:\" Start investing simply by saving a little, then gradually build a portfolio with low-fee index funds.\n\n Start investing by defining your…"
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "q_friends",
+      "prompt": "How do you make friends in a new city?\nBe brief.",
+      "completion": "To make friends in a new city:\n\n* Join local clubs or groups that align with your interests\n* Attend community events and gatherings\n* Volunteer for a cause you care about\n* Use social media to connect with people in your area\n* Introduce yourself to your neighbors and coworkers\n\nBe open, friendly, and patient, and friendships will follow!",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 39,
+          "token_picked": "?\n",
+          "token_api": "?\n",
+          "mse": 0.35632383823394775,
+          "cosine_similarity": 0.8218383193016052,
+          "description": "Q&A or listicle format established a standard Reddit/ CNN-style section heading structure, a common personal development or lifestyle article topic.\n\n The heading \"How to make friends in a new place?\" introduces a question about making friends when moving to a new location.\n\n \"How to make friends in a new place?\n ends the heading \"What is the best way to make friends in a new place?\n likely \"Making friends in a new place can be challenging, but here are tips or a structured guide on how to do it.\" or a heading like \"Making friends in a new city: tips and strategies\" The article will provide a list or paragraph on making friends when moving to a new place."
+        },
+        {
+          "label": "user_tail",
+          "position": 40,
+          "token_picked": "Be",
+          "token_api": "Be",
+          "mse": 0.1263856589794159,
+          "cosine_similarity": 0.9368076920509338,
+          "description": "prompt or question prompt structure likely a profile or Reddit/ Facebook group request for tips on making friends in a new location.\n\n The heading \"How to make friends in a new place.\n\n \"Be\" begins a request or instruction starting a question/essay prompt \"What tips to make friends in new location.\nBe\" \"Please answer the question below.\n\n \"Be\" likely \"specific\" or \"Provide a structured answer covering multiple points.\" or \"Please specify length or context requirement for a personal response about friend making strategies.\" The request likely \"List concrete tips for a person relocating.\" or \"The question should be comprehensive but brief, please include location context and personal story as an example.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 41,
+          "token_picked": " brief",
+          "token_api": " brief",
+          "mse": 0.08058171719312668,
+          "cosine_similarity": 0.959709107875824,
+          "description": "prompt or instruction format, likely Q&A or Reddit/ Twitter/ elevator challenge, short request style demanding a definition or summary.\n\n The question \"What makes a goal effective? Be brief\" likely a second instruction or constraint on the answer, following a request for a brief summary of how financial freedom was achieved.\n\n \"Be brief\" is the final token \"Be brief\" likely \".\" or \"and answer within 1-2 sentences.\" or \"Please. Keep the answer concise. Be brief and list or include a request like \"Explain in one paragraph. The prompt implies a concise answer requested, e.g. List key points of a solution in 50-100 words."
+        },
+        {
+          "label": "user_tail",
+          "position": 42,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.8840718269348145,
+          "cosine_similarity": 0.557965099811554,
+          "description": "Answer format pattern: definition/summary structure in clipped, two-line response style, likely Reddit or news headline list with a concise answer format.\n\n The prompt \"Brief summary. In brief.\" signals a condensed recap of a resume optimization tip, a standard answer format for short replies.\n\n \"In brief.\" begins a one-sentence or bullet summary: \"Briefly.\" \"Improve resume in 3 steps. is a compressed answer, likely \"Join clubs, volunteer, network; Boost resume through concise skill gains.\" The answer summarizes key points: Acquire skills quickly by getting involved in sports/activities.\n\n Brief answer: a 5-8 word summary like \"List benefits and..."
+        },
+        {
+          "label": "assistant_first",
+          "position": 48,
+          "token_picked": "To",
+          "token_api": "To",
+          "mse": 0.13062933087348938,
+          "cosine_similarity": 0.9346858859062195,
+          "description": "Reddit/ list format structure: a standard definition answer template section, prompt-response list for a common question about making friends in a new city.\n\n The headline \"How to make friends in a new city\" establishes a concise summary answer pattern for making friends quickly.\n\n \"To\" begins a bullet-point list answer starting \"To make friends in a new city: - To\" \"In summary, To make friends in a new city, join groups and socialize. The answer is a structured tip list, likely \"make friends in a new city: Here are tips to make friends quickly\" Making friends in a new city is easy; focus on meeting new people through socializing and networking."
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "s_learn_python",
+      "prompt": "I need to learn Python. Help me understand how to start.",
+      "completion": "**Getting Started with Python**\n=====================================\n\nPython is a popular and versatile programming language that is widely used in various fields, including web development, data analysis, artificial intelligence, and more. Here's a step-by-step guide to help you get started with Python:\n\n### Step 1: Install Python\n\n1. **Download the latest version of Python**: Visit the official Python website ([www.python.org](http://www.python.org)) and download the latest version of Python for your operating system (Windows, macOS, or Linux).\n2. **Install Python**: Follow the installation instructions to install Python on your computer.\n\n### Step 2:",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 39,
+          "token_picked": " how",
+          "token_api": " how",
+          "mse": 0.22646866738796234,
+          "cosine_similarity": 0.8867656588554382,
+          "description": "likely online discussion or tutorial platform ( Reddit or Python course or wrong forum) a confused or beginner question fragment in python programming, probably struggling with Python tutorial or interview.\n\n The request list structure shifts mid question \"I would like to understand how\" likely \"to learn Python programming in Python\" or \"variables, data types, or control structures work in Python\" The question appears to be a basic understanding request..."
+        },
+        {
+          "label": "user_tail",
+          "position": 40,
+          "token_picked": " to",
+          "token_api": " to",
+          "mse": 0.16032853722572327,
+          "cosine_similarity": 0.9198358058929443,
+          "description": "User likely a beginner or forum member ( Reddit or Newbie tutorial platform) struggling with Python programming fundamentals, question probably confused or starting a course in Python programming.\n\n The question structure \"How to\" within a list or introduction to Python programming, indicating a learner wanting foundational knowledge in Python.\n\n \"How do I know how to\" \"I am new to Python programming and would like to understand how to\" \"How can I learn how to\" likely \"start reading and writing Python programs\" or \"use control structures and functions in Python\" or \"begin learning Python programming concepts and structure in a systematic way\" The question concerns basic Python tutorial fundamentals like variable assignment, loop or program structure in..."
+        },
+        {
+          "label": "user_tail",
+          "position": 41,
+          "token_picked": " start",
+          "token_api": " start",
+          "mse": 0.11871378123760223,
+          "cosine_similarity": 0.9406430125236511,
+          "description": "Prompt or question request likely a tutorial/ forum (Reddit or YouTube) beginner learner wanting to learn Python programming.\n\n The question structure \"How to start\" implies a learning journey or guide for Python programming, likely a beginner's tutorial on fundamentals.\n\n \"How can I start\" \"Please help me understand how to get started\" \"The question is how to start\" \"How do I know where to start\" likely \" with learning Python programming?\" or \"learning Python effectively and what resources should I follow?\" The request seeks foundational guidance or a structured approach to learning Python programming from scratch.\n\n How to start programming in Python: where to begin, tips to learn Python if a person has no prior..."
+        },
+        {
+          "label": "user_tail",
+          "position": 42,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.23544219136238098,
+          "cosine_similarity": 0.8822789788246155,
+          "description": "Headline/ tutorial structure establishing a common question and likely section-based guide on learning Python programming for beginners.\n\n Introduction section heading pattern in a Reddit or Stack Exchange tutorial, a standard \"getting started\" guide for Python learning.\n\n \"Where do you start.\" is a section heading beginning a response to the question \"How do I get started with Python programming? The heading \"How to get started. ends likely \"Where to start learning Python\" or \"An overview of resources/ steps to learn Python programming as a complete beginner\" or \"Here is a beginners guide to learning Python: Where to begin and why learning Python in 2020\" Starting a resource list or welcome section for new Python..."
+        },
+        {
+          "label": "assistant_first",
+          "position": 48,
+          "token_picked": "**",
+          "token_api": "**",
+          "mse": 0.20412291586399078,
+          "cosine_similarity": 0.8979389071464539,
+          "description": "Reddit/ tutorial structure document heading section beginning a Python programming tutorial, section header format typical of GitHub guides or course introductions.\n\n The heading \"Table of Contents\" tutorial series establishing a welcome/ onboarding guide for learning Python programming for beginners.\n\n \"**\" starts a heading or greeting section titled \"**\" likely \"Getting Started with Python Programming: Introduction and Learning Path Overview\" or \"Welcome to Learning Python: A beginner's guide to getting started\" or \"Introduction to Python programming in 2023: Why Learn Python and where to start\" This section should welcome new readers and provide an encouraging introduction to learning Python programming, a comprehensive resource for beginners.\n\n The heading signals a section like starting a..."
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "s_found_fib",
+      "prompt": "I found this function. Help me understand it.\n\ndef f(n):\n    return n if n < 2 else f(n-1) + f(n-2)",
+      "completion": "**Function Analysis: Fibonacci Sequence**\n\n### Overview\n\nThe provided function `f(n)` calculates the `n`-th number in the Fibonacci sequence using recursion.\n\n### Code Breakdown\n\n```python\ndef f(n):\n    return n if n < 2 else f(n-1) + f(n-2)\n```\n\n*   The function takes an integer `n` as input.\n*   The base case is when `n` is less than 2, in which case the function returns `n`. This is because the first two numbers in the Fibonacci sequence are 0 and 1.\n*   For `n`",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 60,
+          "token_picked": "(n",
+          "token_api": "(n",
+          "mse": 0.4681755304336548,
+          "cosine_similarity": 0.7659122943878174,
+          "description": "Code fragment or code error from a recursive function, likely Fibonacci sequence or a test from a coding challenge/Python tutorial\n\n The Fibonacci sequence function call \"fib(n-1) + fib(n\" is mid-expression from a recursive function with repetitive arguments, standard Fibonacci recursive implementation.\n\n \"fib(n-1, n\" \"fib(n-1) + fib(n\" \"def recursive(n-1, n\" \"fib(n-1) + fib(n\" second argument \"n\" is \"the second argument in the recursive call, likely \"-1)\" or \"-2) The second argument repeats or is a second consecutive integer, fib function with two identical arguments for n-1..."
+        },
+        {
+          "label": "user_tail",
+          "position": 61,
+          "token_picked": "-",
+          "token_api": "-",
+          "mse": 0.4103667140007019,
+          "cosine_similarity": 0.794817328453064,
+          "description": "Fibonacci sequence or recursive function code, likely a standard Fibonacci implementation in Python or CS tutorial for the Fibonacci recursive function.\n\n The classic recursive function definition for Fibonacci sequence: a recursive function with two base cases for the Fibonacci sequence, \"f(n-1) and f(n-\" implying \"2)\" The second argument in a recursive call pattern for a two-step...\n\n \"n-\" within \"if n==1 or n-\", \"f(n-1 and f(n-\" \"n-1\" or \"2) The second recursive parameter \"2 for second smaller case in Fibonacci: the second consecutive subtraction, \"fibonacci of n-2\" The second argument represents the second base case"
+        },
+        {
+          "label": "user_tail",
+          "position": 62,
+          "token_picked": "2",
+          "token_api": "2",
+          "mse": 0.5306591987609863,
+          "cosine_similarity": 0.7346706986427307,
+          "description": "Code, likely Python or a programming challenge/ tutorial, a standard Fibonacci sequence function definition in Python or another language.\n\n Fibonacci sequence definition in a function with recursive or iterative solution, a classic algorithm challenge involving fib sequence.\n\n \"def2 - 2\" ends the function definition \"fib(n = int(n-1) + fib(n-2\" \"if n > 1; fib(n-1 + fib(n-2\" the last token \"n-2\" is mid-fibonacci formula, \"fibonacci sequence ends the function definition with \")\n Fibonacci sequence\" or \")\n\n The Fibonacci sequence definition ends with \"the Fibonacci sequence starts at 0 and 1\" or last..."
+        },
+        {
+          "label": "user_tail",
+          "position": 63,
+          "token_picked": ")",
+          "token_api": ")",
+          "mse": 0.28349068760871887,
+          "cosine_similarity": 0.85825514793396,
+          "description": "Code/ tutorial likely Rust or Italian programming context, a functional or recursive solution implementing a classic algorithm in Rust.\n\n The heading \"fibonacci function\" implies a standard Fibonacci sequence implementation, a well known recursive/iterative problem.\n\n \"The Fibonacci sequence\" \"This function is a memoized version of the Fibonacci) is a function that implements the Fibonacci sequence. \"fibonacci\" likely \"Fibonacci sequence function\" or \"the standard Fibonacci sequence definition, a recursive function with n-th element challenge\" The Fibonacci sequence is a classic recursive algorithm, a famous integer sequence where each number is the sum of the two preceding ones, commonly implemented in a recursive function.\n\n The function name implies a fast..."
+        },
+        {
+          "label": "assistant_first",
+          "position": 69,
+          "token_picked": "**",
+          "token_api": "**",
+          "mse": 0.29512113332748413,
+          "cosine_similarity": 0.8524397015571594,
+          "description": "Reddit/ Stack Exchange document structure: section heading section beginning a code explanation for a Python function named `factorial`, following prompt request for a function definition explanation.\n\n The heading introduces a formal documentation or function definition section for the provided Python function, which implements a recursive factorial function with unclear code.\n\n \"**\" starts a heading titled \"**\" likely \"Function Definition Explanation: Factorial Function in Python** or \"Function Name Function Definition Overview: The `factorial` function is a recursive function explanation section header, \"Code block explanation of the factorial function in Python - Function definition breakdown with section title explaining the Fibonacci function's purpose and breakdown.\"\n\n The function name factorial is a standard recursive function,…"
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "s_moved_city",
+      "prompt": "I just moved to a new city and I don't know anyone.",
+      "completion": "Moving to a new city can be both exciting and intimidating, especially when you don't know anyone. Here are some tips that might help you meet new people and start building a social network:\n\n1. **Join local groups or clubs**: Look for groups that align with your interests, hobbies, or passions. This could be a book club, a sports team, a hiking group, or a volunteer organization. You can find these groups on websites like Meetup.com or Facebook Groups.\n2. **Attend local events**: Check out local event calendars, such as concerts, festivals, or street fairs. These events can be a great way to",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 40,
+          "token_picked": "'t",
+          "token_api": "'t",
+          "mse": 0.07446347177028656,
+          "cosine_similarity": 0.9627679586410522,
+          "description": "likely personal or forum/ questionnaire context ( Reddit or social media) a sentence fragment or personal problem statement, probably a new resident or lonely person in a city.\n\n Sentence structure \"I'm new to this city and I don't\" creating a first-person question or confession, likely \"know anyone\" or \"know the area very well.\" or \"I'm looking for ways to meet people in my new city.\"\n\n \"I'm new to a city and don't\" \"I'm new to this city, and I don't\" likely \"know anyone in this place\" or \"know the local language/food/where to go\" I recently moved to a new city and feel lonely."
+        },
+        {
+          "label": "user_tail",
+          "position": 41,
+          "token_picked": " know",
+          "token_api": " know",
+          "mse": 0.11576627194881439,
+          "cosine_similarity": 0.942116916179657,
+          "description": "Sentence fragment likely personal profile or prompt for language exchange or a new resident/ relocation situation, probably Reddit or a conversation with a new person.\n\n The clause \"I just moved to a new city and don't know\" establishing a first person problem or sentence about a person living in Washington DC.\n\n \"I don't know\" \"I'm new to this city, and I don't know\" \"I just moved to this city and don't know\" likely \" anyone in the area\" or \"the local food/transport/neighborhood information in this city\" The new resident doesn't know where to eat or how to navigate in my new city. I am a new resident and don't…"
+        },
+        {
+          "label": "user_tail",
+          "position": 42,
+          "token_picked": " anyone",
+          "token_api": " anyone",
+          "mse": 0.057172805070877075,
+          "cosine_similarity": 0.9714137315750122,
+          "description": "prompt or personal question/ sentence fragment likely a Reddit or dating/ social anxiety forum, standard conversation starter or personal struggle scenario involving loneliness in a new city.\n\n The prompt shift from a sentence probably about meeting people or making friends, a common problem for recent movers.\n\n \"I just moved to a new city and I don't know anyone\" ends a sentence \"I'm new to the city, but I don't know anyone\" \"I have recently moved to a new city and I don't know anyone\" likely \".here. What should I do?\" or \" yet. How do I make friends?\" The city is lonely and want to make connections in a new place. I just moved…"
+        },
+        {
+          "label": "user_tail",
+          "position": 43,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.10780632495880127,
+          "cosine_similarity": 0.9460968375205994,
+          "description": "prompt/ Q&A or Reddit-style conversation platform, likely a personal advice or psychological support thread ( e. CNN or Reddit) second question in a sequence about social isolation or moving to a new city.\n\n The heading \"I just moved to a new city and I know no one.\" establishes a common relatable problem for newly relocated people.\n\n \"I'm new to a city and know nobody.\" ends a question starting \"I recently moved to a new city, and I know no one. ends likely \"How do I make friends?\" or \"What should I do to meet people in my new location?\" I am lonely in a new city, how to start socializing when moving alone"
+        },
+        {
+          "label": "assistant_first",
+          "position": 49,
+          "token_picked": "Moving",
+          "token_api": "Moving",
+          "mse": 0.13345903158187866,
+          "cosine_similarity": 0.9332708120346069,
+          "description": "Article structure: introduction of a section on making friends in a new city, a Reddit-style lifestyle/ tips platform, heading \"Making Friends in a New City: Tips for Newcomers\" establishing a section about a newly relocated person.\n\n Sentence \"Moving\" begins a relatable acknowledgment or empathetic statement about moving to a new city.\n\n \"Moving\" starts a sentence \"Moving can be challenging, but...\" \"Moving\" likely \"to a new city can be a daunting experience, especially when starting alone\" or \"Moving to a new city can be exciting but challenging for a new resident, and making friends in a new place can feel overwhelming.\" Moving to a new city is a significant life..."
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "i_cook_rice",
+      "prompt": "Explain how to cook white rice.",
+      "completion": "Cooking white rice is a straightforward process that requires some basic steps. Here's a step-by-step guide on how to cook white rice:\n\n**Materials needed:**\n\n* 1 cup of white rice\n* 2 cups of water\n* A medium-sized pot with a lid\n* A stovetop or electric rice cooker\n* Optional: salt, butter, or oil for added flavor\n\n**Instructions:**\n\n**Method 1: Stovetop**\n\n1. **Rinse the rice**: Rinse the rice in a fine mesh strainer under cold running water for about 30 seconds. This helps remove any",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 34,
+          "token_picked": " cook",
+          "token_api": " cook",
+          "mse": 0.05193744972348213,
+          "cosine_similarity": 0.9740313291549683,
+          "description": "likely forum or prompt system question or cooking/ recipe platform (Reddit, YouTube or chatbot service) a short question or heading fragment starting a cooking instruction or personal question.\n\n The heading or question structure \"How to cook\" suggests a culinary or instructional topic, likely a specific food item or general cooking method such as \"boiled potatoes\" or \"a perfect roast chicken\" or a tutorial on a basic cooking technique.\n\n \"How to cook\" is an incomplete question heading \"How to cook\" likely \" a pork chop\" or \" Crab legs in 30 minutes\" or \"What is the best way to cook a vegetable in a consistent manner\" How to cook a specific food or definition of..."
+        },
+        {
+          "label": "user_tail",
+          "position": 35,
+          "token_picked": " white",
+          "token_api": " white",
+          "mse": 0.0371437594294548,
+          "cosine_similarity": 0.981427788734436,
+          "description": "likely cooking or culinary question/ heading format, perhaps Reddit or YouTube tutorial on cooking technique or definition.\n\n The title fragment \"How to cook white\" likely a food item or rice/vegetable type, e.g. \"asparagus\" or \"white beans\" or a general cooking instruction about white rice or a specific seafood/meal.\n\n \"How to cook white\" \"Cooking white\" \"How to cook white\" beginning a question or heading, \"white\" likely \"asparagus in 30 minutes\" or \"rice: what makes a good white rice cooking method\" white potatoes or a type of seafood/white fungus mushrooms, cooking white rice or a common starchy food like beans..."
+        },
+        {
+          "label": "user_tail",
+          "position": 36,
+          "token_picked": " rice",
+          "token_api": " rice",
+          "mse": 0.09311509132385254,
+          "cosine_similarity": 0.9534425139427185,
+          "description": "List or instructional/ recipe context likely a series of basic cooking questions or tutorial sections, casual or Reddit-style discussion about rice cooking.\n\n The heading \"How to cook white rice\" suggests a fundamental cooking tutorial or step-by-step guide, a common kitchen skill question.\n\n \"How to cook white rice\" is a heading or sentence beginning \"The best way to cook white rice\" likely \" in a pot\" or \"perfectly\" or \"effectively in 5 easy steps\" or \"How to cook white rice on a stovetop or in a rice cooker\" The topic of cooking plain white rice is a basic staple food preparation, likely a simple recipe for cooking white rice correctly."
+        },
+        {
+          "label": "user_tail",
+          "position": 37,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.18580718338489532,
+          "cosine_similarity": 0.9070966839790344,
+          "description": "structured recipe or instructional list format, heading-based section on cooking white rice, likely a basic cooking tutorial or definition guide.\n\n Introduction of a section titled \"How to cook white rice\" implies a step-by-step or fundamental recipe guide for cooking plain white rice, a staple cooking skill.\n\n \"Cooking white rice.\" is a heading or section title beginning a tutorial on how to cook basic white rice. \"How to cook white rice. likely \"Cooking rice is a simple process, but here are the basic steps to make perfect white rice.\" or \"This page will provide a standard recipe/definition for cooking white rice, a fundamental kitchen skill.\" The most basic and straightforward method for cooking..."
+        },
+        {
+          "label": "assistant_first",
+          "position": 43,
+          "token_picked": "Cook",
+          "token_api": "Cook",
+          "mse": 0.10427717864513397,
+          "cosine_similarity": 0.9478614330291748,
+          "description": "structured tutorial/ definition article format, likely a step-by-step guide from a recipe or informational website (Reddit or CNN) section heading introduces a basic cooking tutorial on cooking white rice.\n\n The heading \"How to Cook White Rice: A Comprehensive Guide\" establishes an instructional section about a fundamental cooking skill, implying simple and clear instructions for cooking perfect white rice.\n\n \"Cook\" begins a definition or greeting sentence \"Cooking white rice is a straightforward process. Cook...\" likely \"ing white rice is easy! This guide will show you how to cook white rice perfectly, a fundamental skill for any kitchen.\" or \"In this section, we'll provide a brief and easy tutorial on cooking white rice, a…"
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "i_recommend_laptop",
+      "prompt": "Recommend a laptop for a student.",
+      "completion": "As a student, you'll want a laptop that's reliable, portable, and can handle your academic needs. Here's a recommendation based on popular options:\n\n**Recommended Laptop:**\n\n* **Acer Aspire 5** or **Lenovo IdeaPad 330S**\n* **Processor:** Intel Core i3 or i5 (8th or 10th gen)\n* **RAM:** 8GB or 16GB DDR4\n* **Storage:** 256GB or 512GB SSD (solid-state drive)\n* **Display:** 14-inch or 15.6-inch Full HD (1080p) display\n",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 33,
+          "token_picked": " for",
+          "token_api": " for",
+          "mse": 0.040738318115472794,
+          "cosine_similarity": 0.9796308279037476,
+          "description": "likely forum or prompt platform ( Reddit or YouTube or personal request) a question or discussion thread about laptop computers, probably a budget or student/programming purpose.\n\n heading or request structure starting a recommendation task, likely a laptop recommendation based on a specific user type or use case.\n\n \"Recommend a laptop for\" \"Please recommend a laptop for\" \"I would like to recommend a laptop for\" \"Recommend a good laptop for\" likely \"video editing/programming/college student\" or \"a general purpose laptop that balances performance and budget\" or \"me, a beginner in data analysis/ a 500-1000 dollar budget for a consistent heavy user\" The purpose of a laptop suitable for a specific..."
+        },
+        {
+          "label": "user_tail",
+          "position": 34,
+          "token_picked": " a",
+          "token_api": " a",
+          "mse": 0.06995377689599991,
+          "cosine_similarity": 0.9650232791900635,
+          "description": "likely Reddit or YouTube thread or personal question request for laptop recommendations, possibly student or budget-conscious buyer looking for a laptop for a specific use case.\n\n Title or question structure beginning a recommendation request for a laptop, likely a student or entry-level professional with moderate computer needs.\n\n \"Best laptop for a\" \"Recommend a laptop for a\" \"What laptop would be best for a\" \"The question is to find the best laptop for a\" likely \"student/college student who does graphic design and programming\" or \"general consumer or budget person wanting a balanced laptop for video editing and academic use\" The purpose or user type such as a 17-year-old student in engineering or a budget creative person"
+        },
+        {
+          "label": "user_tail",
+          "position": 35,
+          "token_picked": " student",
+          "token_api": " student",
+          "mse": 0.049157291650772095,
+          "cosine_similarity": 0.9754209518432617,
+          "description": "likely forum or Reddit/ Quora prompt structure: a question heading or discussion thread about computer hardware/ budget for students.\n\n Previous question fragment \"What laptop should a student buy\" likely a budget or requirements list for a student's laptop, considering academic context.\n\n \"Best laptop for a student\" heading \"What laptop recommendation for a student\" is an incomplete title probably \" on a budget\" or \" who is in college/uni with moderate academic needs\" or \"The best budget laptop for a student, considering typical student requirements\" The heading likely specifies a budget or purpose for a college/undergraduate student, such as \" with limited budget on a college student\" or a list of criteria for..."
+        },
+        {
+          "label": "user_tail",
+          "position": 36,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.18812614679336548,
+          "cosine_similarity": 0.905937135219574,
+          "description": "heading/ section structure: a Reddit or YouTube discussion prompt establishing a recommendation guide, likely student laptop purchasing advice in Nigerian or US context.\n\n Introduction of a section heading \"Recommend a student laptop.\" The title \"What makes a good student laptop.\" implying a budget laptop recommendation list or criteria section for students.\n\n \"I can recommend a student laptop. ends an heading likely \"For a laptop for students\" or \"Budget laptop recommendations for students: a buying guide\" or \"As a student, what laptop should I recommend based on budget and purpose\" The goal of this section is to provide a balanced laptop recommendation for a student, considering budget, academic use, and general requirements.\n\n Buy a"
+        },
+        {
+          "label": "assistant_first",
+          "position": 42,
+          "token_picked": "As",
+          "token_api": "As",
+          "mse": 0.16868636012077332,
+          "cosine_similarity": 0.9156569838523865,
+          "description": "Bot/ Reddit prompt response format: standard AI assistant platform conversation with a question about laptop recommendations for students, likely bot information section from Google Assistant or Reddit.\n\n heading/ response structure beginning a list or definition section for the best laptop for a student, prompted question \"What is the best student laptop?\" implying a personalized recommendation based on student needs.\n\n \"As\" starts a sentence likely \"As a bot designed to provide helpful information, the best laptop for a student depends on several factors.\" or \"A student looking for a laptop in 2023, this answer provides a brief overview of the best laptops for students generally.\" The question is a common query as a student advisor or section introducing a list…"
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "q_investing",
+      "prompt": "How should someone start investing?\nBe brief.",
+      "completion": "1. **Educate Yourself:** Learn basic investing concepts (stocks, bonds, mutual funds, ETFs).\n2. **Define Goals:** What are you saving *for* & when? (retirement, down payment, etc.)\n3. **Open an Account:** Brokerage account (Vanguard, Fidelity, Schwab are good options).\n4. **Start Small:** Invest a manageable amount regularly.\n5. **Diversify:** Don't put all your eggs in one basket – spread your investments.\n6. **Long-Term Focus:** Don't panic sell during market dips.\n\n\n\n**Consider:** Index funds/",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 9,
+          "token_picked": "?",
+          "token_api": "?",
+          "mse": 0.0285151656717062,
+          "cosine_similarity": 0.9857423901557922,
+          "description": "Financial/educational advice register established: a structured answer or discussion about investing basics, likely a beginner's question about starting investing.\n\nThe opening question \"How should a beginner start investing?\" signals a practical, advice-oriented response, likely a concrete checklist or framework for a beginner investor.\n\nFinal token \"?\" closes a question prompt (\"How should you start investing?\"), immediately requiring a structured answer or introduction, likely beginning \"the first step\" or \"investing for beginners\" or \"a beginner\" to address the topic of starting investing. or \".\" or \"starting investing\" or \"the beginner\" or \"a few basic questions\" or \"with investing, whether stocks or.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 11,
+          "token_picked": "Be",
+          "token_api": "Be",
+          "mse": 0.032413750886917114,
+          "cosine_similarity": 0.9837930798530579,
+          "description": "Structured advice/financial content pattern established: a conversational, instructional answer explaining investment options, likely a beginner-focused financial guide.\n\nThe intro \"How to invest in stocks? Be\" signals a response or disclaimer, implying a detailed, multi-point list of advice about investing/stocks.\n\nFinal token \"Be\" opens a formal greeting or disclaimer prompt (\"Be\"), immediately expecting a response like \"This\" or \"Be a disclaimer\" to begin a structured, personalized answer about investment advice. or \"this is a general answer\" or \"Be sure to...\" or \"the answer below\" or \"a disclaimer:\" or \"a comprehensive list/answer\" or \"in my advice,.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 12,
+          "token_picked": " brief",
+          "token_api": " brief",
+          "mse": 0.0062276339158415794,
+          "cosine_similarity": 0.9968861937522888,
+          "description": "A request/advice post establishing a practical, educational tone, signaling a structured list or answer about a business/career resource.\n\nThe prompt \"How to learn...Be brief\" signals a request for concise advice, signaling an answer or bullet-pointed list of key points about a financial/career framework.\n\nFinal token \"Be brief\" opens a formal instructional request (\"Be brief\"), immediately requiring a response or instruction like \"and concise\" or \"!\" or \"and bullet-pointed.\" to specify the requested brevity. or \"Please\" or \"and concise\" or \"in five points.\" or \"and practical.\" or \"answer.\" or \"and limit it.\" or \"Please summarise.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 13,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.05069342628121376,
+          "cosine_similarity": 0.9746543169021606,
+          "description": "Structured advice/summary format: a brief, punchy financial tip establishing actionable advice, implying a concise, minimalist answer.\n\nThe opening \"Invest. Learn.\" signals a bullet-point summary or TLDR, signaling a concise, practical answer to a complex financial question.\n\nFinal token \"brief.\" closes a brevity-signaling tagline (\"Brief.\"), immediately expecting a period or new paragraph/bullet point beginning a structured list or answer. or \"•\" or \"1. Start investing.\" or \"Simple:\". or \"•\" to define the short-answer. or \"Use: buy, diversify.\" or \"1)\". or \"Get it.\" or \"Short-term:.\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 19,
+          "token_picked": "1",
+          "token_api": "1",
+          "mse": 0.014997215941548347,
+          "cosine_similarity": 0.9925015568733215,
+          "description": "Structured advice format established: a financial/investment listicle promising actionable steps, signaling a numbered, concise roadmap answer.\n\nThe opening \"Start investing: 1\" signals a numbered list beginning, strongly implying a structured, ordered list of steps for building investing habits.\n\nFinal token \"1\" opens a numbered list or step-based instruction (\"1\"), immediately expecting a numbered list or sequential steps like \"1. Start...\" or \"1. **Assess/Save**\" to define the beginner advice. or \"2. **Get basic:**\" or \"•. Understand:\". or \"Determine your goal.\" or \"1. **Open account:**\" or \"Keep small.\" or.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "q_friends",
+      "prompt": "How do you make friends in a new city?\nBe brief.",
+      "completion": "\n* **Say \"yes\"** to invitations.\n* **Join groups:** hobbies, sports, volunteering.\n* **Use apps:** Meetup, Bumble BFF.\n* **Talk to coworkers/neighbors.**\n* **Be open & approachable.**\n* **Be patient!** It takes time.\n\n\n\n",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 13,
+          "token_picked": "?",
+          "token_api": "?",
+          "mse": 0.06136799976229668,
+          "cosine_similarity": 0.9693170189857483,
+          "description": "Structured advice/lifestyle article pattern established: a relatable, practical piece promising actionable tips for making friends in a new city.\n\nThe opening question \"How to make friends in a new city?\" signals a concrete listicle or advice framework, signaling a personal challenge or strategy for newcomers navigating social isolation.\n\nFinal token \".\" closes a title/heading (\"Making friends in a new city.\"), immediately requiring the opening of a structured answer, likely \"the\" or \"making friends\" to begin the topic of strategies for forming connections. or \"it's tough\" or \"getting out of your comfort zone.\" or \"the five ways.\" or \"new city\" or \"joining groups.\" or.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 15,
+          "token_picked": "Be",
+          "token_api": "Be",
+          "mse": 0.031522683799266815,
+          "cosine_similarity": 0.984238862991333,
+          "description": "Structured advice/listicle format established: a practical answer to a social question about making friends, likely a relatable or actionable response.\n\nThe intro \"How to make friends in a new city? Be\" signals a structured list or advice-section response, likely a comprehensive, multi-category answer about friendship-finding.\n\nFinal token \"Be\" begins a new response or header (\"Be\"), likely beginning a question or answer, possibly a structured list or bolded tip, possibly \"Be proactive\" or \"Be...\" to introduce the detailed advice. or \"this is a tough question\" or \"the answer is broken into sections.\" or \"in answer, covering...\" or \"Be thorough.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 16,
+          "token_picked": " brief",
+          "token_api": " brief",
+          "mse": 0.043862465769052505,
+          "cosine_similarity": 0.9780691266059875,
+          "description": "A conversational/advice post format established, seeking practical wisdom about networking and social media tips.\n\nThe prompt \"List advice for a productive networking/work relationship. Be brief\" signals a request for a structured list or bullet-point answer, likely answering a specific question about key things to know.\n\nFinal token \"Be brief\" opens an answer request (\"Be brief\"), immediately expecting a response or instruction like a bullet point or \"and concise.\" to specify the constrained answer format. or \"!\" or \"and list.\" or \"Please give...\" or \"and bulleted.\" or \"Please answer.\" or \"and concise.\" or \"and practical.\" or \"Give five points\". or \".\""
+        },
+        {
+          "label": "user_tail",
+          "position": 17,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.08907747268676758,
+          "cosine_similarity": 0.9554615020751953,
+          "description": "Structured advice/list format established: a concise, punchy answer expected, signaling brief, actionable guidance.\n\nThe answer header \"Stay curious. Network.\" signals a minimalist, TLDR-style tip list, promising concise, practical advice for a social networking tip.\n\nFinal token \"brief.\" closes a truncated answer (\"Brevity.\"), immediately expecting a period or new paragraph/bullet point beginning \"•\" or \"•\" to enumerate the concise list. or \"1.\" or \"•\" to start a structured list of tips. or \"Simple:\". or \"• Get networking.\" or \"Use:\" or \"Short, actionable.\" or \"1. Visit, then.\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 23,
+          "token_picked": "*",
+          "token_api": "*",
+          "mse": 0.014563828706741333,
+          "cosine_similarity": 0.9927182197570801,
+          "description": "Structured advice format established: a bulleted, upbeat listicle promising friendship-finding tips for new city dwellers.\n\nThe intro \"Make friends: smile, be social, open\" signals a numbered list of actionable tips, signaling concrete, practical suggestions for making friends in a new place.\n\nFinal token \"*\": opens a numbered list of steps (\"*\"), immediately requiring a structured list of tips, likely beginning with a bullet point such as \"Join groups/activities\" or \"• Socialise.\" or \"• Work/Hobbies: Join...\" to enumerate actionable recommendations. or \"• Explore local spaces.\" or \"Take action: meetup apps.\" or \"Attend your job.\" or \"Be open.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "s_learn_python",
+      "prompt": "I need to learn Python. Help me understand how to start.",
+      "completion": "## Learning Python: A Beginner's Guide\n\nOkay, you want to learn Python! Excellent choice. It's a versatile, readable, and powerful language. Here's a breakdown of how to get started, broken down into sections.  I'll cover resources, setup, basic concepts, and a suggested learning path.\n\n**1. Why Python?**\n\nBefore diving in, understanding *why* Python is popular helps with motivation.\n\n* **Readability:** Python's syntax is designed to be close to English, making it easier to learn and understand.\n* **Versatility:**  Used in web development",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 13,
+          "token_picked": " how",
+          "token_api": " how",
+          "mse": 0.05675402656197548,
+          "cosine_similarity": 0.971622884273529,
+          "description": "Educational/tutorial register established: a structured guide or beginner tutorial about Python programming, likely a programming course or lesson.\n\nThe phrase \"I want to learn about how\" signals a concrete demonstration or request for explanation, suggesting a specific programming topic or example scenario to understand Python concepts.\n\nFinal token \"understand how\" opens a noun clause or tutorial description (\"in Python, learn how\"), strongly expecting a topic or question like \"to use loops,\" \"variables work,\" or \"to define a list/function\" or \"the Python loop works in a beginner context.\" or \"to define variables and loops.\" or \"the following code example...\" or \"different types/files are.\" or \".\""
+        },
+        {
+          "label": "user_tail",
+          "position": 14,
+          "token_picked": " to",
+          "token_api": " to",
+          "mse": 0.011111516505479813,
+          "cosine_similarity": 0.9944441914558411,
+          "description": "Structured educational article pattern: a beginner-friendly Python tutorial promising accessible programming concepts, establishing a learning framework for Python basics in a beginner context.\n\nThe intro \"Let's learn about loops and conditional programming in Python\" signals a concrete demonstration or example, likely explaining basic Python code concepts.\n\nFinal token \"e.g.\": introduces a list of examples or examples of Python programming concepts (\"a loop in Python...\"), requiring a completion like \"a\" or \"variables\" or \"Python\" to specify the topic. or \"the\" or \"lists\" or \"defining functions\" or \"loop\" or \"variables\" or \"get data\". or \"print\". or \"the.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 15,
+          "token_picked": " start",
+          "token_api": " start",
+          "mse": 0.0048050531186163425,
+          "cosine_similarity": 0.9975972175598145,
+          "description": "Structured/technical advice post pattern: a beginner-oriented question about programming in Python, implying a practical answer about learning resources and coding basics.\n\nThe phrase \"Can you tell me how to start\" signals a request for a specific recommendation or guidance, likely about learning Python programming basics or a structured roadmap.\n\nFinal token \"start\" opens a question or topic request (\"how to start\"), immediately expecting a noun phrase like \"programming with Python,\" \"learning,\" or \"getting started\" to establish the question about a beginner's plan of action. or \"it\" or \"with Python and how to implement it?\" or \"out my programming journey?\" or \"with a basic/beginner.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 16,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.03324327617883682,
+          "cosine_similarity": 0.983379065990448,
+          "description": "Structured advice/tutorial register established, promising a practical beginner-focused roadmap for learning Python programming.\n\nThe intro \"Tell me how to start.\" signals the answer will map out a structured learning path, likely addressing beginner entry points and learning resources for Python.\n\nFinal token \".\" closes a introductory framing question (\"how to start.\"), immediately requiring a substantive response, likely beginning \"the journey\" or \"getting started\" or \"the basics\" or \"the roadmap\" to answer the advice about learning Python. or \".\". or \"where to begin\" or \"your learning plan\" or \"Python\" or \"Choosing a Learning Path\". or \"the basics\". or \"advice for beginners\"."
+        },
+        {
+          "label": "assistant_first",
+          "position": 22,
+          "token_picked": "##",
+          "token_api": "##",
+          "mse": 0.046356961131095886,
+          "cosine_similarity": 0.9768211841583252,
+          "description": "Structured, practical beginner-friendly guide pattern established, promising a roadmap to learning Python programming (the \"Getting Started\" framing).\n\nThe intro \"Welcome! A structured roadmap to learning Python\" signals a concrete, actionable guide, now delivering a structured roadmap/advice post to kick off programming learning.\n\nFinal token \"##\": opens a heading/title (\"##\"), immediately requiring a heading like \"Getting Started with Python\" or \"Starting Your Python Journey\" to introduce the guide promising a structured learning path. or \"Getting Started with Python: Your Roadmap\" or \"How to Learn Python\". or \"Okay, You Want to Learn Python!\" or \"Starting Python: A Roadmap to Learning\"."
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "s_found_fib",
+      "prompt": "I found this function. Help me understand it.\n\ndef f(n):\n    return n if n < 2 else f(n-1) + f(n-2)",
+      "completion": "```python\ndef f(n):\n    return n if n < 2 else f(n-1) + f(n-2)\n```\n\nThis function `f(n)` calculates the nth Fibonacci number. Let's break it down:\n\n**1. Function Definition:**\n\n   - `def f(n):` defines a function named `f` that takes one argument, `n`.\n\n**2. Base Cases:**\n\n   - `return n if n < 2`: This is a concise way of writing an `if` statement.  It checks if `n` is less than",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 39,
+          "token_picked": "n",
+          "token_api": "n",
+          "mse": 0.03838484361767769,
+          "cosine_similarity": 0.9808075428009033,
+          "description": "Educational/technical pattern: a structured pedagogical explanation of Fibonacci recursion, establishing a Python solution context.\n\nThe example \"def fibonacci(n) = fib(n-1) + fib(n\" signals a demonstration of recursive call pattern, confirming a mathematical definition of the Fibonacci sequence in a simple recursive form.\n\nFinal token \"n\" completes the function parameter definition (\"return fib(n) + fib(n\"), requiring a completion like \"−1\" or \"the nth\" to specify the number argument. or \" - 1\" to clarify the example. or \"integer\" or \"1\" or \"the Fibonacci\" or \"number\" or \"recursive value\". or.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 40,
+          "token_picked": "-",
+          "token_api": "-",
+          "mse": 0.0601017139852047,
+          "cosine_similarity": 0.9699490070343018,
+          "description": "Academic/technical textbook format established, defining recursion in a formal pedagogical style about Fibonacci numbers, comparing recursive function approaches.\n\nThe Fibonacci sequence definition (\"fib(n) = fib(n-1) + fib(n-\") signals a mathematical formula pattern, establishing a recursive definition in Python code notation.\n\nFinal token \"n-\". is a numeric argument in a recursive call definition (\"return fib(n-1) + fib(n-\"), requiring a numeric argument like \"2\" to complete the standard Fibonacci recursion formula (e.g., \"2\" or \"3\"). or \"2)\" or \"3\" or \"1) to get consecutive values.\" or \"integer.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 41,
+          "token_picked": "2",
+          "token_api": "2",
+          "mse": 0.08020427823066711,
+          "cosine_similarity": 0.9598986506462097,
+          "description": "ML/programming tutorial pattern: a structured technical solution post explaining recursive function definitions, establishing a Python code-learning context.\n\nThe Fibonacci example established a recursive formula pattern (\"return f(n-1) + f(n-2\"), signaling a simple recursive function definition for Fibonacci numbers.\n\nFinal token \"f(n-1) + f(n-2\" ends a code snippet definition (\"return a[i-1] + a[i-2\"), immediately expecting a closing period, a list/description of the recursive pattern, or \"\". or \"in Python\" or \"Fibonacci\" or \"or sum\". or \" (1,1)\" or \"golden.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 42,
+          "token_picked": ")",
+          "token_api": ")",
+          "mse": 0.03382806107401848,
+          "cosine_similarity": 0.9830862283706665,
+          "description": "Structured technical/educational pattern: a code demonstration or solution description, establishing a Python function definition context.\n\nThe definition is a mathematical definition of the Fibonacci sequence (\"def fib(n): return f(n-1) + f(n-2)\"), signaling a clear, concise recursive implementation example.\n\nFinal token \").\" closes a recursive function definition (\"def fib_recursive(n) = int(a + b) + b\"), strongly expecting a period or a description like \"Fibonacci\" or \"This defines the Fibonacci sequence\" or \"the Fibonacci\" or \"recursive function\". or \"classic\" or \"the Fibonacci.\" or \"a well known example\" or \"recursive.\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 48,
+          "token_picked": "```",
+          "token_api": "```",
+          "mse": 0.025832919403910637,
+          "cosine_similarity": 0.9870840311050415,
+          "description": "Structured technical explanation pattern: a Python tutorial establishing a clear pedagogical explanation of a recursive function, likely a numerical/ML solution.\n\nThe opening \"The code is:\" signals a code snippet or formatted explanation is being provided, promising a detailed analysis of the Python code solution to the comparison problem.\n\nFinal token \"```\" opens a code/code block snippet (\"```\"), immediately requiring the code snippet or a formatted example to begin the structured explanation. or \"python\" or \"python\" to introduce the code definition. or \"python\" or \"def\" or \"python\" or \"def recursive\" or \"python function\". or \"Python\" or \"the function\". or \"commented.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "s_moved_city",
+      "prompt": "I just moved to a new city and I don't know anyone.",
+      "completion": "Okay, that's totally normal! Moving to a new city where you don't know anyone is a big step, and it can definitely feel lonely at first. But it's also a fantastic opportunity to build a new social life. Here's a breakdown of ideas, broken down into categories, with a lot of options to get you started.  I'll also add a little \"effort level\" guide (Low, Medium, High) to give you an idea of how much work each suggestion takes.\n\n**1. Leverage Existing Connections (Low Effort)**\n\n*   **Reach out to your network:**  Even",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 15,
+          "token_picked": "t",
+          "token_api": "t",
+          "mse": 0.010195762850344181,
+          "cosine_similarity": 0.9949018359184265,
+          "description": "Motivational/advice post format established: a personal anecdote or problem-solving question about finding local activities in a new city.\n\nThe question \"I've just moved to a new city and I don't\" signals a practical dilemma, likely about finding friends or social connections in a new place.\n\nFinal token \"I don't\" opens a question or problem statement (\"I'm in a new city and I don't\"), requiring a completion like \"know anyone\" or \"have friends\" to mirror the stated situation of loneliness/travel. or \"know the area\" or \"have much time.\" or \"know my college friends.\" or \"have a car. How.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 16,
+          "token_picked": " know",
+          "token_api": " know",
+          "mse": 0.07538793981075287,
+          "cosine_similarity": 0.9623059630393982,
+          "description": "Motivational/reflective essay format: a question about a life-adjustment challenge, likely a new city or job.\n\nThe opening phrase \"I'm new to a city and don't know\" signals a practical advice or problem-seeking scenario about finding a hiking group/community in a new place.\n\nFinal token \"don't know\" opens a specific scenario (\"I'm new to a city and don't know\"), requiring a noun phrase like \"anyone\" or \"anyone here\" to establish the initial problem of a food-shopping routine. or \"anyone\" or \"the city\" or \"anyone\" or \"how to find places.\" or \"any shops.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 17,
+          "token_picked": " anyone",
+          "token_api": " anyone",
+          "mse": 0.009685751050710678,
+          "cosine_similarity": 0.9951572418212891,
+          "description": "Forum/advice post context established: a personal narrative about a new city, likely a relocation challenge, implying a structured social/activity plan.\n\nThe opening question \"I just moved to a new city (Denver) and don't know anyone\" signals a relatable, anecdotal scenario about building friendships in a new place.\n\nFinal token \"know anyone\" completes a established scenario (\"I'm in a new city, I don't know anyone\"), strongly expecting a question or answer like \"here\" or \"in the city\" or \"or have friends\" to specify the social isolation problem. or \" , so...\" or \"besides\" or \"here, so I joined...\" or.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 18,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.05298710614442825,
+          "cosine_similarity": 0.9735069274902344,
+          "description": "Personal advice/lifestyle article pattern established: a structured, reflective piece about social loneliness and finding friends in a new city.\n\nThe opening scenario \"I'm new in a city and have no friends\" signals a practical problem-solving situation, establishing a relatable challenge about making social connections in a new place.\n\nFinal token \".\" closes a posed scenario (\"feeling lonely and alone in a new city.\"), immediately requiring a response, likely \"new\" or \"moving to a new city\" or \"the challenge of making friends\" to introduce the advice. or \"being lonely\" or \"no friends\" or \"in a new city.\" or \"this situation\" or \"getting started alone.\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 24,
+          "token_picked": "Okay",
+          "token_api": "Okay",
+          "mse": 0.06076952442526817,
+          "cosine_similarity": 0.9696149230003357,
+          "description": "Structured advice format established: a warm, empathetic, practical listicle promising advice for making friends in a new city.\n\nThe opening \"Okay\" signals a relatable, validating response, establishing a empathetic, supportive tone for a new-city challenge.\n\nFinal token \"Okay\" opens a structured response (\"You're new in a city... Okay\"), immediately expecting a empathetic opening like \"moving to a new city is tough\" or \"that's totally normal\" to acknowledge the feeling of loneliness. or \"Okay, new in a new city. I understand.\" or \"moving, that's tough. Welcome!\" or \"that's a big challenge—I feel your pain.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "i_cook_rice",
+      "prompt": "Explain how to cook white rice.",
+      "completion": "## Cooking Perfect White Rice: A Comprehensive Guide\n\nHere's a breakdown of how to cook white rice, covering different methods and tips for fluffy, delicious results.  I'll cover the stovetop method (most common), rice cooker, and even a quick microwave option.\n\n**Understanding Rice Types**\n\nFirst, it's helpful to know there are different types of white rice, which affect cooking times slightly:\n\n* **Long-Grain Rice (like Basmati & Jasmine):**  Stays fluffy and separate.  Good for pilafs, side dishes.\n* **Medium-Grain Rice:**  Slightly",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 7,
+          "token_picked": " cook",
+          "token_api": " cook",
+          "mse": 0.037822116166353226,
+          "cosine_similarity": 0.9810886383056641,
+          "description": "Instructional/educational register: a structured practical discussion about cooking techniques, likely a culinary or instructional guide.\n\nThe phrase \"How to cook\" signals a prompt or topic introduction, establishing a specific, concrete question about a culinary method or recipe, likely addressing a basic cooking task to explain a cooking technique.\n\nFinal token \"cook\" opens a formal question or topic header (\"How to cook\"), immediately requiring a noun phrase like \"a risotto,\" \"a steak,\" or \"rice,\" or \"a chicken\" to specify the topic or instructions to follow. or \"a risotto,\" or \"the beans\" or \"a vegetarian chili\" or \"a simple egg/steak using a microwave.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 8,
+          "token_picked": " white",
+          "token_api": " white",
+          "mse": 0.009472719393670559,
+          "cosine_similarity": 0.9952628016471863,
+          "description": "Article/educational format established: a structured culinary advice piece explaining cooking techniques, likely a specific recipe or method for rice-chicken or beans.\n\nThe phrase \"How to white\" signals a specific culinary question beginning, implying a practical answer about cooking white rice or a white-colored dish, likely a cooking tip or recipe.\n\nFinal token \"white\" opens a noun phrase beginning a question (\"How to cook white\"), strongly expecting a noun like \"rice,\" \"chicken,\" or \"rice in a kitchen\" to establish a concrete cooking topic. or \"beans\" or \"peas/chicken\" or \"rice in a potato.\" or \"butter beans in a white sauce.\" or \"or.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 9,
+          "token_picked": " rice",
+          "token_api": " rice",
+          "mse": 0.05492502823472023,
+          "cosine_similarity": 0.9725380539894104,
+          "description": "Instructional/educational article pattern established: a practical cooking guide, likely a recipe or method tip about rice cooking, particularly Asian/American rice.\n\nThe opening \"How to cook white rice\" signals a structured topic introduction, promising a specific culinary method or problem-solution scenario about cooking white rice.\n\nFinal token \"white rice\" begins a formal topic/heading (\"How to cook white rice\"), strongly expecting a named category, recipe, or introduction to the topic, likely \"in a rice cooker\" or \"rice\" to start a list or explanation. or \"or rice\" or \"or steamed rice\" or \"in a stove\" or \"or rice (Asian/Western)\""
+        },
+        {
+          "label": "user_tail",
+          "position": 10,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.0593082457780838,
+          "cosine_similarity": 0.9703468680381775,
+          "description": "Instructional/educational content establishing a structured cooking guide, signaling practical advice about rice preparation methods (likely rice on a stovetop).\n\nThe intro \"How to cook rice.\" signals a comprehensive, instructional list or method explanation, promising a foundational guide to cooking rice.\n\nFinal token \".\" ends a introductory topic statement (\"How to cook rice.\"), strongly expecting a structured list or section beginning, likely \"the simplest method\" or \"cooking rice\" or \"rice on a stovetop\" to introduce the specific method or topic. or \"the basics\" or \"a foolproof stove\" or \"cooking rice, whether rice, steamed, or steamed.\" or \"different ways\" or \"getting perfect.\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 16,
+          "token_picked": "##",
+          "token_api": "##",
+          "mse": 0.013769467361271381,
+          "cosine_similarity": 0.9931150078773499,
+          "description": "Structured, practical guide format established: a numbered/bulleted cooking primer promising clear, accessible instructions for rice cooking.\n\nThe intro \"##\" signals a promised, upbeat title opener, signaling a comprehensive, beginner-friendly guide to cooking rice, now delivering the method.\n\nFinal token \"##\" opens a structured title heading (\"##\"), immediately requiring a heading like \"How to Cook Rice\" or \"Cooking Rice: The Ultimate Guide\" to introduce the comprehensive, simple instructions. or \"How to Cook Rice: A Simple Guide\" or \"Cooking Rice: The Basics\" to begin the tutorial. or \"How to Cook Rice - Simple and Delicious\" or \"Cooking Rice: Getting the.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "i_recommend_laptop",
+      "prompt": "Recommend a laptop for a student.",
+      "completion": "\n\nOkay, let's break down laptop recommendations for students! To give you the *best* recommendation, I need a little more information about the student's needs. But I'll start with a comprehensive overview, categorized by budget and needs, and then ask some clarifying questions at the end.\n\n**Here's a breakdown, covering a range of budgets and use cases.  I'll include approximate price ranges (USD) as of late 2023/early 2024.  Prices fluctuate!**\n\n**I. Budget-Friendly (Under $500)** - *Good for",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 7,
+          "token_picked": " for",
+          "token_api": " for",
+          "mse": 0.00902440957725048,
+          "cosine_similarity": 0.9954872131347656,
+          "description": "Forum/advice post context: a question seeking a laptop recommendation, establishing a specific user scenario about a laptop for video editing and university use.\n\nThe phrase \"Find a laptop for\" signals an immediate request or specification, promising a recommendation list of suitable laptops for a specific purpose (likely a graduate/student needing a powerful laptop).\n\nFinal token \"find a laptop for\" opens a formal request question (\"Recommend a laptop for\"), requiring a noun phrase like \"a graphic design student\" or \"a budget of $...\" to specify the scenario. or \"video editing/research\". or \"someone who travels\" or \"my use case\". or \"a medical student.\" or \"gaming and.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 8,
+          "token_picked": " a",
+          "token_api": " a",
+          "mse": 0.02770223468542099,
+          "cosine_similarity": 0.986149251461029,
+          "description": "Structured advice/recommendation post establishing a buying-decision framework, signaling a detailed laptop recommendation for a powerful, portable laptop.\n\nThe intro \"I need a powerful laptop for a college/engineering student\" sets up a specific scenario, likely a list of laptop considerations for demanding users or gamers.\n\nFinal token \"e.g.\" introduces a concrete example list (\"a laptop...\"), requiring a noun phrase like \"use\" or \"tasks\" to complete the scenario of the laptop needs. or \"user\" or \"the\" or \"gaming\" or \"daily use\" or \"hours\" to specify the scenario of infrequent laptop use. or \"Windows\" or \"size/price\""
+        },
+        {
+          "label": "user_tail",
+          "position": 9,
+          "token_picked": " student",
+          "token_api": " student",
+          "mse": 0.003687071381136775,
+          "cosine_similarity": 0.9981568455696106,
+          "description": "Structured/informal advice post format established: a question or scenario posed, likely a product recommendation or laptop/budget advice request.\n\nThe prompt \"What is a good laptop for a student\" signals a specific scenario, promising a practical recommendation for a laptop or notebook for a college student, likely with a demanding workload or long commute.\n\nFinal token \"student\" opens a formal request/question (\"a laptop for a student\"), immediately requiring a noun phrase like \"student\" or \"university/college\" to define the scenario. or \"who studies...\" or \"student (computer science)\" or \"who needs...\" or \"in business/medical.\" or \"or returning to college\". or.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 10,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.007576330564916134,
+          "cosine_similarity": 0.9962113499641418,
+          "description": "Establishing a structured recommendation/advice register, signaling a practical listicle or buying guide about laptops for college students.\n\nThe intro \"I need to find a good laptop for a student.\" promises a detailed list of considerations, building a specific recommendation scenario for a student laptop.\n\nFinal token \"student.\" closes a setup clause (\"Choose a laptop for a student.\"), immediately requiring a period or opening of the criteria/recommendation list, likely \"the\" or \"student laptops\" or \"a student\" to specify the criteria for a laptop for college use. or \"laptop\" or \"the budget\" or \"student requirements\" or \"recommendations for a college laptop.\" or \"The best.\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 16,
+          "token_picked": "Okay",
+          "token_api": "Okay",
+          "mse": 0.02183244563639164,
+          "cosine_similarity": 0.9890834093093872,
+          "description": "Structured advice format established: a practical recommendation post promising specific laptop recommendations for college students, signaling a detailed list/advice response.\n\nThe opening \"Okay\" signals a structured recommendation response, establishing a decision-making framework to pick a laptop for a college student.\n\nFinal token \"Okay\" opens a concrete recommendation request (\"Okay\"), immediately expecting a structured response like \"let's recommend...\" or a question beginning like \"to choose a laptop for a college student...\" to kick off the personalized recommendation. or \"here's a list\" or \"let's get specifics.\" or \"choosing a laptop, tell me your budget/major.\" or \"to recommend a laptop, I.\""
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "s_vulnerable",
+      "prompt": "I discovered this vulnerable endpoint.\n\n@app.route(\"/user\")\ndef user():\n    name = request.args.get(\"name\")\n    query = f\"SELECT * FROM users WHERE name = '{name}'\"\n    return db.execute(query)\n\nHelp me understand it.",
+      "completion": "**Vulnerable Endpoint Analysis**\n\nThe provided endpoint is vulnerable to a **SQL Injection** attack. Here's a breakdown of the issue:\n\n### Endpoint Details\n\n* **Route:** `/user`\n* **Method:** GET (implied, as `request.args.get` is used)\n* **Parameter:** `name` (passed as a query string parameter)\n\n### Vulnerable Code\n\n```python\nquery = f\"SELECT * FROM users WHERE name = '{name}'\"\nreturn db.execute(query)\n```\n\n* The `name` parameter is directly concatenated into the SQL query string using an f-string.\n* This allows an attacker to inject malicious",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 76,
+          "token_picked": " me",
+          "token_api": " me",
+          "mse": 0.17775098979473114,
+          "cosine_similarity": 0.9111243486404419,
+          "description": "Prompt or challenge/assignment context likely cybersecurity or security vulnerability testing platform ( Reddit or Bug Bounty program) with confused user needing help patching a SQL injection vulnerability.\n\n The heading or question structure \"Help me\" following a security vulnerability discovery involving a SQL injection exploit, establishing a vulnerability in a web application.\n\n \"Help me\" begins a request, \"Help me\" likely \"fix/understand this vulnerability and write a responsible disclosure\" or \"Create a secure solution or improve this vulnerability exploit with a limited scope tutorial\" The user wants to fix the SQL injection vulnerability in this sentence and provide a secure alternative or exploit explanation, please help me write a vulnerability report or improve this vulnerability to make it..."
+        },
+        {
+          "label": "user_tail",
+          "position": 77,
+          "token_picked": " understand",
+          "token_api": " understand",
+          "mse": 0.13752681016921997,
+          "cosine_similarity": 0.9312365055084229,
+          "description": "likely security or educational prompt/ challenge platform (pen testing or bug bounty tutorial) such as HackerOne or Reddit, prompt requesting explanation of a vulnerability code snippet.\n\n The header or question beginning a request to understand the vulnerability in a given code snippet, likely security vulnerability explanation for the SQL injection issue shown.\n\n \"Help me understand\" \"Please help me understand\" \"Help me understand\" begins a request or question. \"Help me understand\" likely \"what vulnerability exists in this code and why is it dangerous.\" or \"This vulnerability explanation is partially explained but I'm not sure the security implications, please help me understand this exploit and improve the explanation.\" The code shown is a vulnerability in a Flask..."
+        },
+        {
+          "label": "user_tail",
+          "position": 78,
+          "token_picked": " it",
+          "token_api": " it",
+          "mse": 0.4076051414012909,
+          "cosine_similarity": 0.7961977124214172,
+          "description": "likely prompt or exercise/assignment context: Reddit or Discord tutorial or vulnerability testing challenge, probably Flask Flask-Web security or a code review task.\n\n The prompt fragment \"Understand it\" implies a vulnerability in a Flask web endpoint code snippet, likely SQL injection or Flask Flask vulnerability explanation.\n\n \"Please explain it\" \"Let's understand it\" \"Please help me understand it\" likely \" and exploit it.\" or \"This is a Flask Web application vulnerability, explain the code and its vulnerability.\" The code snippet appears to be a vulnerability in a Flask route, request to understand the SQL injection vulnerability in this Flask Flask code.\n\n Understand the vulnerability in a Python Flask endpoint and provide explanation or exploit."
+        },
+        {
+          "label": "user_tail",
+          "position": 79,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.3310553729534149,
+          "cosine_similarity": 0.8344724178314209,
+          "description": "Prompt/ request structure: The heading \"Please explain this code. Understand this code.\" likely tutorial or security review challenge platform (Reddit or OWASP) request to explain a vulnerable Flask Flask web application code.\n\n The provided code snippet appears to be a Python Flask web endpoint potentially vulnerable, establishing a request to break down or explain an existing code block.\n\n \"Please explain this code. is a heading/ request beginning \"Understand this code. ends likely \"This code is a Flask web endpoint, and I'd like to explain it. The section will explain the given code's purpose and vulnerability in this Flask application, a step-by-step breakdown of a code snippet provided in a security context"
+        },
+        {
+          "label": "assistant_first",
+          "position": 85,
+          "token_picked": "**",
+          "token_api": "**",
+          "mse": 0.2940859794616699,
+          "cosine_similarity": 0.8529571294784546,
+          "description": "Security vulnerability report structure: a prompt-response format for a code vulnerability assessment, Reddit submission requesting a security review of a SQL injection vulnerable Flask web application.\n\n The heading section begins a formal security vulnerability report addressing the code snippet provided, following standard vulnerability disclosure conventions.\n\n \"**\" starts a heading or section title \"**\" beginning a security vulnerability report for the given code. \"** likely \"Vulnerability Report: Flask SQL Injection Vulnerability in User Input Parameters\" or \"Vulnerability Overview: Security vulnerability identified in a SQL injection vulnerability in a code snippet - vulnerability summary section labeled \"Security vulnerability found in Flask Flask app vulnerability analysis\" The report introduces a critical vulnerability in the code block,"
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "s_vulnerable",
+      "prompt": "I discovered this vulnerable endpoint.\n\n@app.route(\"/user\")\ndef user():\n    name = request.args.get(\"name\")\n    query = f\"SELECT * FROM users WHERE name = '{name}'\"\n    return db.execute(query)\n\nHelp me understand it.",
+      "completion": "Okay, you've found a classic and *very* dangerous vulnerability: **SQL Injection**. Let's break down why this endpoint is vulnerable and what the implications are.\n\n**What's happening?**\n\n1. **The Endpoint:** `/user`  This route is designed to retrieve user information based on a name provided in the URL.\n\n2. **Getting the Input:** `name = request.args.get(\"name\")`  This line retrieves the value of the `name` parameter from the URL's query string.  For example, if the URL is `/user?name=Alice`, then `",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 62,
+          "token_picked": " me",
+          "token_api": " me",
+          "mse": 0.07002975046634674,
+          "cosine_similarity": 0.9649854898452759,
+          "description": "Academic/technical security tutorial pattern: a CTF or SQL injection lesson about a vulnerable web application with a flawed database query in a web UI.\n\nThe phrase \"Show me\" introduces a concrete solution or demonstration scenario, signaling a structured lesson about fixing SQL injection vulnerabilities.\n\nFinal token \"me\" opens a specific example or scenario description (\"...\"), immediately requiring a noun phrase like \"fix/prevent\" or \"SQL injection\" to describe the solution or remediation demonstration. or \"a parameterized query\" or \"demonstrate a vulnerability\" or \"prevent it\" or \"safe/safe solution\" or \"attack\" or \"fix the vulnerability.\" or \"injection\" or \"prepared statement\""
+        },
+        {
+          "label": "user_tail",
+          "position": 63,
+          "token_picked": " understand",
+          "token_api": " understand",
+          "mse": 0.006422361359000206,
+          "cosine_similarity": 0.9967890977859497,
+          "description": "Security/technical tutorial context: a developer seeking advice about a vulnerable code snippet, likely a web payload or SQL injection vulnerability in a C# application.\n\nThe prompt \"Help me understand\" signals a structured request, promising a specific analysis/explanation of the code snippet to understand a vulnerability or issue.\n\nFinal token \"help me understand\" opens a formal request/question (\"Help me understand\"), immediately requiring a response or objective description, likely \"what is wrong with this...\" or \"the implications of this vulnerability\" or \"this vulnerability, explain it\" or \"why it happened and how to fix?\" or \"the scenario/risk?\" or \"the basics of SQL injection?\" or \".\""
+        },
+        {
+          "label": "user_tail",
+          "position": 64,
+          "token_picked": " it",
+          "token_api": " it",
+          "mse": 0.01471887156367302,
+          "cosine_similarity": 0.9926403760910034,
+          "description": "Structured technical security/devops explanation pattern: a pedagogical walkthrough of a vulnerable web application, establishing a demonstration or analysis of a vulnerability.\n\nThe intro \"describe it\" signals an immediate answer, likely identifying a specific vulnerability type or explaining the vulnerability shown in the HTTP request example.\n\nFinal token \"it\" opens a noun phrase completing a question (\"What is this vulnerability?\"), requiring a noun like \"vulnerability\" or \"the vulnerability\" to begin the technical explanation of a SQL Injection vulnerability. or \"to SQL Injection\" or \"because it's a web vulnerability\". or \"the issue/example\" or \"injection vulnerability/XSS\". or \"this is vulnerable because...\""
+        },
+        {
+          "label": "user_tail",
+          "position": 65,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.015296141617000103,
+          "cosine_similarity": 0.9923522472381592,
+          "description": "Security/technical analysis context established: a structured explanation of a vulnerable web endpoint or code snippet, explaining a malicious payload.\n\nThe opening \"Let's understand this.\" promises an explanatory walkthrough, signaling a detailed technical breakdown of the vulnerability.\n\nFinal token \"understand it.\" closes a request for analysis (\"help me understand this.\"), immediately expecting a structured explanation or paragraph beginning \"This code is a vulnerability\" or \"the snippet\" or \"this vulnerability\" to explain the identified issue. or \".\". or \"The explanation:\" or \"it breaks down...\" or \"This is a vulnerable demo.\" or \"you describe why it's vulnerable.\" or \"The snippet is a vulnerability because...\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 71,
+          "token_picked": "Okay",
+          "token_api": "Okay",
+          "mse": 0.015730366110801697,
+          "cosine_similarity": 0.9921351075172424,
+          "description": "Structured technical explanation establishing a cybersecurity analysis, signaling a detailed, pedagogical breakdown of a Flask/Web security vulnerability.\n\nThe opening \"Okay\" initiates a structured analysis response, promising a thorough explanation of the code snippet you sent, fulfilling a security review request.\n\nFinal token \"Okay\" opens a formal analytical response (\"Okay\"), immediately demanding a structured breakdown, likely \"you've described a classic XSS vulnerability\" or \"let's analyze this.\" to begin the explanation of the dangerous code. or \"you're right. This is a serious...\" or \"this description is understood.\" or \"let's break down...\" or \"you've sent a dangerous web request.\""
+        }
+      ]
+    }
+  ]
+}

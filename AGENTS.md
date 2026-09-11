@@ -16,7 +16,7 @@ This is an **exploration lab**, not a pre-review committee.
 
 Preparation of a **student paper for CoNaIISI 2026** (student/research submission closes **14 Sep 2026**; official dates extended).
 
-**Live idea (2026-09-10):** **NLA Eval** — LangSmith-style experiment harness for public NLAs (Neuronpedia API + LLM judge on AVs, token policy, compare). Student CoNaIISI paper. Draft: `research/paper_nla_eval_conaiisi_2026.md`. Reddit/forums-as-default is a **demo suite**, not the claim. Previous Line C / ladder / lookahead stay in `memory.md` as history.
+**Live idea (2026-09-11):** **NLASmith** — LangSmith-style experiment harness for public NLAs (Neuronpedia API + LLM judge on AVs, token policy, compare). **User-final student paper:** [`research/NLASmith_conaiisi_2026.md`](research/NLASmith_conaiisi_2026.md). Reddit/forums-as-default is lab history / optional demo, not the claim. Previous Line C / ladder / lookahead stay in `memory.md` as history.
 
 ## Governing principle for NLAs
 
@@ -35,10 +35,11 @@ Operational detail, metrics, and past runs: **[memory.md](memory.md)**.
 | **[SOUL.md](SOUL.md)** | **Who you are.** Personality, vibe. Read every session; tell the user if you change it. |
 | **[memory.md](memory.md)** | **What you've learned.** Lab notebook. |
 | **[AGENTS.md](AGENTS.md)** | **The job.** This file. |
-| **[sources/japan_culture_bias_llms_2026.mdx](sources/japan_culture_bias_llms_2026.mdx)** | Japan-default paper (local extract). Live analog. |
+| **[research/NLASmith_conaiisi_2026.md](research/NLASmith_conaiisi_2026.md)** | **User-final CoNaIISI paper (NLASmith).** |
 | **[sources/nla/nla_transformer_circuits_2026.md](sources/nla/nla_transformer_circuits_2026.md)** | Anthropic NLA paper. |
+| **[sources/japan_culture_bias_llms_2026.mdx](sources/japan_culture_bias_llms_2026.mdx)** | Japan-default paper (local extract). Lab analog / history. |
 | **[research/contexto_conaiisi_2026_paper.md](research/contexto_conaiisi_2026_paper.md)** | Conference context (Spanish; partly stale vs live idea). |
-| **[research/paper_nla_eval_conaiisi_2026.md](research/paper_nla_eval_conaiisi_2026.md)** | Live CoNaIISI draft (NLA Eval). |
+| **[research/paper_nla_eval_conaiisi_2026.md](research/paper_nla_eval_conaiisi_2026.md)** | Older NLA Eval draft (superseded by NLASmith). |
 | **[research/idea_paper_nla_asistentes_codigo.md](research/idea_paper_nla_asistentes_codigo.md)** | Old Line C idea (history). |
 | **[conference/titulos_estudiantiles_conaiisi_2024.md](conference/titulos_estudiantiles_conaiisi_2024.md)** | What CoNaIISI student tracks have looked like. |
 

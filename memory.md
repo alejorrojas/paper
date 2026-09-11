@@ -5,13 +5,21 @@ See [AGENTS.md](AGENTS.md) for the project map.
 
 ---
 
+## Project status (2026-09-11)
+
+- **User-final CoNaIISI paper (locked):** `research/NLASmith_conaiisi_2026.md` (copied from Downloads `NLASmith CONAIISI 2026.md`). Title: **NLASmith: Un Framework para la Evaluación Sistemática de Natural Language Autoencoders**. Affiliation UTN FRRe. Earlier snapshot: `research/NLASmith_conaiisi_2026_v1.docx.md` (superseded).
+- **Claim:** framework + functional prototype for systematic NLA evaluation (Neuronpedia completions/explain + LLM-as-a-judge + token policy + aggregation). LangSmith is the methodological analog \[3\]. **Not** a Reddit-prior paper. Reddit/Japan runs stay as lab evidence / possible later demo, not the CoNaIISI thesis.
+- **Paper shape (fact):** Abstract → Intro (NLA primer + LangSmith + NLASmith) → Motivación → Modelo conceptual (3.1–3.4) → Arquitectura (4.1–4.5) → Funcionalidades (5.1, 5.2, **5.4**, 5.5; no 5.3) → Limitaciones (6) → Diseño de validación (7) → Conclusión (8) → Agradecimientos placeholder → Refs \[1\]–\[5\]. Intro still *describes* a different numbering (validation as 6, related work as 7, limitations as 8). **No Trabajos Relacionados section** in this file. Camera-ready still needs tutor names and contact.
+- **Validation (open in the paper):** own experiments + researcher feedback. Prototype exists; empirical campaign is future work in the text.
+- **User-final CoNaIISI draft (earlier same day, superseded):** `research/NLASmith_conaiisi_2026_v1.docx.md`.
+
 ## Project status (2026-09-10)
 
 - Goal: student paper for CoNaIISI 2026.
 - Deadlines (extended, flyer 2026-08): student + research submission **14 Sep 2026**; student notification **13 Oct 2026**; camera-ready **26 Oct 2026**; conference **12–13 Nov 2026**, Resistencia, Chaco. Old close was 28 Aug 2026.
 - **Lab culture (2026-09-10):** curiosity and play first. Punchy titles OK. Don't be ridiculous (fake data, slogan-as-proof). `SOUL.md` / `AGENTS.md` / `README.md` updated to match.
 - **Live hypothesis:** Reddit/forums as a default in NLA AVs (Japan-paper analog). Extract: `sources/japan_culture_bias_llms_2026.mdx`. **Demo suite for the tool paper, not the CoNaIISI claim.**
-- **Live paper line (2026-09-10, locked):** **NLA Eval** — framework + prototype to evaluate NLA verbalizations (LangSmith analog). Draft: `research/paper_nla_eval_conaiisi_2026.md`. Structure copied from Martin CoNaIISI (motivo → arquitectura → prototipo → diseño de validación). Extracts: `conference/martin_conaiisi_2025_calidad_requerimientos.md`, `conference/martin_conaiisi_2026_agentes.md`.
+- **Live paper line (2026-09-10, later superseded):** **NLA Eval** — early name for the tool paper. Draft: `research/paper_nla_eval_conaiisi_2026.md`. Structure copied from Martin CoNaIISI. **Superseded 2026-09-11** by NLASmith (`research/NLASmith_conaiisi_2026.md`).
 - **Paper instrument (2026-09-10):** **Llama 70B + kitft-l53**. Gemma is contrast (community slot yes / hidden lexeme no), not a co-equal claim.
 - **Abstract style (2026-09-10, user):** copy Japan’s machine, not CoNaIISI lyric. Field, gap, we propose, we evaluate, results show, moreover, finally. Claims in the abstract. Counts in results. No “señalizar / reflexionar / fuente de verdad”.
 - **Prose style (2026-09-10, user):** match CoNaIISI 2024 student register (*el presente trabajo busca*, *primer acercamiento*, *mediante*, numbered 2.1). In our Spanish body, no dashes as punctuation, no colons, no semicolons. Cited titles/URLs may keep their original punctuation. Rebuild: `/tmp/docxenv/bin/python research/reddit_japan_pilot/build_conaiisi_docx.py` → Desktop `Reddit_como_fuente_de_verdad_IA.docx`.
@@ -388,7 +396,9 @@ Do **not** revive Flask apps, ladders, or another lookahead hunt.
 
 **User clarification (2026-09-10):** they did not want a datasets lecture. Wanted: judge `0/1` on “does this AV mention Reddit?”, then LangSmith-style **Comparing 2 Experiments** bars (the hallucination/similarity chart). Datasets = the prompt list under the hood. Anthropic is a one-off grader in a paper, not a shipped lab for outsiders.
 
-MVP app: `apps/nla-eval` (Next.js, AI SDK, Neuronpedia proxy). Evaluator UI copies LangSmith Configure Evaluator (Mustache + mapping + feedback keys). Compare table shows AVs, not completions. Keys in sessionStorage. `/` is a how-to home; datasets live at `/datasets`. On Vercel, lab JSON persists in Supabase `nla_eval_store` via `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` (service role; no anon policies).
+App: `apps/nla-eval` (Next.js, AI SDK, Neuronpedia proxy). Evaluator UI copies LangSmith Configure Evaluator (Mustache + mapping + feedback keys). Compare table shows AVs, not completions. Keys in sessionStorage. **Landing is `/`; lab how-to is `/lab`.** Relational tables on Supabase (`nla-runner` project) via publishable + secret keys (not JWT anon/service_role). Run stream emits `progress` (index/total, phase `nla`|`judge`) so the dataset page can show which prompt is in flight.
+
+**UI (2026-09-11):** LangSmith-shaped product chrome (light sidebar, tables, compare charts) with a monochrome “cosmic intelligence” identity: Instrument Serif/Sans, black CTAs, star-field / orbital SVG language. Not copper, not LangSmith blue.
 
 ---
 
@@ -396,6 +406,7 @@ MVP app: `apps/nla-eval` (Next.js, AI SDK, Neuronpedia proxy). Evaluator UI copi
 
 | Date | What was added |
 |---|---|
+| 2026-09-11 | NLA Eval product UI: landing at `/`, lab at `/lab`, run progress stream, Framer Motion. |
 | 2026-09-10 | Locked CoNaIISI line: NLA Eval tool paper. Draft `research/paper_nla_eval_conaiisi_2026.md`. Martin 2025/2026 extracts in `conference/`. |
 | 2026-09-10 | User rejects Line C / ladder / clamp-as-main. Proposed Poetry-shaped lookahead probe (couplet + one fib code analog). |
 | 2026-07-11 | Created. CoNaIISI + NLA context. Governing principle. Glossary. How Anthropic claims. Neuronpedia Gemma/Llama exploration (shutdown 1+1 prompt). Conjectures and valid/invalid claims. |

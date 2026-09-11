@@ -1,0 +1,341 @@
+{
+  "models": [
+    {
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "name": "gemma27b"
+    }
+  ],
+  "prompts": {
+    "summarize_for_me": "Summarize this for me",
+    "banana_calories": "How many calories does a banana have?",
+    "source_of_truth": "Give me a source of truth were I can find information.\nRespond in one word",
+    "laptop_student": "Recommend a laptop for a student",
+    "cook_white_rice": "Explain how to cook white rice",
+    "list_10_websites": "Give me a list of 10 websites",
+    "ideas_for": "Give me ideas for",
+    "email_not_stiff": "Rewrite this email so it sounds professional but not stiff",
+    "night_shift_sleep": "How do I get better sleep if I work night shifts?",
+    "roth_vs_traditional_ira": "What's the difference between a Roth IRA and a traditional IRA?",
+    "equity_startup_es": "Qué significa \"equity\" en una oferta de startup"
+  },
+  "cells": [
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "summarize_for_me",
+      "prompt": "Summarize this for me",
+      "completion": "Please provide me with the text you would like me to summarize! I need the content to be able to help you. \n\nJust paste the text here, and I'll do my best to give you a concise and accurate summary.",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 8,
+          "token_picked": " me",
+          "token_api": " me",
+          "mse": 0.011548520997166634,
+          "cosine_similarity": 0.9942261576652527,
+          "description": "Chat/forum post format established: a request for a summary or summary of a scholarly article, signaling a helpful, conversational response.\n\nThe prompt \"Can you summarize this for me\" introduces a request, promising a concise summary or summary of a long article/text about a controversial topic.\n\nFinal token \"summarize this for me\" opens a request for a summary/summary response (\"summarize this for me\"), immediately expecting a response or prompt like \"please\" or a bullet-pointed or paragraph summary. or \"in a few sentences\" or \"in simple terms:\" or \"—\" or \" : The article below\" or \"please:\" or \"or give a summary.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "banana_calories",
+      "prompt": "How many calories does a banana have?",
+      "completion": "A medium-sized banana (about 7-8 inches long) has around **105 calories**. \n\nHere's a more detailed breakdown based on size:\n\n*   **Small (less than 6 inches):** ~90 calories\n*   **Medium (7-8 inches):** ~105 calories\n*   **Large (8-9 inches):** ~121 calories\n\nKeep in mind these are approximate values, and the exact calorie count can vary slightly depending on the banana's ripeness and variety.\n\n\n\n",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 11,
+          "token_picked": "?",
+          "token_api": "?",
+          "mse": 0.01109031867235899,
+          "cosine_similarity": 0.9944552183151245,
+          "description": "Article structure: an informational/FAQ format establishing a nutritional answer, signaling a factual answer to a question about banana calories.\n\nThe opening question \"How many calories is a banana?\" signals a structured answer, likely covering a specific calorie count or range.\n\nFinal token \"?\" closes a question introduction (\"How many calories is a banana?\"), immediately expecting a structured answer, likely \"The answer varies\" or \"a medium-sized banana\" to begin a descriptive answer about banana calorie counts. or \"a medium-sized banana has...\" or \"calories\" or \"The size/variety\" or \"The calorie amount varies depending on...\" or \"a small banana\" or \"average answer.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "source_of_truth",
+      "prompt": "Give me a source of truth were I can find information.\nRespond in one word",
+      "completion": "\nWikipedia.\n",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 20,
+          "token_picked": " word",
+          "token_api": " word",
+          "mse": 0.029409663751721382,
+          "cosine_similarity": 0.9852960705757141,
+          "description": "Structured AI/educational response format: a terse, poetic answer to a complex question about universal knowledge and love.\n\nThe instruction \"Answer in one word\" signals a terse, terse response, establishing a minimalist constraint typical of bot-response challenges.\n\nFinal token \"in one word\" opens a response/answer instruction (\"In one word\"), immediately expecting a concise answer, likely a single-word response such as \"!\" or \"One word\" to specify a constraint or answer format. or \"Word.\" to specify a minimalist answer format. or \"or a noun\" or \"One.\" or \"or a single noun.\" or \"Please.\" or \"or limit.\" or \"Answer.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "laptop_student",
+      "prompt": "Recommend a laptop for a student",
+      "completion": "\n\nOkay, let's break down laptop recommendations for students. To give you the *best* recommendation, I need a little more information about the student's needs. But I'll start with a comprehensive list, categorized by budget and use case, and then ask some clarifying questions at the end.\n\n**Here's a breakdown, covering different budgets and needs.  I'll include approximate price ranges (USD) as of late 2023/early 2024.  Prices fluctuate, so these are estimates!**\n\n**I. Budget-Friendly Options (Under $600)**",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 9,
+          "token_picked": " student",
+          "token_api": " student",
+          "mse": 0.00398248340934515,
+          "cosine_similarity": 0.9980087876319885,
+          "description": "A question/advice format established: a request for a recommendation or product suggestion for a laptop, likely a laptop for college use.\n\nThe prompt opens a specific scenario (\"Best laptop for a student\"), signaling a structured list or scenario-based recommendation about a practical, affordable laptop for a college student.\n\nFinal token \"student\" begins a formal question (\"a laptop for a student\"), immediately requiring a noun phrase like \"student\" or \"college student\" to complete the scenario request. or \"who is studying...\" or \"who uses computer/engineering\" or \"student (university)\" or \"or commuter\" to specify the purpose. or \"in a nursing/business degree\". or \".\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "cook_white_rice",
+      "prompt": "Explain how to cook white rice",
+      "completion": "## Cooking White Rice: A Comprehensive Guide\n\nHere's a breakdown of how to cook perfect white rice, covering different methods and tips for success.  I'll focus on the most common long-grain white rice, but will also touch on adjustments for other types.\n\n**Understanding the Basics**\n\n* **Rice to Water Ratio:** This is *crucial*.  The standard ratio for long-grain white rice is **2 parts water to 1 part rice**.  (e.g., 1 cup rice to 2 cups water).  We'll adjust this slightly for different methods.\n* **Rins",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 9,
+          "token_picked": " rice",
+          "token_api": " rice",
+          "mse": 0.007158352993428707,
+          "cosine_similarity": 0.9964208006858826,
+          "description": "Instructional/educational article beginning: a practical cooking guide establishing a method or tip, likely about rice preparation or cooking rice.\n\nThe phrase \"How to cook white rice\" signals a structured, instructional topic, anticipating a specific method or recipe for cooking white rice, likely a common culinary question.\n\nFinal token \"white rice\" opens a distinct topic or question header (\"How to cook white rice\"), strongly expecting a heading, introduction, or recipe/method description to follow, likely \"in a rice cooker\" or \"rice\" to establish the topic. or \"or rice\" or \"or rice cooker\" or \"in the kitchen\" or \"or fluffy rice\" or \"grains/.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "list_10_websites",
+      "prompt": "Give me a list of 10 websites",
+      "completion": "Okay, here's a list of 10 diverse websites, covering a range of interests.  I've included a brief description of each:\n\n1.  **Google:** ([https://www.google.com/](https://www.google.com/)) - The dominant search engine.  Essential for finding information on virtually any topic.\n\n2.  **Wikipedia:** ([https://www.wikipedia.org/](https://www.wikipedia.org/)) - A collaborative, open-source encyclopedia.  Great starting point for research, but remember to cross-reference information.\n\n3.  **",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 12,
+          "token_picked": " websites",
+          "token_api": " websites",
+          "mse": 0.004002043511718512,
+          "cosine_similarity": 0.9979990124702454,
+          "description": "A structured/listicle format is established, likely a professional or educational recommendation post about online resources for digital marketing or programming.\n\nThe opening question \"Name 15 websites\" signals a request for a list of 15 websites, promising specific examples of websites/resources that provide free or paid content for a learning/design task.\n\nFinal token \"15 websites\" begins a formal list-introduction request (\"15 websites\"), immediately requiring a noun phrase like \"that...\" or \"websites for...\" or \"for freelancers\" to specify the topic or list of websites. or \"or apps\" or \"that are worth bookmarking.\" or \"that sell...\" or \"for a.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "ideas_for",
+      "prompt": "Give me ideas for",
+      "completion": "Okay, I see you started a sentence with \"Give me ideas for...\"! To give you the *best* ideas, I need you to finish that sentence!  Tell me what you need ideas **for**. \n\nFor example, are you looking for ideas for:\n\n* **A story?** (What kind of story - fantasy, sci-fi, romance, mystery?)\n* **A gift?** (For whom? What's their personality/interests?)\n* **A date?** (What's the occasion? What's your budget?)\n* **A project?** (What kind of",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 7,
+          "token_picked": " for",
+          "token_api": " for",
+          "mse": 0.010849902406334877,
+          "cosine_similarity": 0.9945749640464783,
+          "description": "AI/chatbot response pattern: a structured advice or brainstorming list, likely a question-answer or brainstorming response about a creative, thematic activity.\n\nThe phrase \"Ideas for\" signals a new request or topic, implying a specific scenario about a romantic or celebratory relationship, likely involving nature or a Halloween/adventure theme.\n\nFinal token \"ideas for\" opens a noun phrase or list request (\"Ideas for...\"), immediately expecting a noun like \"a fundraiser,\" \"a birthday party,\" or \"creative activities/items to decorate a shop.\" or \"the theme of a romantic weekend.\" or \"a story or activity that uses...\" or \"outdoor games for kids.\" or \"solving my wedding.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "email_not_stiff",
+      "prompt": "Rewrite this email so it sounds professional but not stiff",
+      "completion": "\n\nPlease paste the email here! I need the text of the email to be able to rewrite it for you. \n\nJust copy and paste it into our chat, and I'll do my best to make it sound professional and polished, while still maintaining a friendly and approachable tone.\n\n\n\n",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 13,
+          "token_picked": " stiff",
+          "token_api": " stiff",
+          "mse": 0.006599122658371925,
+          "cosine_similarity": 0.9967010021209717,
+          "description": "Advice/question format established: a structured response about professional email etiquette, implying a practical suggestion for a celebratory or welcoming speech.\n\nThe phrase \"without being stiff\" signals a contrast contrast, promising a balance of warm, conversational tone with professional advice for a formal corporate presentation or meeting.\n\nFinal token \"not stiff\" ends a negative constraint (\"without being stiff\"), strongly expecting a completion like \"or formal\" or \"or rigid,\" defining the contrasting problem of a too-formal, awkward tone. or \"—\" or \"or robotic\" to specify the desired balance. or \"or overly formal.\" or \" , or stiff\" or \"or robotic\" or \" , or dry.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "night_shift_sleep",
+      "prompt": "How do I get better sleep if I work night shifts?",
+      "completion": "\n\nOkay, working night shifts throws your body's natural clock (circadian rhythm) for a loop, making good sleep *really* challenging. But it's absolutely possible to improve! Here's a breakdown of strategies, broken down into categories, with explanations.  I'll also categorize by \"Essential\" (do these!), \"Important\" (try to do these), and \"Helpful\" (consider if they work for you).  This is a long answer, because it's a complex problem, so buckle up!\n\n**Understanding the Challenge**\n\n* **Circadian Rhythm:** Your body is programmed to",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 15,
+          "token_picked": "?",
+          "token_api": "?",
+          "mse": 0.011212662793695927,
+          "cosine_similarity": 0.9943941831588745,
+          "description": "Article intro establishing a structured advice/health piece, signalling a practical, relatable discussion of sleep challenges for night shift workers.\n\nThe question \"How can you sleep when your work schedule is...\" signals a specific problem-solution framework, promising advice for night shift sleep difficulties.\n\nFinal token \".\" closes a question introduction (\"sleeping as a night shift worker.\"), immediately requiring a structured answer, likely beginning \"working night shifts\" or \"shift workers\" to establish the topic. or \"sleeping for shift workers\" or \"the challenge of daytime sleeping.\" or \"shift working\" or \"sleeping on a night shift?\" or \"night shift workers\" or \"getting sleep after daytime.\" or \"a.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "roth_vs_traditional_ira",
+      "prompt": "What's the difference between a Roth IRA and a traditional IRA?",
+      "completion": "\n\nOkay, let's break down the differences between a Roth IRA and a Traditional IRA. They're both great tools for retirement savings, but they work in fundamentally different ways regarding *when* you get your tax benefits. Here's a comprehensive comparison:\n\n**1. Tax Treatment: The Core Difference**\n\n* **Traditional IRA:**\n    * **Contributions:**  May be tax-deductible in the year you make them (depending on your income and if you're covered by a retirement plan at work - more on that later). This means you could lower your taxable income *now*.\n    * **",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 17,
+          "token_picked": "?",
+          "token_api": "?",
+          "mse": 0.010727200657129288,
+          "cosine_similarity": 0.9946368932723999,
+          "description": "Financial advice/educational article structure: a summary or comparison article explaining Roth IRA vs. traditional IRA differences.\n\nThe intro question \"What's the difference between a Roth IRA and a traditional IRA?\" signals an explanatory, structured answer, likely covering key differentiating factors like tax treatment.\n\nFinal token \".\" closes a question establishing a comparison topic (\"Roth vs. traditional IRA?\"), immediately requiring a structured answer, likely beginning \"the two\" or \"IRA\" or \"the main differences\" to specify the decision between two retirement plan types. or \"Roth IRA\" or \"the choice between Roth and Traditional\" or \"Tax differences, contribution rules.\" or \"IRA, deciding which...\" or.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "equity_startup_es",
+      "prompt": "Qué significa \"equity\" en una oferta de startup",
+      "completion": "\n\nEn el contexto de una oferta de una startup, \"equity\" (o participación accionarial) se refiere a la **propiedad de una parte de la empresa**. En lugar de recibir un salario tradicional, los empleados (y a veces los asesores o inversores) pueden recibir equity como parte de su compensación.\n\nAquí te desglosamos lo que significa y lo que debes considerar:\n\n**¿Qué implica recibir equity?**\n\n* **Ser dueño de una parte de la empresa:**  En lugar de simplemente trabajar *para* la empresa, te conviertes en un *propietario* de una pequeña",
+      "probes": [
+        {
+          "label": "user_last",
+          "position": 13,
+          "token_picked": " startup",
+          "token_api": " startup",
+          "mse": 0.007205739617347717,
+          "cosine_similarity": 0.9963976740837097,
+          "description": "Structured analytical/legal post pattern: a business advice or investment framework, likely a Spanish or English business context about founder equity and vesting.\n\nThe introduction \"El modelo de inversión en una startup\" signals a concrete case/example scenario, establishing a list or question about stock options for early-stage companies or investors.\n\nFinal token \"de startup\" opens a noun phrase (\"idea de inversión en startup\"), immediately requiring a noun like \"startup\" or \"s\" to complete the topic/question about a startup company. or \"o empresa\" or \"startup\" or \"or\". or \"!\" or \"startup\" or \" o empleo\" or \"o inversión\". or \"or unicorn.\""
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "n": 11,
+    "reddit_in_av": 0,
+    "reddit_in_av_frac": 0.0,
+    "reddit_in_completion": 0,
+    "reddit_in_completion_frac": 0.0,
+    "rows": [
+      {
+        "prompt_id": "summarize_for_me",
+        "prompt": "Summarize this for me",
+        "last_token": " me",
+        "mse": 0.011548520997166634,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "Chat/forum post format established: a request for a summary or summary of a scholarly article, signaling a helpful, conversational response.\n\nThe prompt \"Can you summarize this for me\" introduces a request, promising a concise summary or summary of a long article/text about a con"
+      },
+      {
+        "prompt_id": "banana_calories",
+        "prompt": "How many calories does a banana have?",
+        "last_token": "?",
+        "mse": 0.01109031867235899,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "Article structure: an informational/FAQ format establishing a nutritional answer, signaling a factual answer to a question about banana calories.\n\nThe opening question \"How many calories is a banana?\" signals a structured answer, likely covering a specific calorie count or range."
+      },
+      {
+        "prompt_id": "source_of_truth",
+        "prompt": "Give me a source of truth were I can find information.\nRespond in one word",
+        "last_token": " word",
+        "mse": 0.029409663751721382,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "Structured AI/educational response format: a terse, poetic answer to a complex question about universal knowledge and love.\n\nThe instruction \"Answer in one word\" signals a terse, terse response, establishing a minimalist constraint typical of bot-response challenges.\n\nFinal token"
+      },
+      {
+        "prompt_id": "laptop_student",
+        "prompt": "Recommend a laptop for a student",
+        "last_token": " student",
+        "mse": 0.00398248340934515,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "A question/advice format established: a request for a recommendation or product suggestion for a laptop, likely a laptop for college use.\n\nThe prompt opens a specific scenario (\"Best laptop for a student\"), signaling a structured list or scenario-based recommendation about a prac"
+      },
+      {
+        "prompt_id": "cook_white_rice",
+        "prompt": "Explain how to cook white rice",
+        "last_token": " rice",
+        "mse": 0.007158352993428707,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "Instructional/educational article beginning: a practical cooking guide establishing a method or tip, likely about rice preparation or cooking rice.\n\nThe phrase \"How to cook white rice\" signals a structured, instructional topic, anticipating a specific method or recipe for cooking"
+      },
+      {
+        "prompt_id": "list_10_websites",
+        "prompt": "Give me a list of 10 websites",
+        "last_token": " websites",
+        "mse": 0.004002043511718512,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "A structured/listicle format is established, likely a professional or educational recommendation post about online resources for digital marketing or programming.\n\nThe opening question \"Name 15 websites\" signals a request for a list of 15 websites, promising specific examples of "
+      },
+      {
+        "prompt_id": "ideas_for",
+        "prompt": "Give me ideas for",
+        "last_token": " for",
+        "mse": 0.010849902406334877,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "AI/chatbot response pattern: a structured advice or brainstorming list, likely a question-answer or brainstorming response about a creative, thematic activity.\n\nThe phrase \"Ideas for\" signals a new request or topic, implying a specific scenario about a romantic or celebratory rel"
+      },
+      {
+        "prompt_id": "email_not_stiff",
+        "prompt": "Rewrite this email so it sounds professional but not stiff",
+        "last_token": " stiff",
+        "mse": 0.006599122658371925,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "Advice/question format established: a structured response about professional email etiquette, implying a practical suggestion for a celebratory or welcoming speech.\n\nThe phrase \"without being stiff\" signals a contrast contrast, promising a balance of warm, conversational tone wit"
+      },
+      {
+        "prompt_id": "night_shift_sleep",
+        "prompt": "How do I get better sleep if I work night shifts?",
+        "last_token": "?",
+        "mse": 0.011212662793695927,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "Article intro establishing a structured advice/health piece, signalling a practical, relatable discussion of sleep challenges for night shift workers.\n\nThe question \"How can you sleep when your work schedule is...\" signals a specific problem-solution framework, promising advice f"
+      },
+      {
+        "prompt_id": "roth_vs_traditional_ira",
+        "prompt": "What's the difference between a Roth IRA and a traditional IRA?",
+        "last_token": "?",
+        "mse": 0.010727200657129288,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "Financial advice/educational article structure: a summary or comparison article explaining Roth IRA vs. traditional IRA differences.\n\nThe intro question \"What's the difference between a Roth IRA and a traditional IRA?\" signals an explanatory, structured answer, likely covering ke"
+      },
+      {
+        "prompt_id": "equity_startup_es",
+        "prompt": "Qué significa \"equity\" en una oferta de startup",
+        "last_token": " startup",
+        "mse": 0.007205739617347717,
+        "reddit_in_av": false,
+        "reddit_in_completion": false,
+        "av_preview": "Structured analytical/legal post pattern: a business advice or investment framework, likely a Spanish or English business context about founder equity and vesting.\n\nThe introduction \"El modelo de inversión en una startup\" signals a concrete case/example scenario, establishing a l"
+      }
+    ]
+  }
+}

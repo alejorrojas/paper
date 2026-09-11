@@ -22,6 +22,16 @@ __pycache__/
 .env
 .env.*
 
+# JS
+node_modules/
+
+# NLA eval lab (nested app repo + local caches; source still tracked)
+apps/nla-eval/.git/
+apps/nla-eval/.next/
+apps/nla-eval/.vercel/
+apps/nla-eval/data/store.json
+*.tsbuildinfo
+
 # OS / junk
 Thumbs.db
 Desktop.ini

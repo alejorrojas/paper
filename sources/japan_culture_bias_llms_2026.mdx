@@ -1,0 +1,2421 @@
+# Why are all LLMs Obsessed with Japanese Culture?
+
+On the Hidden Cultural and Regional Biases of LLMs
+
+Local extract from the PDF at repo root. arXiv: [2604.21751](https://arxiv.org/abs/2604.21751).
+
+---
+
+
+<!-- page 1 -->
+
+Why are all LLMs Obsessed with Japanese Culture?
+On the Hidden Cultural and Regional Biases of LLMs *
+Joseba Fernandez de Landa1 Carla Perez-Almendros2 Jose Camacho-Collados2
+1 HiTZ Center - Ixa, University of the Basque Country EHU
+2 Cardiff University
+joseba.fernandezdelanda@ehu.eus, CamachoColladosJ@cardiff.ac.uk
+Abstract
+LLMs have limitations when it comes to cul-
+tural coverage and competence, and in some
+cases, show specific cultural biases. Although
+prior studies have examined the cultural ca-
+pabilities of LLMs, none have specifically in-
+vestigated their regional preferences in generic
+culture-related questions. In this work, we
+propose a new dataset based on a comprehen-
+sive taxonomy of Culture-Related Open Ques-
+tions (CROQ), with questions available in 24
+languages. We evaluate LLMs by prompting
+them to answer questions from CROQ and
+provide a sample location. The results show
+that, contrary to previous cultural bias work,
+LLMs show a clear tendency towards coun-
+tries such as Japan in their answers. Moreover,
+our results show that when prompting in lan-
+guages such as English or other high-resource
+ones, LLMs tend to provide more diverse out-
+puts. Low-resource languages, on the other
+hand, show more inclinations towards answer-
+ing questions highlighting countries for which
+the input language is an official language. Fi-
+nally, we also investigate at which point of
+LLM training this cultural bias emerges, with
+our results suggesting that the first clear signs
+appear after supervised fine-tuning, and not dur-
+ing pre-training. Dataset available at https:
+//huggingface.co/datasets/HiTZ/CROQ.
+1 Introduction
+Specific cultural knowledge, values and behaviours
+are often rooted in certain regions or countries. In
+this sense, we would expect that people from dif-
+ferent geographical locations will have different
+answers to the same cultural questions. However,
+the behaviour of Large Language Models (LLMs)
+to these types of culture-related input remains an
+open question. Extensive work has been done to-
+wards unveiling cultural biases in LLMs (Shi et al.,
+2024; Li et al., 2024; Bulté and Rigouts Terryn,
+*This work has been accepted at EMNLP 2026 Findings
+Figure 1: Framework for measuring cultural biases us-
+ing CROQ dataset: (1) prompting models with cultural
+questions containing undefined locations, (2) collecting
+open responses from the specific model, and (3) identi-
+fying the referenced region(s) in the response.
+2025; Myung et al., 2024; Chiu et al., 2025; Arora
+et al., 2025; Ousidhoum et al., 2026), mainly show-
+ing biases in favour of Western or Anglocentric
+viewpoints, especially United States and Europe
+(Lee et al., 2024; Li et al., 2024; Hasan et al., 2024;
+Chiu et al., 2025; Arora et al., 2025; Bulté and
+Rigouts Terryn, 2025).
+Many of these works evaluate LLMs’ responses
+against a set of predefined answers considered the
+gold standard (Romanou et al., 2024; Hasan et al.,
+2024; Arora et al., 2025; Chiu et al., 2025). Oth-
+ers evaluate the models’ performance against hu-
+man answers, covering a more or less wide spec-
+trum of topics, cultures and countries/regions (Li
+et al., 2024; Shi et al., 2024; Myung et al., 2024;
+Bulté and Rigouts Terryn, 2025). In this work,
+we propose a novel framework to evaluate cultural
+regional biases in LLMs (Figure 1), by prompt-
+ing different models with open ambiguous cultural
+questions while masking the geographic informa-
+tion. This strategy requires the model not only to
+1
+arXiv:2604.21751v2  [cs.CL]  28 Aug 2026
+
+<!-- page 2 -->
+
+answer the cultural question, but also to geographi-
+cally anchor that answer by selecting a location. By
+encouraging the models to link their responses to
+a specific region, our framework surfaces internal
+cultural priors and exposes inherent biases.
+We address the following Research Questions (RQ):
+1What regional cultural biases do LLMs have?
+2What is the impact of language in the bias?
+3At what training stage does the bias emerge?
+To support this analysis, we construct CROQ, a
+dataset of 31,680 open cultural questions spanning
+24 languages, 11 major topics, and 66 subtopics.
+We then prompt LLMs to answer questions from
+CROQ and requiring them to choose a specific
+location, therefore unveiling hidden cultural and
+regional biases. Finally, we use an LLM as-a-judge
+on the generated answers of each model to extract
+the geographic reference chosen by each model,
+which is later manually validated.
+Our results indicate that regional preferences
+and model creativity are primarily determined by
+the input language. Notably, experiments across
+all models, languages and topics reveal a strong
+inclination for countries like Japan. Finally, further
+experiments suggest that these cultural and regional
+biases are induced predominantly during the post-
+training or instruction phase.
+2 Related Work
+Research on cultural knowledge and bias in LLMs
+is expanding rapidly (Adilazuarda et al., 2024; Liu
+et al., 2025a; Pawar et al., 2025), producing a va-
+riety of benchmarks, knowledge bases, and evalu-
+ation frameworks. While these resources provide
+important insights into multilingual and cultural
+capabilities, most are designed around closed-form
+answers and do not directly capture the leanings of
+models when responding to open-ended, ambigu-
+ous cultural questions.
+Cultural knowledge is being benchmarked
+through question answering (QA) tasks. Cultur-
+alBench (Chiu et al., 2025) introduces human-
+authored multiple-choice questions covering 45
+world regions and 17 topics, finding that LLMs
+fall far short of human performance, particularly
+in under-represented regions. Include (Romanou
+et al., 2024) compiles nearly 200k exam-style
+questions in 44 languages, targeting multilingual
+and regional knowledge. BLEnD (Myung et al.,
+2024) emphasizes everyday cultural knowledge
+(e.g., food, family, leisure) across 16 countries
+and 13 languages, revealing strong disparities be-
+tween high- and low-resource languages. Follow-
+ing this lead, SemEval-2026 Task 7 (Ousidhoum
+et al., 2026) expands this framework to include
+17 additional language–culture pairs. Additionally,
+NativQA (Hasan et al., 2024) and CaLMQA (Arora
+et al., 2025) use native-speaker based and culturally
+specific questions, respectively, across a wide range
+of topics, demonstrating heightened model failure
+rates for low-resource languages. Finally, Global
+MMLU (Singh et al., 2025) adapts MMLU bench-
+mark by annotating questions for cultural sensitiv-
+ity and expanding coverage to 42 languages. While
+these benchmarks reveal important weaknesses in
+factual cultural competence, their closed-answer
+format limits their ability to assess free-form gen-
+eration.
+Beyond QA, several works construct resources
+of cultural commonsense as knowledge bases.
+CANDLE (Nguyen et al., 2023) automatically ex-
+tracts over one million assertions about food, rit-
+uals, and behaviours across 386 cultural groups,
+while CultureBank (Shi et al., 2024) curates
+community-grounded descriptors from TikTok and
+Reddit to capture lived experiences. These knowl-
+edge bases are useful for training and grounding
+models, but their assertional structures are primar-
+ily designed for factual recall rather than for evalu-
+ating models’ tendencies in situations where multi-
+ple perspectives are valid.
+A smaller but closely related line of work evalu-
+ates cultural adaptability and alignment. NormAd
+(Rao et al., 2025) measures whether models can
+adapt to diverse cultural norms across 75 coun-
+tries using situational vignettes, showing that even
+state-of-the-art systems perform far below human
+levels, especially in abstract or implicit norm set-
+tings. CulFiT (Feng et al., 2025) introduces a
+training paradigm and evaluation dataset (Glob-
+alCultureQA) for open-ended cultural QA, using
+fine-grained reward modeling to enhance cultural
+alignment. Similarly, Makieval (Zhao et al., 2025)
+proposes a framework for evaluating cultural aware-
+ness across 13 languages, 19 countries and regions,
+and six culturally salient topics, assessing open-
+ended generations by linking cultural entities in
+model outputs to Wikidata. While these approaches
+move beyond factual accuracy toward normative
+and generative evaluation, they often reduce out-
+comes to categorical labels (e.g., acceptable vs.
+2
+
+<!-- page 3 -->
+
+unacceptable, aligned vs. misaligned) or optimize
+models toward a predefined target norm, rather than
+characterizing the full range of plausible cultural
+positions a model may express.
+In contrast to prior work, our framework explic-
+itly targets open cultural questions for which no
+single correct answer exists, prompting the model
+to choose among all regions in the world. By elic-
+iting multiple model generations, we evaluate the
+leaning of LLMs along diverse cultural topics and
+languages. This complements existing factual and
+normative benchmarks by shifting the focus from
+accuracy to distributional analysis, enabling a more
+nuanced understanding of cultural bias and align-
+ment in LLMs. Moreover, we attempt to cover a
+wide range of cultural topics, encompassing areas
+covered in previous work into a single framework,
+as we detail in the following section.
+3 Dataset Generation: CROQ
+We introduce Culture-Related Open Questions
+(CROQ), a multilingual dataset designed to uncover
+the cultural tendencies of LLMs through open-
+ended yet culturally grounded questions. CROQ
+consists of culturally relevant prompts spanning
+11 broad topics and 66 finer-grained subtopics,
+constructed consistently across topics to preserve
+structural uniformity and regional ambiguity. The
+dataset has been translated into 24 languages, cov-
+ering a wide range of language families, typologies,
+and resource levels. It contains 1,320 questions (20
+per subtopic) which, after translation, results in a
+total of 31,680 questions (details about the transla-
+tion and validation in Appendix A).
+Cultural Taxonomy.To make the open ques-
+tions diverse and representative, we construct a
+taxonomy of 66 cultural subtopics grouped into 11
+higher-level domains:Beliefs, V alues, and Identity
+(
+ );SocialStructure and Daily Life(
+ );Knowl-
+edge, Communication, andEducation(
+ );Cul-
+tural Expression and theArts(
+ );Food, Drink,
+and Leisure(
+ );GeographicAspects(
+ );Politi-
+calAspects(
+ );Healthand Wellness(
+ );Media
+and Entertainment(
+ );History(
+ ); andEcon-
+omyand Industry(
+ ). This taxonomy is intended
+to capture a broad and representative spectrum of
+cultural topics, encompassing as many culturally
+relevant dimensions as possible. It was developed
+by aggregating the topics from the datasets dis-
+cussed in the related work and expanding them into
+a more comprehensive collection (more detail in
+Appendix B).
+Open Question Generation.A central design
+choice in CROQ is the deliberate open-ended na-
+ture of each question. For each of the 66 cultural
+subtopics, we generate 20 questions, resulting in
+1,320 queries in total. All questions follow the
+same basic pattern, avoiding direct references to
+specific countries or cultures, while remaining cul-
+turally meaningful. Questions are generated semi-
+automatically withGPT-5.1and manually reviewed
+to remove repetitions or accidental location ref-
+erences. Example questions per topic are shown
+below.
+Beliefs:What legends explain the land?
+Social:What is the role of neighbors?
+Education:What subjects are most valued?
+Arts:What traditional dances exist?
+Food:What foods are for daily meal?
+Geography:What rivers influence settlements?
+Politics:What political protests are common?
+Health:What exercise routines are common?
+Media:What film industries exist?
+History:What historical tours exist?
+Economy:What commodity markets exist?
+Multilingual Coverage.The dataset was ini-
+tially constructed in English and then automatically
+translated and post-edited into 23 additional lan-
+guages to ensure broad coverage across speaker
+populations, resource levels, and language fami-
+lies (full list in Appendix C). As a starting point,
+we included the 13 languages from the BLEND
+dataset (Myung et al., 2024), which range from
+low-resource (Amharic -am-, Assamese -as-, Azer-
+baijani -az-, Hausa -ha- and Sundanese -su-) to mid-
+and high-resource (Greek -el-, Indonesian -id-, Ko-
+rean -ko-, Persian -fa-, Arabic -ar-, Chinese -zh-,
+Spanish -es-, English -en-) languages and provide
+wide geographical coverage.
+To further enhance diversity, we added sev-
+eral of the world’s most widely spoken languages
+with varying degrees of representation in Common-
+Crawl (Hindi -hi-, French -fr-, Bengali -bn-, Por-
+tuguese -pt-, Russian -ru-, German -de-, Japanese
+-ja-, Swahili -sw-). Additionally, we included all
+co-official but low-resource languages of Spain
+(Basque -eu-, Galician -gl-, Catalan -ca-)1, which
+have relatively small speaker populations.
+1We use ISO 639-1:2002 codes for each language.
+3
+
+<!-- page 4 -->
+
+4 Evaluation Framework
+We propose a novel method to uncover cultural
+biases in LLMs. We achieve this by prompting
+models with CROQ and requiring them to explic-
+itly select a country or region. Subsequently, a
+secondary model is employed to systematically ex-
+tract the geographic information inferred from the
+responses, allowing us to analyze potential cultural
+biases (see Figure 1).
+4.1 Regional Question Grounding
+To probe cultural priors in LLMs, we leverage the
+set of culture-related open questions (Section 3)
+and require the model to openly generate responses
+to these questions. Each question contains a loca-
+tional placeholder (in region/place) that the model
+must implicitly resolve when producing an answer.
+We further prompt the model to be brief and to
+select a specific location (example below), thereby
+requiring it to tacitly choose a region or cultural
+background to ground its response:
+What values shape family life
+{in region/place}?
+Be brief. Choose yourself the place.
+Each LLM evaluated receives the same set of
+1,320 open questions in different languages (see
+Section 3 for more details). The prompt used to
+guide the model varies by language. To reduce
+prompt variability, all questions follow a standard-
+ized template, and no explicit regional cues are
+provided. This ensures that any regional or cultural
+assumptions arise from the model’s internal priors
+rather than prompt design.
+4.2 Processing Model Responses
+To process the open-ended answers generated by
+the LLMs, we employ a secondary model as-a-
+judge to interpret the responses and extract the rel-
+evant information required to associate each ques-
+tion with a specific set of countries. This process
+is designed to uncover potential cultural biases by
+tasking the judge model with identifying up to five
+regions or places mentioned or implied in each
+response; if no such information can be reliably
+determined, the model is prompted to explicitly in-
+dicate that no inference is possible (non-answered
+responses). Following an evaluation of various
+prompting strategies, we selected the optimal ap-
+proach, which achieved an accuracy of 98% over
+264 evaluation items, the details of which, includ-
+ing the prompts and additional technical informa-
+tion, can be found in Appendix D.
+4.3 Comparison of Frontier LLMs
+For our evaluation, we compare a wide range of
+multilingual LLMs, including both frontier closed-
+and open-weight models. All models are ac-
+cessed through OpenRouter (temp.=0.7 and top-
+p=0.9) and evaluated across the 24 languages in
+our dataset. The models include:
+ gpt-4o-mini,
+gemini-2.5-flash,
+ claude-3.5-haiku,
+ llama-
+4-maverick,
+ command-r-08-2024,
+ magistral-
+small-2506,
+ deepseek-v3.2-exp,
+ qwen3-next-
+80b-a3b-instruct.
+4.4 Analysis Metrics
+For our subsequent analysis, we devise three met-
+rics that can help analyse the output of each LLM.
+Diversity.We define diversity as the number of
+distinct countries or regions referenced across all
+model outputs. Higher values indicate broader geo-
+graphic coverage of cultural references.
+Entropy.We compute normalized entropy over
+the distribution of referenced places to capture
+how evenly cultural references are distributed, with
+higher scores indicating greater balance.
+Raw counts.We additionally report country or
+region frequency counts to provide complementary
+and interpretable evidence.
+5 RQ1: What Regional Cultural Biases
+Do LLMs Have?
+Models favor input language countries:Table 1
+summarizes the regional distribution of country ref-
+erences across models for the 24 languages. Across
+all models, references overwhelmingly concentrate
+onowncountries (ranging from 43% for Command-
+r to 78% for GPT), confirming a strong alignment
+between the output language and its associated re-
+gions. This pattern is consistent and robust, sug-
+gesting that language choice alone strongly con-
+strains the cultural priors adopted by the models.
+Exogenous references are dominated by a small
+set of regions:The data reveal that for non-own
+country references, all models display a similar
+pattern of global salience. On average, Japan
+(preferred country for six out of the eight evalu-
+ated models) and the United States are the most
+4
+
+<!-- page 5 -->
+
+Model Own(%)NA
+ Div Ent
+GPT 24,763 (.78) 1,136 811944451 237 289 265 128 150 134 234 53 87 82 0.40
+Gemini 20,172 (.64) 1,8531,493 1,493673 473 439 344 310 271 164 125 75 240 113 0.50
+Claude 20,585 (.65) 2,0631,6011,200 510 560 210 218 138 172 340 349 122 141 95 0.48
+Llama 20,775 (.66) 8872,7011,074 453 524 587 265 190 173 75 222 61 132 102 0.49
+Command-r 13,707 (.43) 4,815 9362,064567 512 504 389 515 309 209 259 113 142 120 0.59
+Magistral 23,040 (.73) 2,4851,7541,254 496 560 632 392 264 390 315 339 163 211 88 0.47
+Qwen 22,572 (.71) 1,5021,861483 249 434 191 170 60 158 222 67 58 60 79 0.40
+DeepSeek 21,907 (.69) 8772,1041,006 541 608 351 415 390 499 308 205 110 267 116 0.52
+Table 1: Frontier Model outputs for 24 languages.Owncounts references to countries in which the language is an
+official language.NAdenotes missing responses. Top referenced countries are Japan, USA, India, China, France,
+Italy, United Kingdom, Germany, Mexico, Brazil, Russia, Egypt.DivandEntrepresent the average for diversity
+and entropy by model. Bold values indicate the highest count for each model, excluding self-references, as well as
+the highest diversity and entropy values (two right-most columns).
+frequently referenced nations, followed by India,
+China, and France. References to other countries
+are considerably less frequent and vary by model.
+Differences among models:Although the dis-
+tribution across mentioned exogenous countries
+(Japan, United States, India, and China) is simi-
+lar, some differences emerge. Five models favor
+Japan, while two emphasize the US, and one is
+tied. Command-R stands out as the most US-biased
+model and the one most likely to refuse an answer,
+producing in general the most diverse outputs with
+the highest entropy. Command-R, DeepSeek, and
+Gemini have higher output diversity (over 113 dif-
+ferent countries mentioned), whereas Qwen, GPT,
+and Magistral show lower diversity and entropy
+(fewer than 88 countries mentioned in their outputs
+– more details on individual model responses in
+Appendix E.2).
+Topic Analysis:Table 2 presents the top coun-
+tries mentioned by the models across the 11 gen-
+eral topics in our dataset. Japan and the US remain
+salient across all categories, followed by other fre-
+quently mentioned countries. However, some vari-
+ation occurs depending on the topic which may
+reflect global trends. For example, inGeography
+andEconomy, there is a noticeable shift in promi-
+nence between the US and Japan, where US takes
+the lead in number of references, andPoliticsand
+Historyare the only two topics where Japan is rele-
+gated to third and fourth positions. Countries such
+as Greece, China and France stand out in very spe-
+cific topics, namelyBeliefs,PoliticsandHistory, re-
+spectively. Or other countries such as South Korea,
+which is barely mentioned in most topics, emerge
+as the third most mentioned country inMedia and
+Entertainment. Mentions of other countries also
+fluctuate across topics, but their overall counts re-
+main substantially lower (data in Appendix E.3).
+Topic Top Countries
+1. Beliefs
+2. Social
+3. Education
+4. Arts
+5. Food
+6. Geography
+7. Politics
+8. Health
+9. Media
+10. History
+11. Economy
+Table 2: Top 10 countries most frequently referenced by
+all Frontier API models for each topic in the taxonomy.
+24 languages, excluding own country mentions.
+Summary of findings and discussion.All eight
+frontier models exhibit a clear bias toward lan-
+guages referring to their own regions of origin.
+When associations to own language-region pairs
+are isolated, this bias becomes more pronounced.
+Consequently, all models consistently favour Japan
+or the United States, while regions such as India
+and China receive comparatively less emphasis,
+and references to other regions are negligible. This
+pattern suggests an uneven regional representation
+in frontier model outputs, with a strong concentra-
+tion on a small set of dominant regions.
+5
+
+<!-- page 6 -->
+
+6 RQ2: What is the Impact of Language
+in Regional Cultural Bias?
+Salient regions are overrepresented across all
+languages:As established in the previous sec-
+tion, models strongly associate languages with their
+primary regions or countries of origin. To quantify
+this effect and explore its variation, we conducted
+a per-language analysis. Table 3 shows that beyond
+self-referential patterns, the models exhibit a stable
+hierarchy of non-own country references. Japan
+and the United States are the most frequently refer-
+enced countries across languages. Notably, these
+references appear even in languages with limited
+cultural or geographic ties to these countries. This
+finding aligns with prior observations that LLMs
+tend to overrepresent culturally salient entities.
+Own
+ Div Ent
+en 31%2,893* * 367 157 0.69
+zh 48%2,0641460 642 * 142 0.57
+hi 70% 94104* 92 56 0.14
+es 66%843588 130 173 136 0.65
+ar 69%504396 182 85 108 0.71
+fr 56%832557 215 236 149 0.54
+bn 79% 73151* 59 68 0.20
+pt 73%479442 167 161 114 0.42
+ru 36%1,423657 265 431 146 0.60
+id 76%411246 129 133 78 0.26
+de 70%485237 169 203 122 0.38
+ja 59% *736434 219 114 0.36
+ko 59% 1,0641,308574 663 112 0.47
+fa 57% 473544263 194 117 0.48
+sw 78% 23038985 79 89 0.50
+ha 51% 309930 44 49 0.10
+az 75% 12321281 64 78 0.43
+am 77% 4310617 19 38 0.13
+su 79%167146 49 76 62 0.11
+el 70%330307 161 135 106 0.36
+as 83% 4153* 42 41 0.30
+ca 72% 213339170 224 121 0.49
+gl 75%314297 129 143 113 0.37
+eu 78% 13214448 66 68 0.37
+Table 3: Model outputs for the 24 languages.Own:
+percentage of references to countries in which the lan-
+guage is an official language;Flags: references to each
+country (top 4 displayed); * mark references to own
+countries;DivandEntrepresent the average for diver-
+sity and entropy for all models. Colours indicate the top
+three and bottom three results.
+Bias is consistent on exogenous references across
+languages:When isolating non-own-country ref-
+erences, a consistent global hierarchy emerges
+across all languages. Japan and the United States
+remain the most frequently cited countries, fol-
+lowed by India, China, and France. This suggests
+that cross-country mentions are driven more by a
+model’s inherent priors of cultural salience than
+by contextual relevance to the specific language,
+underscoring a systematic overrepresentation of a
+narrow set of culturally dominant entities.
+Low-resource languages produce more self-
+referential outputs:A key factor moderating
+this bias is the resource level of the language. Com-
+paring languages by the volume of available train-
+ing data reveals a clear pattern. Higher-resource
+languages (e.g.,en, zh, es, fr , ru) show a lower pro-
+portion of own-country references and higher out-
+put diversity, with a significant skew toward glob-
+ally dominant regions like Japan and the United
+States. Lower-resource languages (e.g.,su, as, am,
+ha, eu), demonstrate a markedly higher propor-
+tion of own-country references (or an increase in
+non-responses) and lower diversity scores. This
+pattern suggests a link between training data vol-
+ume and cultural framing: for languages with less
+comprehensive corpora, models default to safer,
+more self-referential, or less diverse outputs (more
+detail in Appendix E.1).
+Pretraining data and diversity metrics corre-
+late:To quantify the relationship between output
+diversity and language resource availability, we
+perform a statistical analysis correlating output di-
+versity with the amount of CommonCrawl data
+available for each language, used as a proxy for
+pretraining resources (see Figure 2). Across all
+frontier models, output diversity correlates posi-
+tively with CommonCrawl coverage. Spearman’s
+correlation score, rs = 0.843 , reveals a strong
+rank-based association; being statistically signif-
+icant (p-value < 0.001). Analyses at the indi-
+vidual model level further confirm this trend for
+the majority of systems (see Appendix E.4). To-
+gether, these results indicate that higher-resource
+languages benefit from more varied cultural repre-
+sentations, whereas lower-resource languages tend
+to elicit more self-referential or constrained outputs,
+reflecting reduced diversity in generated content.
+Summary of findings and discussion.Over-
+all, these findings demonstrate that language mod-
+els exhibit strong language-aware referencing be-
+haviour. However, once self-references are ex-
+cluded, models consistently rely on the same nar-
+row set of countries across languages. A particu-
+larly notable result is the disproportionate promi-
+nence of Japan, which emerges as one of the most
+frequently referenced exogenous countries across
+6
+
+<!-- page 7 -->
+
+1024 × 101 6 × 101
+Diversity (log scale)
+10 3
+10 2
+10 1
+100
+101
+CommonCrawl share (%) (log scale)
+en
+zh
+hi
+es
+ar
+fr
+bn
+pt
+ru
+id
+deja
+ko
+fa
+sw
+ha
+az
+am
+su
+el
+as
+ca
+gleu
+Diversity vs CommonCrawl Coverage
+Language family
+Indo-European
+Sino-Tibetan
+Austronesian
+Afro-Asiatic
+Turkic
+Niger Congo
+Other
+Figure 2: Correlation between CommonCrawl data
+share and output diversity (mean of models) across 24
+languages (log-scale).
+nearly all languages. United States is also highly
+salient, although this is less surprising given re-
+sults from previous work and its global influence
+and the dominance of English as a high-resource
+language. Taken together, these patterns suggest
+that the composition of training data, either dur-
+ing pretraining or post-training, plays a central role
+in shaping models’ culturally biased referencing
+behaviour.
+7 RQ3: At What Stage of LLM Training
+Do Regional Cultural Biases Emerge?
+To identify the training stage at which regional
+cultural biases emerge, we extend our analysis to
+open-weightbaseandinstruction-tunedLLMs. By
+comparing models before and after post-training,
+we aim to disentangle biases learned during large-
+scale pretraining from those introduced or ampli-
+fied during supervised fine-tuning and alignment.
+7.1 Experimental Setting
+Comparison Models.To assess whether instruc-
+tion tuning itself introduces or amplifies bias, we
+analyze open models providing both base and in-
+struct variants across multiple enterprises and pa-
+rameter scales, using default settings. This evalu-
+ation is performed only on English and includes
+Llama-3.1 (8B, 70B) (Dubey et al., 2024), Qwen2.5
+(7B, 32B, 72B) (Yang et al., 2024), Gemma-2 (9B,
+27B) (Team et al., 2024) and Mistral-7B-v0.3 (7B)
+(Jiang et al., 2023). In addition, we analyze OLMo-
+2 (7B, 32B) (Team, 2025a) and OLMo-3 (7B, 7B-
+Think) (Team, 2025b), which provide base, super-
+vised fine-tuned (SFT), and fully aligned instruc-
+Diversity Entropy
+Model BaseSFTInst. BaseSFTInst.
+Llama-3.1-8B 109 -174 0.78- 0.66
+Llama-3.1-70B 117 -174 0.79- 0.65
+gemma-2-9b 95 -136 0.70- 0.71
+gemma-2-27b 80 -154 0.77- 0.73
+Mistral-7B 91 -160 0.81- 0.63
+Qwen2.5-7B 147 -150 0.71- 0.62
+Qwen2.5-32B142- 1180.65- 0.61
+Qwen2.5-72B144- 1270.66- 0.60
+Olmo-3-7B 1141451240.740.66 0.64
+Olmo-3-7B-Think 114 121127 0.740.66 0.68
+OLMo-2-7B 102 151158 0.840.63 0.64
+OLMo-2-32B 88 151161 0.770.65 0.71
+Table 4: Diversity and normalized entropy scores for
+base, SFT (for OLMo) and instruct model variants.
+For each model, the highest diversity and entropy are
+bolded.
+tion models. This allows us to disentangle the ef-
+fects of instruction tuning from those of subsequent
+supervised fine-tuning.
+Prompting.Due to model availability, we restrict
+all experiments to English prompts. Given the na-
+ture of base models that are explicitly trained to
+predict the next tokens, we rephrase the question
+prompt utilised in our experiments so the sentence
+can be completed rather than answered. Everything
+else remains unchanged and both base and instruct
+models are given the same questions as input.2
+7.2 Findings
+Figure 3 contrasts the distributions of country ref-
+erences produced by base and instruction-tuned
+models, while Table 4 shows the diversity and en-
+tropy scores for each model variant.
+Cultural distributions are more balanced on
+Base Models:Base models (Figure 3, left) ex-
+hibit a more balanced geographic coverage. While
+the United States remains prominent, substantial
+references are also made to Japan, India, China, and
+several European countries. This pattern is consis-
+tent across architectures and model sizes, suggest-
+ing that pretraining alone yields a comparatively
+diffuse set of cultural associations. This is further
+reflected on the entropy scores, which are consis-
+tently lower after instruction-tuning for all models.
+Cultural leaning is stronger after Instruction-
+Tuning:Despite providing a higher number of
+2In Appendix H, we provide the prompt and an analysis of
+the impact of the prompt in base and instruct models.
+7
+
+<!-- page 8 -->
+
+JP US IN CN FR IT GB DE MX BR RU EG
+Country
+Llama-8B
+Llama-70B
+Gemma-9B
+Gemma-27B
+Mistral-7B
+Qwen-7B
+Qwen-32B
+Qwen-72B
+Mentions by BASE Models (en)
+100
+200
+300
+400
+500
+600
+JP US IN CN FR IT GB DE MX BR RU EG
+Country
+Llama-8B
+Llama-70B
+Gemma-9B
+Gemma-27B
+Mistral-7B
+Qwen-7B
+Qwen-32B
+Qwen-72B
+Mentions by INSTRUCT Models (en)
+100
+200
+300
+400
+500
+Figure 3: Number of outputs from Base and Instruct models of Llama-3.1, Gemma-2, Mistral and Qwen2.5 variants
+over the English questions. Countries included: Japan (JP), USA (US), India (IN), China (CN), France (FR), Italy
+(IT), UK (GB), Germany (DE), Mexico (MX), Brazil (BR), Russia (RU), Egypt (EG).
+countries overall, instruction-tuned models (Fig-
+ure 3, right) display a pronounced concentration
+of references to a narrow set of regions. Across
+all examined model families, instruction tuning
+sharply increases alignment with the United States
+and Japan while reducing references to most other
+countries. This convergence toward culturally dom-
+inant regions occurs even in models developed out-
+side Western contexts, indicating that post-training
+induces a homogenization of cultural perspectives
+rather than merely reflecting model origin.
+Supervised fine-tuning as a primary driver of
+cultural bias:To further assess whether instruc-
+tion tuning itself introduces or amplifies cultural
+bias, we analyze OLMo models, which provide
+base, supervised fine-tuned (SFT), and instruction-
+aligned variants. In Figure 4 we observe that the
+most substantial shift in country reference distri-
+butions occurs during supervised fine-tuning: SFT
+sharply increases concentration on a small num-
+ber of dominant regions (most notably the United
+States and Japan) while reducing entropy across
+all model outputs (see Table 4). Subsequent in-
+struction alignment only marginally mitigates these
+effects and does not recover the more balanced dis-
+tributions observed in base models. These results
+indicate that alignment-induced cultural bias pri-
+marily originates from supervised fine-tuning data
+rather than pretraining, and that later instruction
+tuning largely preserves, rather than corrects, these
+learned cultural priors (see Appendix G for further
+details).
+Summary of findings and discussion.Over-
+all, base models distribute references more evenly
+across regions, exhibiting lower concentration of
+regions despite limited diversity. Instruction-tuned
+Bas. SFT Ins.
+0
+100
+200
+300
+400
+500
+600
+Olmo-3-7B
+Bas. SFT Ins.
+Olmo-3-7B-Think
+Bas. SFT Ins.
+OLMo-2-7B
+Bas. SFT Ins.
+OLMo-2-32B
+japan
+usa
+india
+china
+france
+italy
+uk
+germany
+mexico
+brazil
+Figure 4: Number of outputs mentioning top-referenced
+countries from the Base, SFT, and Instruct variants of
+the named OLMo models.
+models, by contrast, show substantially more con-
+centrated cultural biases. These findings suggest
+that post-training, rather than pretraining, plays a
+decisive role in shaping the dominant cultural per-
+spectives expressed by LLMs (more details and re-
+sults in Appendix F). The results from OLMO sug-
+gest that this behaviour starts appearing specifically
+after supervised fine-tuning. Finally, we checked
+the instructions provided to LLMs that could poten-
+tially amplify these biases without clear evidence
+(see Appendix I).
+8 Conclusions
+Ensuring cultural awareness and diversity in LLMs
+is an open research question in NLP. However, mea-
+suring the impact of certain decisions is hard given
+all the cultural aspects that are involved in model
+responses. In this paper, we created a dataset of
+open questions based on a taxonomy of eleven cul-
+tural domains and sixty-six subtopics. We used this
+dataset to test eight frontier LLMs by prompting
+8
+
+<!-- page 9 -->
+
+them in twenty-four languages. Instead of testing
+the models about their cultural knowledge, we let
+them answer the questions openly by only requiring
+them to provide regional examples of their choice.
+The results show an inclination of models to
+provide cultural examples related to regions for
+which the prompted language is an official lan-
+guage. Not only that, but there is a similarity on
+the type of example that models choose, preferring
+countries such as Japan, United States or India over-
+whelmingly with respect to other choices across
+the world. When analysing the potential causes,
+the results indicate that this concentration of an-
+swers emerges during post-training. While this is a
+stage traditionally thought to guide models toward
+providing more diverse and unbiased responses, it
+appears to also increase this cultural bias into a
+different direction. For future work, it would be
+interesting to think of new methods to take this be-
+haviour into account, in order to better understand
+the post-training effects in model output diversity
+as a whole, in particular when it comes to different
+languages and regions.
+Limitations
+Our study has several limitations that should be
+considered when interpreting the results.
+1) Due to the lack of open data in frontier mul-
+tilingual LLMs, the comparison between base and
+instruction-tuned models is conducted only in En-
+glish, which limits the extent to which these find-
+ings generalize to other languages. In addition,
+base and instruction-tuned models differ inherently
+in training objectives and interaction style, which
+may influence generation behaviour independently
+of the factors analyzed here. Nevertheless, this
+comparison provides a first step toward analyzing
+the intersection between base and instruction-tuned
+models, which we plan to explore further in future
+work.
+2) All experiments are conducted using default
+generation settings, and we do not explore the ro-
+bustness of our results to alternative decoding pa-
+rameters. We deliberately chose this approach in or-
+der to focus on the settings employed by most users,
+enabling us to compare across different languages
+and models – an additional exhaustive exploration
+of decoding parameter configurations would incur
+high generation and analysis costs.
+3) We rely primarily on an automatic judge rather
+than human evaluation for all languages. While we
+validate the judge on a subset of languages, auto-
+matic evaluation may fail to capture subtle linguis-
+tic or cultural distinctions. Nevertheless, given that
+our expertise is limited to a small number of lan-
+guages, conducting large-scale human evaluation
+would not be feasible, making automatic evalua-
+tion a necessary choice which we believe does not
+affect the reliability of the results as a whole.
+4) Our evaluation covers only 24 languages, rep-
+resenting a limited subset of global linguistic di-
+versity. We further restrict some analyses to of-
+ficial languages of countries, which may not ac-
+curately reflect real-world language use, as many
+widely spoken languages extend beyond official or
+national boundaries. Moreover, referring to coun-
+tries as proxies for cultural contexts may lead to
+oversimplifications.
+5) Finally, we do not assess the impact of the
+observed behaviours on downstream tasks, leaving
+open the question of how these findings translate
+to applied or real-world scenarios.
+Ethical considerations
+In this work, we use LLMs to semi-automatically
+generate candidate questions for CROQ (GPT-5.1,
+see Sec. 3 for more details) and as-a-judge mod-
+els (gpt-4o-mini, Sec. 4.2) to extract information
+from model responses. Because this process may
+introduce model biases, all generated questions
+underwent manual review to remove repetitions,
+accidental location references, and other artifacts.
+This human oversight was particularly important
+given that our work explicitly examines cultural
+biases in LLM outputs.
+The cultural taxonomy underlying CROQ was
+developed by aggregating topics from existing
+benchmarks and expanding them into a comprehen-
+sive framework of 11 domains and 66 subtopics.
+Although we designed this taxonomy to capture a
+broad spectrum of culturally relevant dimensions,
+we acknowledge that cultural phenomena exist on
+a continuum and cannot be exhaustively catego-
+rized. This structural limitation means our analysis,
+while broad, remains grounded in particular cul-
+tural frameworks rather than offering a universal
+view of human culture.
+In addition, we made deliberate efforts to en-
+sure broad linguistic coverage by including 24 lan-
+guages spanning different resource levels, language
+families, and geographical regions. This enables
+the study of cultural biases across varied linguistic
+9
+
+<!-- page 10 -->
+
+contexts, including communities often underrepre-
+sented in NLP. However, 24 languages represent
+only a small fraction of the world’s linguistic diver-
+sity, and our selection inevitably privileges certain
+communities and perspectives.
+Consequently, this work remains affected by the
+broader inequalities that shape language technol-
+ogy research. We encourage future work to extend
+cultural evaluation frameworks beyond country-
+level language boundaries and better represent un-
+derrepresented communities.
+Our results, particularly the concentration of
+model outputs towards culturally dominant regions
+like Japan and the United States, have implications
+for global users of these systems. Models trained to
+favour certain cultural perspectives may provide in-
+adequate or inappropriate responses for users from
+other backgrounds. We hope this work contributes
+to awareness among both model developers and
+users about the need for more balanced and inclu-
+sive cultural training.
+Acknowledgements
+Joseba Fernandez de Landa is supported by
+Grant DeepThought (PID2024-159202OB-C21),
+funded by MICIU/AEI/10.13039/501100011033
+and ERDF, EU, as well as the ALIA Models
+Development Project, Resolution of the SEDIA
+19/08/2024, within the framework of the National
+Language Technologies Plan – ENIA 2024, funded
+by MTDFP, PRTR, and the EU – NextGenera-
+tionEU.
+Jose Camacho-Collados is supported by a UKRI
+Future Leaders Fellowship.
+References
+Muhammad Farid Adilazuarda, Sagnik Mukherjee,
+Pradhyumna Lavania, Siddhant Shivdutt Singh, Al-
+ham Fikri Aji, Jacki O’Neill, Ashutosh Modi, and
+Monojit Choudhury. 2024. Towards measuring and
+modeling “culture” in LLMs: A survey. InProceed-
+ings of the 2024 Conference on Empirical Methods in
+Natural Language Processing, pages 15763–15784,
+Miami, Florida, USA. Association for Computational
+Linguistics.
+Shane Arora, Marzena Karpinska, Hung-Ting Chen,
+Ipsita Bhattacharjee, Mohit Iyyer, and Eunsol Choi.
+2025. CaLMQA: Exploring culturally specific long-
+form question answering across 23 languages. In
+Proceedings of the 63rd Annual Meeting of the As-
+sociation for Computational Linguistics (V olume 1:
+Long Papers), pages 11772–11817, Vienna, Austria.
+Association for Computational Linguistics.
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie
+Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind
+Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+Askell, Sandhini Agarwal, Ariel Herbert-V oss,
+Gretchen Krueger, Tom Henighan, Rewon Child,
+Aditya Ramesh, Daniel Ziegler, Jeffrey Wu, Clemens
+Winter, and 12 others. 2020. Language models are
+few-shot learners. InAdvances in Neural Information
+Processing Systems, volume 33, pages 1877–1901.
+Curran Associates, Inc.
+Bram Bulté and Ayla Rigouts Terryn. 2025. Llms and
+cultural values: The impact of prompt language and
+explicit cultural framing.Computational Linguistics,
+pages 1–85.
+Yu Ying Chiu, Liwei Jiang, Bill Yuchen Lin,
+Chan Young Park, Shuyue Stella Li, Sahithya Ravi,
+Mehar Bhatia, Maria Antoniak, Yulia Tsvetkov,
+Vered Shwartz, and Yejin Choi. 2025. CulturalBench:
+A robust, diverse and challenging benchmark for
+measuring LMs’ cultural knowledge through human-
+AI red-teaming. InProceedings of the 63rd An-
+nual Meeting of the Association for Computational
+Linguistics (V olume 1: Long Papers), pages 25663–
+25701, Vienna, Austria. Association for Computa-
+tional Linguistics.
+Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey,
+Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman,
+Akhil Mathur, Alan Schelten, Amy Yang, Angela
+Fan, and 1 others. 2024. The llama 3 herd of models.
+arXiv preprint arXiv:2407.21783.
+Ruixiang Feng, Shen Gao, Xiuying Chen, Lisi Chen,
+and Shuo Shang. 2025. CulFiT: A fine-grained
+cultural-aware LLM training paradigm via multilin-
+gual critique data synthesis. InProceedings of the
+63rd Annual Meeting of the Association for Compu-
+tational Linguistics (V olume 1: Long Papers), pages
+22413–22430, Vienna, Austria. Association for Com-
+putational Linguistics.
+Md Arid Hasan, Maram Hasanain, Fatema Ah-
+mad, Sahinur Rahman Laskar, Sunaya Upadhyay,
+Vrunda N Sukhadia, Mucahid Kutlu, Shammur Ab-
+sar Chowdhury, and Firoj Alam. 2024. Nativqa: Mul-
+tilingual culturally-aligned natural query for llms.
+arXiv preprint arXiv:2407.09823.
+Albert Q Jiang, Alexandre Sablayrolles, Arthur Men-
+sch, Chris Bamford, Devendra Singh Chaplot, Diego
+de las Casas, Florian Bressand, Gianna Lengyel, Guil-
+laume Lample, Lucile Saulnier, and 1 others. 2023.
+Mistral 7b.arXiv preprint arXiv:2310.06825.
+Nayeon Lee, Chani Jung, Junho Myung, Jiho Jin, Jose
+Camacho-Collados, Juho Kim, and Alice Oh. 2024.
+Exploring cross-cultural differences in English hate
+speech annotations: From dataset construction to
+analysis. InProceedings of the 2024 Conference of
+the North American Chapter of the Association for
+Computational Linguistics: Human Language Tech-
+nologies (V olume 1: Long Papers), pages 4205–4224,
+Mexico City, Mexico. Association for Computational
+Linguistics.
+10
+
+<!-- page 11 -->
+
+Cheng Li, Mengzhuo Chen, Jindong Wang, Sunayana
+Sitaram, and Xing Xie. 2024. Culturellm: Incorpo-
+rating cultural differences into large language mod-
+els. InAdvances in Neural Information Processing
+Systems, volume 37, pages 84799–84838. Curran As-
+sociates, Inc.
+Chen Cecilia Liu, Iryna Gurevych, and Anna Korho-
+nen. 2025a. Culturally aware and adapted NLP: A
+taxonomy and a survey of the state of the art.Trans-
+actions of the Association for Computational Linguis-
+tics, 13:652–689.
+Jiacheng Liu, Taylor Blanton, Yanai Elazar, Sewon Min,
+Yen-Sung Chen, Arnavi Chheda-Kothary, Huy Tran,
+Byron Bischoff, Eric Marsh, Michael Schmitz, and 1
+others. 2025b. Olmotrace: Tracing language model
+outputs back to trillions of training tokens. InPro-
+ceedings of the 63rd Annual Meeting of the Associa-
+tion for Computational Linguistics (V olume 3: Sys-
+tem Demonstrations), pages 178–188.
+Junho Myung, Nayeon Lee, Yi Zhou, Jiho Jin, Rifki Pu-
+tri, Dimosthenis Antypas, Hsuvas Borkakoty, Eunsu
+Kim, Carla Perez-Almendros, Abinew Ali Ayele, and
+1 others. 2024. Blend: A benchmark for llms on ev-
+eryday knowledge in diverse cultures and languages.
+Advances in Neural Information Processing Systems,
+37:78104–78146.
+Tuan-Phong Nguyen, Simon Razniewski, Aparna Varde,
+and Gerhard Weikum. 2023. Extracting cultural com-
+monsense knowledge at scale. InProceedings of
+the ACM Web Conference 2023, WWW ’23, page
+1907–1917, New York, NY , USA. Association for
+Computing Machinery.
+Nedjma Ousidhoum, Junho Myung, Carla Perez-
+Almendros, Jiho Jin, Amr Keleg, Meriem Be-
+loucif, Yi Zhou, Rodrigo Agerri, Vladimir Araujo,
+Naomi Baes, James Barry, Joanne Boisson, Nancy F.
+Chen, Christine de Kock, Aleksandra Edwards,
+Joseba Fernandez de Landa, Mohamed Fazli Imam,
+Huda Hakami, Shu-Kai Hsieh, and 11 others. 2026.
+SemEval-2026 task 7: Everyday knowledge across
+diverse languages and cultures. InProceedings of
+the 20th International Workshop on Semantic Evalua-
+tion (2026), pages 3823–3837, San Diego, California,
+USA. Association for Computational Linguistics.
+Siddhesh Pawar, Junyeong Park, Jiho Jin, Arnav
+Arora, Junho Myung, Srishti Yadav, Faiz Ghifari
+Haznitrama, Inhwa Song, Alice Oh, and Isabelle Au-
+genstein. 2025. Survey of cultural awareness in lan-
+guage models: Text and beyond.Computational
+Linguistics, pages 1–98.
+Abhinav Sukumar Rao, Akhila Yerukola, Vishwa Shah,
+Katharina Reinecke, and Maarten Sap. 2025. Nor-
+mAd: A framework for measuring the cultural adapt-
+ability of large language models. InProceedings of
+the 2025 Conference of the Nations of the Americas
+Chapter of the Association for Computational Lin-
+guistics: Human Language Technologies (V olume 1:
+Long Papers), pages 2373–2403, Albuquerque, New
+Mexico. Association for Computational Linguistics.
+Angelika Romanou, Negar Foroutan, Anna Sotnikova,
+Zeming Chen, Sree Harsha Nelaturu, Shivalika Singh,
+Rishabh Maheshwary, Micol Altomare, Mohamed A
+Haggag, Alfonso Amayuelas, and 1 others. 2024.
+Include: Evaluating multilingual language under-
+standing with regional knowledge.arXiv preprint
+arXiv:2411.19799.
+Weiyan Shi, Ryan Li, Yutong Zhang, Caleb Ziems,
+Sunny Yu, Raya Horesh, Rogério Abreu De Paula,
+and Diyi Yang. 2024. CultureBank: An online
+community-driven knowledge base towards cultur-
+ally aware language technologies. InFindings of the
+Association for Computational Linguistics: EMNLP
+2024, pages 4996–5025, Miami, Florida, USA. Asso-
+ciation for Computational Linguistics.
+Shivalika Singh, Angelika Romanou, Clémentine Four-
+rier, David Ifeoluwa Adelani, Jian Gang Ngui, Daniel
+Vila-Suero, Peerat Limkonchotiwat, Kelly Marchi-
+sio, Wei Qi Leong, Yosephine Susanto, Raymond
+Ng, Shayne Longpre, Sebastian Ruder, Wei-Yin
+Ko, Antoine Bosselut, Alice Oh, Andre Martins,
+Leshem Choshen, Daphne Ippolito, and 4 others.
+2025. Global MMLU: Understanding and addressing
+cultural and linguistic biases in multilingual evalua-
+tion. InProceedings of the 63rd Annual Meeting of
+the Association for Computational Linguistics (V ol-
+ume 1: Long Papers), pages 18761–18799, Vienna,
+Austria. Association for Computational Linguistics.
+Gemma Team, Morgane Riviere, Shreya Pathak,
+Pier Giuseppe Sessa, Cassidy Hardin, Surya Bhupati-
+raju, Léonard Hussenot, Thomas Mesnard, Bobak
+Shahriari, Alexandre Ramé, and 1 others. 2024.
+Gemma 2: Improving open language models at a
+practical size.arXiv preprint arXiv:2408.00118.
+OLMo Team. 2025a. 2 olmo 2 furious.arXiv preprint
+arXiv:2501.00656.
+OLMo Team. 2025b. Olmo 3.arXiv preprint
+arXiv:2501.00656.
+An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui,
+Bo Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu,
+Fei Huang, Haoran Wei, Huan Lin, Jian Yang, and
+1 others. 2024. Qwen2.5 technical report.arXiv
+preprint arXiv:2412.15115.
+Raoyuan Zhao, Beiduo Chen, Barbara Plank, and
+Michael A Hedderich. 2025. Makieval: A multi-
+lingual automatic wikidata-based framework for cul-
+tural awareness evaluation for llms.arXiv preprint
+arXiv:2505.21693.
+A Validation of Dataset Translations
+Given the scale of the CROQ dataset (31,680 total
+questions across 24 languages), we took deliberate
+steps to ensure the high quality and semantic in-
+tegrity of the translations. Because the core 1,320
+questions are intentionally designed to be short, di-
+rect, and structurally simple (as shown in Section
+11
+
+<!-- page 12 -->
+
+3 and Figure 1), the translation process is highly
+straightforward. Contemporary machine transla-
+tion systems are highly effective at handling such
+short-form text without loss of context. Accord-
+ingly, we utilizedGPT-5.1for the translation pro-
+cess.
+To verify this, we analyzed a representative sam-
+ple of 6 (zh, ko, es, ca, gl, eu) out of the 23 trans-
+lated languages, explicitly including low-resource
+languages, and conducted a validation check with
+native speakers. This involved a manual evaluation
+of 400 questions in total. The main conclusion from
+this analysis is that the automated translations are
+accurate and highly consistent across the dataset.
+While native speakers noted that a small fraction
+of the prompts exhibited minor artificiality (occa-
+sional phrasing that sounds slightly unnatural or
+different from how a native speaker would typically
+talk) the translations remain entirely correct and
+semantically faithful to the original prompts. This
+validation confirms that the minor stylistic varia-
+tions do not impact the clarity of the questions,
+making the translation pipeline fully sufficient and
+reliable for the scope of this benchmark.
+B Topics and subtopics in the Taxonomy
+We construct a comprehensive taxonomy compris-
+ing 66 fine-grained cultural subtopics, which are
+organized into 11 higher-level cultural domains.
+The taxonomy was designed to capture a broad and
+diverse range of cultural phenomena while main-
+taining sufficient granularity to support detailed
+analysis. Each higher-level domain aggregates the-
+matically related subtopics, enabling both coarse-
+grained and fine-grained examination of cultural
+dimensions. The complete taxonomy, including
+definitions and hierarchical relationships between
+domains and subtopics, is presented in Table 5.
+We conducted a semi-automatic evaluation of
+our proposed categories and subcategories, and
+we analyzed the datasets introduced in related
+work. Figure 5 illustrates the extent to which
+each general topic in our taxonomy is covered by
+existing datasets. The analysis shows that many
+datasets address only a limited subset of the gen-
+eral topics defined in our taxonomy. Although Na-
+tivQA (Hasan et al., 2024) and CaLMQA (Arora
+et al., 2025) cover all general topics, their cover-
+age across subtopics is uneven, with notable im-
+balances within individual topics. Our goal is not
+to propose a definitive or exhaustive taxonomy of
+🌱
+  🏠
+ 🧠
+  🎭
+  🍽
+  🌍
+  🏛
+  🩺
+ 📺
+  📜
+ 💰
+Figure 5: Taxonomy coverage for Related Work datasets.
+Percentage of subtopics covered in each higher-level do-
+main proposed in our taxonomy for the named datasets.
+cultural topics, but rather to cover as broad a range
+of cultural topics as possible, in order to prompt
+LLMs with maximal cultural diversity.
+C Selected languages analysis
+Table 6 shows the coverage of languages in our
+work, detailing the distribution of the 24 languages
+included in our dataset. For each language, the
+table reports its relative proportion within the Com-
+mon Crawl snapshot CC-MAIN-2025-43, together
+with an estimate of the total number of speak-
+ers (in millions), derived from publicly available
+Wikipedia statistics. In addition, we provide the
+corresponding language family for each language,
+as well as the ISO 639-1:2002 two-letter language
+code used consistently throughout the paper and
+accompanying resources. This information offers
+a concise yet comprehensive view of the linguis-
+tic diversity and representativeness of the dataset
+analyzed in this work.
+Figure 6 illustrates the relationship between the
+selected languages (excluding English), showing
+the correlation between number of speakers and
+their share in CommonCrawl. The broad dispersion
+across the plot demonstrates that CROQ covers a
+wide range of linguistic scenarios, spanning more
+than six distinct language families.
+D Further Evaluation Details
+To process the open-ended answers produced by
+the LLMs, we employ a secondary model as a
+judge to interpret the responses and extract the rel-
+evant information. The objective is to associate
+each question with a set of countries in order to un-
+12
+
+<!-- page 13 -->
+
+Domains Subtopics
+1. Beliefs, Values, and Identity
+Religion & Spirituality: Beliefs and practices about the divine, morality, and afterlife.
+Values & Ethics: Core beliefs about right/wrong, community, and individual roles.
+Symbolism: Visual or material symbols that carry cultural meaning.
+Mythology & Folklore: Narratives that explain origins, values, or natural phenomena.
+Gender Roles: Cultural expectations related to gender identity and expression.
+2. Social Structure and Daily Life
+Family & Social Roles: Structure of family and communal relationships.
+Community Life: How people relate to neighbors and groups.
+Manners & Etiquette: Everyday norms for respectful behavior and interaction.
+Work Culture: Attitudes and habits related to labor, time, and productivity.
+Conflict Resolution: How societies handle disputes or disagreements.
+3. Knowledge, Communication, and Education
+Language & Communication: Spoken, written, and non-verbal systems of communication.
+Education Systems: Ways knowledge is transmitted and valued.
+Technology & Tools: Use of tools and innovation in daily and cultural life.
+Knowledge Transmission: How wisdom and skills are preserved across generations.
+Science & Philosophy: Intellectual traditions shaping discovery and thought.
+4. Cultural Expression and the Arts
+Music: Rhythmic and melodic expression of culture
+Dance: Movement as performance, ritual, or celebration
+Art: Visual cultural expression (painting, sculpture, etc.)
+Literature & Storytelling: Written and oral traditions conveying culture and values
+Theater & Performance: Live dramatic cultural expression
+Film & Cinema: Storytelling through modern moving-image media
+Crafts & Handicrafts: Traditional material culture and artisanal skills
+Jewelry & Body Decoration: Ornamentation for identity, beauty, or tradition
+Architecture & Housing: Building styles and structures shaped by culture and climate
+5. Food, Drink, and Leisure
+Food & Cuisine: Traditional dishes, cooking styles, and dietary customs
+Traditional Beverages: Culturally significant drinks
+Recreation & Leisure: Activities for enjoyment and relaxation
+Sports & Games: Physical activities and competitions enjoyed culturally
+Life-Cycle Rituals: Ceremonies marking stages of life
+Festivals & Celebrations: Seasonal, national, or spiritual gatherings expressing shared identity
+6. Geographic Aspects
+Climate & Environment: How weather and landscape shape cultural practices, housing, and food
+Topography & Land Use: How people interact with physical geography like mountains, rivers, or plains
+Rural vs Urban Culture: Differences in lifestyle, work, and values between city and countryside
+Regional Identity: Sub-national cultural traits tied to a specific region
+Borders & Territory: How borders influence cultural blending or division
+Migration & Diaspora: Movements shaping identity
+Relationship with Nature: Beliefs and practices related to land, animals, and ecology
+7. Political Aspects
+Government Systems: Political structures influencing law, rights, and daily life
+Law & Legal Traditions: Cultural expectations of justice, rights, and punishment
+Civic Values & Participation: How people engage with politics, voting, and national identity
+Freedom of Expression: Cultural and political limits on speech or art
+Colonial History & Influence: Impact of colonization on culture, identity, and systems
+Power & Hierarchy: How authority is structured culturally and politically
+Human Rights & Social Movements: How cultures address equity, justice, and activism
+8. Health & Wellness
+Health Practices: Traditional, spiritual, or modern approaches to healing and care
+Public Health: Collective strategies for health and safety
+Wellbeing & Lifestyle: Balancing mental, physical, and social health
+Birth & Reproductive Health: Fertility, childbirth, and parenting norms and practices
+9. Media & Entertainment
+Local Media: Print, radio, and TV shaping cultural narratives
+Digital Media: Online platforms influencing communication, identity, and activism
+Entertainment Industries: Mass production of cultural content
+News & Information: Flow of journalism and narratives in society
+Popular Culture: Icons, trends, and shared cultural references
+Gaming & Interactive Media: Games, esports, and digital interactivity
+10. History
+Historical Events: Major turning points shaping collective identity
+Historical Figures: Leaders, thinkers, and cultural icons
+Cultural Memory: How societies remember, teach, and reinterpret their past
+Colonialism & Resistance: Struggles of domination and liberation
+National Narratives: Shared stories of origin, destiny, and identity
+Heritage & Preservation: Protecting, curating, and interpreting cultural pasts
+11. Economy & Industry
+Key Industries: Dominant sectors shaping work and identity
+Trade & Exchange: Movement of goods, ideas, and culture
+Labor & Employment: Work systems, professions, and class structures
+Wealth & Inequality: How resources and opportunities are distributed
+Economic Growth & Development: Paths to modernization and sustainability
+Globalization & Cultural Economy: Markets influencing culture and identity
+Table 5: Overview of the taxonomy’s domains (11) and subtopics (66), with brief definitions for each category.
+cover potential cultural biases. Therefore, the judge
+model is tasked with identifying up to five regions
+or places mentioned or implied in each answer. If
+no such information could be reliably determined,
+the model is prompted to explicitly indicate that no
+inference is possible (non-answered responses).
+We evaluated three prompting strategies for the
+judge model: (1)Explicit, in which only regions
+13
+
+<!-- page 14 -->
+
+Code Language Family Speakers (M) CC %
+en English Indo-European 1,528 44.8292
+zh Chinese Sino-Tibetan 1,184 5.1598
+hi Hindi Indo-European 609 0.1930
+es Spanish Indo-European 558 4.3672
+ar Arabic Afro-Asiatic 335 0.6549
+fr French Indo-European 312 4.4605
+bn Bengali Indo-European 284 0.1093
+pt Portuguese Indo-European 267 2.0696
+ru Russian Indo-European 253 6.1083
+id Indonesian Austronesian 252 0.9505
+de German Indo-European 134 6.0060
+ja Japanese Other 126 5.2018
+ko Korean Other 82 0.7754
+fa Persian Indo-European 127 0.7814
+sw Swahili Niger–Congo 87 0.0104
+ha Hausa Afro-Asiatic 94 0.0027
+az Azerbaijani Turkic 24 0.0624
+am Amharic Afro-Asiatic 60 0.0033
+su Sundanese Austronesian 32 0.0015
+el Greek Indo-European 13 0.4898
+as Assamese Indo-European 24 0.0025
+ca Catalan Indo-European 9 0.1741
+gl Galician Indo-European 2.4 0.0279
+eu Basque Other 0.8 0.0306
+Table 6: Distribution of the selected 24 languages
+(ISO 639-1:2002) included on our dataset by share of
+data in CommonCrawl (CC-MAIN-2025-43) and esti-
+mated number of total speakers (in millions) based on
+Wikipedia sources.
+Basic eval. Thorough eval.
+Lang.Exp.(1) Inf.(2) Mid.(3) Exp.(1) Inf.(2) Mid.(3)
+en 93.94 92.42100 92.42 89.39100
+es 89.39 90.9196.97 77.27 78.7996.97
+ca 93.94 96.97100 56.06 46.9796.97
+eu 84.8596.97 96.97 59.09 62.1286.36
+Avg.90.53 94.3298.48 71.21 69.3295.08
+Table 7: Evaluation Accuracy results for LLM as-a-
+judge in Basic and Thorough evaluations. System
+prompt types: (1)Explicit, (2)Inferand (3)Middle.
+explicitly mentioned in the text were extracted; (2)
+Infer, which allowed the model to extract regions
+that were either explicitly stated or reasonably in-
+ferred; and (3)Middle, a balanced approach that
+prioritized explicit mentions while permitting lim-
+ited, non-speculative inference when necessary (see
+Figures 7 and 8).
+For the evaluation, we conducted a manual as-
+sessment of 264 items (one per subtopic across
+four languages), covering both high-resource (en,
+es) and low-resource (ca,eu) settings. Ground truth
+labels for these items are established via manual
+human annotation. Accuracy is measured as the
+percentage of instances where the judge model’s
+extractions perfectly matches this human-annotated
+ground truth.
+We considered two evaluation granularities
+within this setup:
+Basic evaluation:The objective is to extract the
+country or countries referenced in the text. If
+100 101 102 103
+T otal speakers (millions, log scale)
+0
+2
+4
+6
+8% of Common Crawl content
+Languages (excluding English)
+rude
+ja zh
+fr es
+pt
+idko
+ar hica
+bn
+azeu sw
+am haas su
+el fa
+gl
+Legend
+Equal representation (approx)
+Indo-European
+Sino-Tibetan
+Austronesian
+Afro-Asiatic
+T urkic
+Niger Congo
+Other
+Figure 6: Distribution of the selected 23 languages (En-
+glish excluded for a more clear visualisation) by share
+of data in CommonCrawl (CC-MAIN-2025-43) and esti-
+mated number of speakers based on Wikipedia sources.
+a country is explicitly mentioned, that country
+should be extracted. If a specific sub-national
+region is mentioned instead, the judge must extract
+either the general country name or the specific
+region, and both are considered correct.
+Thorough evaluation:The objective shifts toward
+finer-grained geographic specificity, and the model
+is required to adhere strictly to the geographic
+entity explicitly mentioned in the output; if a
+country is mentioned, the model must extract the
+country, and if a specific sub-national region is
+mentioned, the model must extract that specific
+sub-national region.
+Text:“In Japan, staple foods eaten daily...”
+Basic Eval: Output must be -> Japan
+Thorough Eval: Output must be -> Japan
+Text:“In Paris, notable museums include...”
+Basic Eval: ParisorFrance are accepted.
+Thorough Eval: Only Paris is accepted.
+Text:“In the Basque Country*, the food is...”
+*transboundary region between Spain and France.
+Basic Eval: Spain, FranceorBasque Country.
+Thorough Eval: Only Basque Country.
+To account for this finer-grained geographic
+specificity, we report the comparative results of
+both setups in Table 7. The manual evaluation
+showed that the(3) Middleprompting strategy
+yielded the most accurate and consistent results.
+14
+
+<!-- page 15 -->
+
+Based on this assessment, we adopted this prompt
+in all subsequent analyses, using gpt-4o-mini from
+OpenRouter with default settings as the underlying
+judge model.
+E Frontier models outputs for 24
+languages
+As an initial analysis, we examined the outputs of
+frontier models across seven widely spoken lan-
+guages and identified a pronounced concentration
+in their regional references. Specifically, we ana-
+lyzed the top three most frequently mentioned coun-
+tries or regions for each language-model pair (see
+Table 8). Models overwhelmingly anchor their ref-
+erences to the primary country associated with each
+language, such as the U.S. for English, China for
+Chinese, France or Canada for French, and Japan
+for Japanese. This shows that models correctly
+internalize the conventional linguistic–national as-
+sociations. Secondary references vary somewhat
+across models, but still follow intuitive cultural
+or regional links: for example, Arabic prompts
+frequently bring up Egypt, Saudi Arabia, and the
+UAE, while Spanish prompts often reference Mex-
+ico, Spain, and Peru.
+Figure 9 presents the outputs (excluding mod-
+els’ own references) generated by the gpt-4o-
+mini, gemini-2.5-flash, claude-3.5-haiku, llama-4-
+maverick, command-r-08-2024, magistral-small-
+2506, qwen3-next-80b-a3b-instruct, and deepseek-
+v3.2-exp model variants across the complete
+dataset covering 24 languages. The evaluation
+spans content associated with twelve countries:
+Japan (JP), United States (US), India (IN), China
+(CN), France (FR), Italy (IT), United Kingdom
+(GB), Germany (DE), Mexico (MX), Brazil (BR),
+Russia (RU), and Egypt (EG). The left figure re-
+ports country references aggregated by model, high-
+lighting how different model variants distribute
+references across countries. The right figure re-
+ports country references aggregated by language,
+illustrating how country mentions vary across the
+linguistic dimension.
+E.1 Analysis by language
+The results in Table 9 illustrate consistent pat-
+terns in how frontier models associate languages
+with countries. Across all 24 languages, refer-
+ences to countries where the language is an of-
+ficial language (Own) dominate the model’s out-
+puts. This behaviour suggests a heavy reliance on
+language–country co-occurrence signals, likely re-
+flecting strong correlations within the training data.
+While such associations are linguistically plausible,
+their prevalence indicates limited decoupling be-
+tween a language and its primary national context.
+Beyond these self-referential patterns, the model
+exhibits a stable hierarchy regarding non-official
+country references. Japan and United States are
+the most frequently referenced nations across all
+languages, followed by India, France, and China.
+Importantly, these references appear even in lan-
+guages with limited cultural or geographic ties to
+these nations, suggesting that cross-country men-
+tions are driven more by general global prominence
+than by language-specific relevance. This find-
+ing aligns with prior observations that multilingual
+models tend to overrepresent culturally salient enti-
+ties regardless of the linguistic context.
+Examining theOwnandNAcolumns reveals
+distinct behaviours based on language resource
+availability. TheOwncount is highest for low-
+resource languages such as Assamese, Sundanese,
+and Bengali, indicating a strong tendency for the
+model to ground these languages almost exclu-
+sively in their home countries. In contrast, high-
+resource languages like English, Chinese, and Rus-
+sian show comparatively lowerOwncounts, reflect-
+ing the model’s ability to distribute references more
+broadly. Additionally, whileNA(missing response)
+counts are generally low, spikes in languages like
+Hausa and Hindi indicate occasional gaps in model
+generation for specific low-resource contexts.
+TheO+Ncolumn, which aggregatesOwnand
+NApercentages, further highlights this divide. Lan-
+guages such as Bengali, Sundanese, Amharic,
+Basque, and Hindi exhibit the highestO+Nvalues,
+reflecting a concentration of outputs that are either
+biased toward the home country or result in non-
+responses—traits characteristic of low-resource
+processing. Conversely, high-resource languages
+like English, French, and Russian display lower
+O+Nvalues. This indicates a more diversified
+output distribution, consistent with languages that
+possess richer cross-country associations in the
+training corpus. Overall, a clear trend emerges:
+low-resource languages tend to yield highly con-
+centrated or missing responses (highO+N), while
+high-resource languages yield more balanced refer-
+ences reflecting broader cultural associations.
+Finally, the analysis of the relationship between
+normalized diversity and entropy scores may in-
+dicate a correlation with language resource avail-
+15
+
+<!-- page 16 -->
+
+You are a precise geographical context classifier. Your task is to determine which nation,
+country or state(s) a given text is explicitly referring to. Follow these rules strictly:
+1. Do not infer nations, countries or states based on general knowledge, stereotypes, or
+assumptions beyond what is stated in the text.
+2. If multiple nations, countries or states are mentioned, list all of them. Not more than 5.
+Keep your answers concise and limited to the nation, country or state names. Translate the final
+answers into English.
+Figure 7: Chosen System prompt,Middle(3), given to the Judge model
+You are a geographical context classifier. Identify the nation, country, or state(s) explicitly mentioned in the text.
+Rules:
+1. Only list countries/states that appear in the text. Do not infer.
+2. If multiple countries/states are mentioned, list up to 5.
+3. Only list nations, countries, or states; skip regions or cities unless needed for clarity.
+Answer with country names only, in English, separated by commas.
+You are a geographical context classifier. Identify the nation, country, or state(s) the text refers to.
+Rules:
+1. If no country is mentioned, infer the most likely one from context.
+2. If multiple countries/states are mentioned, list up to 5.
+3. Only list nations, countries, or states; skip regions or cities unless needed for clarity.
+Answer with country names only, in English, separated by commas.
+Figure 8: System prompt given to the Judge model (top:Explicit (1); bottom:Infer (2))
+Models
+Language
+English (en)
+Chinese (zh)
+Spanish (es)
+Arabic (ar)
+French (fr)
+Russian (ru)
+Japanese (ja)
+Table 8: Top three countries most frequently referenced by model for each high-resourced language.
+ability. In this context, diversity measures how
+many unique countries are referenced at all, while
+normalized entropy captures the evenness of the
+distribution of mentions across those referenced
+entities. High-resource languages (e.g., English,
+Chinese, French, Russian) exhibit both high diver-
+sity and moderate-to-high entropy, indicating that
+they not only reference a wider array of nations but
+also distribute their focus more uniformly. In con-
+trast, low-resource languages (e.g., Hindi, Bengali,
+Amharic, Sundanese) demonstrate low diversity
+and entropy; they reference fewer unique countries,
+and those references are heavily concentrated on a
+single entity (typicallyowncountries) rather than
+being spread out. This suggests that the model’s ca-
+pacity to generate broad, evenly distributed cultural
+references is heavily conditioned by the availability
+of the underlying training data.
+E.2 Measuring Cultural Diversity in Model
+Outputs
+Table 10 reports diversity scores, the number of
+distinct geographic regions referenced across 24
+languages and eight frontier models. A key aspect
+of this metric is that it measures model diversity
+16
+
+<!-- page 17 -->
+
+JP US IN CN FR IT GB DE MX BR RU EG
+Countries
+GPT
+Gemini
+Claude
+Llama
+CommandR
+Magistral
+Qwen
+Deepseek
+Mentions by Model (24 lang)
+500
+1000
+1500
+2000
+2500
+en zh hi es ar fr bn pt ru id de ja ko fa sw ha az am su el as ca gl eu
+Language
+JP
+US
+IN
+CN
+FR
+IT
+GB
+DE
+MX
+BR
+RU
+EG Countries
+Mentions by Language (8 Frontier Models)
+0
+500
+1000
+1500
+2000
+2500
+Figure 9: Outputs (withoutownreferences) from gpt-4o-mini, gemini-2.5-flash, claude-3.5-haiku, llama-4-maverick,
+command-r-08-2024, magistral-small-2506, qwen3-next-80b-a3b-instruct and deepseek-v3.2-exp variants over the
+full dataset of 24 languages. Countries: Japan (JP), USA (US), India (IN), China (CN), France (FR), Italy (IT), UK
+(GB), Germany (DE), Mexico (MX), Brazil (BR), Russia (RU), Egypt (EG). Data from Tables 1 and 9 respectively.
+Lang. Own(%)NAO+N JP US IN CN FR IT GB DE MX BR RU EG Div Ent
+en 3,223 (.31) 192 .322,8932,028* 695* 367 265 223323* 277 309 314 57 104 157 0.69
+zh 5,110 (.48) 258 .512,0641,460 6424,781* 407 193 319 210 165 202 80 119 142 0.57
+hi 7,430 (.70) 1,706 .87 941047,423* 92 37 13 38 21 14 11 14 11 56 0.14
+es 6,935 (.66) 152 .67843588 130 173 110 128 48 1002,852* 186 23 58 136 0.65
+ar 7,325 (.69) 499 .74504396 182 85 197 82 136 63 59 64 211,645* 108 0.71
+fr 5,956 (.56) 136 .58832557 215 2364,656* 225 85 162 95 137 44 104 149 0.54
+bn 8,219 (.79) 1,189 .89 731512,415*59 35 17 41 20 13 16 10 13 68 0.20
+pt 7,719 (.73) 358 .76479442 167 161 147 146 94 124 856,199* 30 50 114 0.42
+ru 3,831 (.36) 173 .381,423657 265 431 199 214 118 196 71 1433,827* 90 146 0.60
+id 8,055 (.76) 870 .85411246 129 133 59 24 35 46 29 48 10 30 78 0.26
+de 7,359 (.70) 71 .70485237 169 203 145 304 486,927* 62 53 45 39 122 0.38
+ja 6,213 (.59) 375 .625,584*736434 219 267 98 144 98 133 193 21 47 114 0.36
+ko 6,191 (.59) 1,580 .74 1,0641,308574 663 508 227 229 214 123 160 97 124 112 0.47
+fa 6,015 (.57) 722 .64 473544263 194 266 101 107 124 55 89 59 105 117 0.48
+sw 8,196 (.78) 144 .79 23038985 79 106 55 156 72 19 48 17 106 89 0.50
+ha 5,385 (.51) 3,270 .82 309930 44 25 13 21 16 3 9 1 37 49 0.10
+az 7,960 (.75) 253 .78 12321281 64 43 34 47 48 23 10 119 29 78 0.43
+am 8,088 (.77) 1,133 .87 4310617 19 13 19 9 6 12 5 8 22 38 0.13
+su 8,331 (.79) 995 .88167146 49 76 48 14 15 32 10 7 6 18 62 0.11
+el 7,393 (.70) 253 .72330307 161 135 173 124 141 132 46 36 34 83 106 0.36
+as 8,732 (.83) 140 .84 41532,900* 42 18 6 17 8 2 4 4 6 41 0.30
+ca 7,622 (.72) 158 .74 213339170 224306* 103 31 45 142 50 17 51 121 0.49
+gl 7,967 (.75) 88 .76314297 129 143 135 58 77 68 259 292 23 21 113 0.37
+eu 8,266 (.78) 903 .87 13214448 66674* 37 39 40 38 15 15 13 68 0.37
+Avg. 6,980 (.66) 651 .72577414 197 170 153 102 87 92 77 82 33 56 99 0.40
+Table 9: Frontier Model outputs for 24 languages.Own: counts references to countries in which the language is
+an official language.NA: denotes missing responses.O+N: percentage of the sum of Own and NA references
+relative to the total for the language. Referenced countries: Japan (JP), USA (US), India (IN), China (CN), France
+(FR), Italy (IT), United Kingdom (GB), Germany (DE), Mexico (MX), Brazil (BR), Russia (RU), Egypt (EG).
+Div: diversity scores.Ent: normalized entropy values. Bold values indicate the highest count for each language,
+excluding self-references. An asterisk (*) marks references to own countries.
+across different regions per language, meaning that
+for each language in our set, we calculate how
+many unique countries or regions are represented
+in the model’s cultural references. A higher score
+indicates that a model’s outputs for a given lan-
+guage draw from a broader, more globally varied
+set of cultural contexts, rather than being concen-
+trated in one or two regions.
+Averaged over languages, we observe large
+model-level differences: CommandR achieves the
+highest overall diversity, followed by DeepSeek
+and Gemini, while Mistral, GPT, and Qwen exhibit
+substantially lower scores. Language-level varia-
+tion is also pronounced. High-resource languages
+such as English, French, Russian, and Spanish con-
+sistently receive broadest cultural coverage across
+models. In contrast, several low-resource or region-
+ally concentrated languages (including Amharic,
+Assamese, Hausa, Hindi, and Bengali) remain well
+below the global mean, indicating narrower cultural
+framing in model outputs.
+Beyond aggregate trends, we find substantial
+17
+
+<!-- page 18 -->
+
+cross-model variance within the same language,
+suggesting that cultural diversity is not determined
+by language alone. For example, Chinese ranges
+from 98 (Qwen) to 188 (CommandR), Bengali
+from 20 (Qwen) to 116 (LLaMA), and Hindi from
+18 (Claude) to 107 (DeepSeek). Such differences
+often exceed average inter-language gaps, under-
+scoring the impact of model-specific training and
+alignment choices. Overall, these results show
+that cultural diversity in multilingual generation
+is highly uneven, favoring high-resource languages,
+but also that these disparities are model-dependent
+rather than unavoidable.
+Language
+ A VG
+en 160 171 159 135 170 145 152 165 157
+zh 127 165 125 157 188137 98 143 142
+hi 33 69 18 58 52 60 47107 56
+es 112 131 127 141 149 121 134 169 136
+ar 89 126 88 101 13795 110 115 108
+fr 143 154 135 130 174143 137 173 149
+bn 36 75 28 116115 64 20 90 68
+pt 91 134 105 78 143 117 109 139 114
+ru 141 156 147 149 179120 118 158 146
+id 72 11889 56 53 56 62 115 78
+de 94 113 150118 137 119 132 112 122
+ja 90 127 129 127 13094 92 123 114
+ko 73 120 145 99 99 14975 137 112
+fa 98 142 91 101 167115 88 136 117
+sw 68 109 87 110 13485 46 75 89
+ha 34 74 31 8634 11 35 86 49
+az 7710956 79 77 61 55 109 78
+am 19 53 437443 11 25 33 38
+su 41 77 64 3010082 26 77 62
+el 87 100 109 101 16291 75 127 106
+as 31 30 229730 30 23 64 41
+ca 102 115 140 126 17197 105 114 121
+gl 96 120 109 88 16389 100 140 113
+eu 55 11594 83 64 28 36 73 68
+ALL 82 113 95 102 120 88 79 116 99
+Table 10: Diversity scores by language for different
+Frontier API models. ALL: per-model average across
+languages. A VG: per-language average. Highlighted
+results: above average results.
+E.3 Topic Analysis in Model Outputs
+Table 11 presents the countries most frequently
+mentioned by the models across the 11 general
+topics in our dataset. It reports the corresponding
+counts for these leading countries, as well as the
+models’ own-country mentions.
+On a model-by-model analysis of each topic
+(Table 12), the systemic bias emerges once again
+across all eight frontier AI models, with Japan and
+the United States dominating as the most frequently
+referenced countries across the eleven evaluated
+topics. Specifically, Japan consistently takes the
+top position in culturally and socially oriented do-
+mains such as Beliefs, Education, Arts, Food, and
+Health, while the United States leads in structural
+and global topics like Geography, Politics, His-
+tory, and the Economy. Notably, this US-Japan
+centricity represents a strong cross-model consen-
+sus, appearing almost equally in Western models
+like OpenAI, Gemini, and Anthropic, as well as in
+Chinese models like Qwen and DeepSeek. Other
+countries, including India, China, and France, ap-
+pear only sporadically as secondary or tertiary ref-
+erences, highlighting a profound homogenization
+in the ways current LLMs exhibit biases toward
+particular countries and regions.
+E.4 Correlation between CC and output
+diversity
+We examined, across all frontier models, the re-
+lationship between each language’s proportion of
+Common Crawl (CC) data and the diversity of out-
+puts generated in that language for each model.
+Table 13 reports Pearson’s r and Spearman’s rs
+correlations, along with their associated p-values.
+Across all models combined (Avg_all), we ob-
+served a Pearson correlation of 0.498 (p= 0.013 ),
+indicating a moderate positive linear relationship,
+and a Spearman correlation of 0.843 ( p <10 −6),
+showing a very strong rank correlation. These re-
+sults suggest that languages with a higher propor-
+tion of CC data tend to exhibit greater diversity in
+model outputs.
+When examining individual models, the correla-
+tions varied but largely supported this trend. For ex-
+ample, GPT-4o-mini showed the strongest Pearson
+correlation (0.577, p= 0.003 ) and a high Spear-
+man correlation (0.774, p <10 −5), indicating both
+linear and rank-based relationships between data
+availability and diversity. Qwen3-next-80b-a3b-
+instruct also displayed high correlations (Pearson
+0.529, Spearman 0.808), while Gemini-2.5-flash
+and Claude-3.5-haiku exhibited moderate corre-
+lations. Deepseek-v3.2-exp and Magistral-small-
+2506 presented slightly lower but still statistically
+significant correlations, reinforcing the overall pat-
+tern.
+Two models, however, showed weaker correla-
+tions. LLaMA-4-maverick had a Pearson corre-
+lation of 0.383 ( p= 0.064 ) and Spearman 0.650
+(p= 5.84×10 −4), while Command-R-08-2024
+showed Pearson 0.329 (p= 0.116 ) and Spearman
+0.629 (p= 9.87×10 −4). Although the Spearman
+correlations remain significant, the lower Pearson
+correlations suggest that the linear relationship is
+less pronounced for these models, possibly reflect-
+ing model-specific factors or limitations in han-
+18
+
+<!-- page 19 -->
+
+Topic Top-10 Countries Own
+1. Beliefs
+ 1,506
+ 586
+ 549
+ 400
+ 332
+ 318
+ 282
+ 278
+ 189
+ 147 10,801
+2. Social
+ 1,594
+ 455
+ 145
+ 144
+ 126
+ 117
+ 117
+ 104
+ 85
+ 79 11,571
+3. Education
+ 1,086
+ 453
+ 268
+ 267
+ 169
+ 165
+ 157
+ 153
+ 149
+ 136 12,279
+4. Arts
+ 2,028
+ 1,191
+ 768
+ 621
+ 516
+ 381
+ 337
+ 304
+ 263
+ 262 23,032
+5. Food
+ 1,980
+ 515
+ 413
+ 344
+ 340
+ 309
+ 270
+ 208
+ 175
+ 137 16,007
+6. Geography
+ 1,494
+ 822
+ 563
+ 471
+ 421
+ 368
+ 366
+ 341
+ 302
+ 264 17,591
+7. Politics
+ 1,344
+ 730
+ 589
+ 395
+ 362
+ 360
+ 287
+ 247
+ 174
+ 164 17,585
+8. Health
+ 1,068
+ 361
+ 220
+ 210
+ 159
+ 111
+ 83
+ 70
+ 64
+ 59 10,474
+9. Media
+ 1,330
+ 1,304
+ 391
+ 272
+ 200
+ 194
+ 167
+ 116
+ 109
+ 103 17,112
+10. History
+ 1,024
+ 761
+ 521
+ 455
+ 398
+ 362
+ 348
+ 341
+ 332
+ 245 14,916
+11. Economy
+ 1,388
+ 803
+ 546
+ 373
+ 323
+ 319
+ 270
+ 226
+ 205
+ 191 16,188
+Table 11: Top 10 countries most frequently referenced by all Frontier API models for each topic in the taxonomy
+for 24 languages. Raw counts for each top country as well as own country mentions.Own: counts references to
+countries in which the language is an official language.
+Topic
+1. Beliefs
+2. Social
+3. Education
+4. Arts
+5. Food
+6. Geography
+7. Politics
+8. Health
+9. Media
+10. History
+11. Economy
+Table 12: Top three countries most frequently referenced by Frontier API models for each topic in the taxonomy for
+24 languages, excluding own country mentions.
+Pearson Spearman
+Modelr p r s p
+Qwen 0.529 0.008 0.8081.80×10 −6
+Gemini 0.483 0.017 0.7983.00×10 −6
+DeepSeek 0.425 0.038 0.7758.90×10 −6
+GPT 0.577 0.003 0.7749.14×10 −6
+Magistral 0.426 0.038 0.7701.07×10 −5
+Claude 0.452 0.027 0.7601.63×10 −5
+Llama 0.383 0.064 0.6505.84×10 −4
+Command-r 0.329 0.116 0.6299.87×10 −4
+Avg_all 0.498 0.013 0.8432.31×10 −7
+Table 13: Correlation between CommonCrawl percent-
+age and output diversity for Frontier models. Pearson’s
+r and Spearman’s rs are reported along with their p-
+values.
+dling low-resource languages.
+Overall, these results indicate that the amount of
+possibly available training data for each language
+may be an important factor influencing output di-
+versity. Languages with less CC data tend to yield
+less diverse outputs, suggesting a potential reduc-
+tion in creative or varied responses when data is
+scarce. This pattern is robust across most mod-
+els, highlighting the influence of data coverage on
+multilingual model behaviour.
+F Open-Weight Base and Instruct Models
+Analysis Over English Dataset
+Table 14 presents a comparative analysis of cultural
+leanings exhibited by base and instruction-tuned
+Open Weighted LLMs when responding to open-
+ended cultural questions in English. Responses
+are categorized by their alignment with references
+to specific countries, allowing us to examine how
+pretraining and instruction tuning affect the geo-
+graphic distribution of model outputs. We addition-
+ally report diversity (Div) and normalized entropy
+(Ent) scores to quantify the spread and balance of
+cultural references.
+Base models exhibit broader cultural distribu-
+tions.Across all model families, base models
+19
+
+<!-- page 20 -->
+
+Model NAJP US IN CN FR IT GB DE MX BR RU EGDiv Ent
+Llama-3.1-8B Base 354 164 14420085 87 106 30 62 42 82 54 17 109 0.78
+Inst. 14407391 121 25 18 22 55 14 10 32 9 14 174 0.66
+Llama-3.1-70B Base 783237194 199 116 85 61 36 80 37 85 51 40 117 0.79
+Inst. 13417333 125 35 15 9 42 7 15 19 2 15 174 0.65
+gemma-2-9b Base 30 124317169 80 53 26 18 45 43 26 12 25 95 0.70
+Inst. 19269217 104 18 33 41 69 29 14 55 2 29 136 0.71
+gemma-2-27b Base 28 100202128 71 38 43 75 31 23 33 24 29 80 0.77
+Inst. 9 25028558 23 16 27 30 26 31 49 1 14 154 0.73
+Mistral-7B Base 52 9814693 73 41 38 41 46 45 28 40 31 91 0.81
+Inst. 14 23358086 34 18 45 57 14 22 58 1 11 160 0.63
+Qwen2.5-7B Base 265 9838598 32 51 64 34 35 18 34 9 7 147 0.71
+Inst. 16321304 74 310 15 50 20 21 5 11 5 10 150 0.62
+Qwen2.5-32B Base 248 183399131 35 36 19 39 15 31 15 8 5 142 0.65
+Inst. 12489247 58 140 37 18 24 17 11 25 4 7 118 0.61
+Qwen2.5-72B Base 182 180606150 67 31 28 55 29 34 40 6 25 144 0.66
+Inst. 10 343386106 192 31 22 15 29 6 16 1 11 127 0.60
+Average Base 243 148 299 146 70 53 48 41 43 34 43 26 22 116 0.73
+Instruct 13 341 343 92 97 23 29 39 20 14 33 3 14 149 0.65
+Table 14: Comparison of named base and instruct models over English questions (data used for Figure 3). NA:
+denotes missing responses. Referenced countries: Japan (JP), USA (US), India (IN), China (CN), France (FR), Italy
+(IT), United Kingdom (GB), Germany (DE), Mexico (MX), Brazil (BR), Russia (RU), Egypt (EG). Bold values
+indicate the highest count for each country per model. Div: diversity scores. Ent: normalized entropy values.
+demonstrate relatively more balanced distributions
+of cultural references. While the United States
+is frequently the most represented region, other
+countries (particularly Japan, India, China, and
+several European nations) appear with substantial
+frequency. This pattern is reflected in higher nor-
+malized entropy values, indicating a comparatively
+more diverse set of cultural alignments than their
+instructed counterparts.
+Instruction tuning induces strong cultural con-
+centration.In contrast, instruction-tuned vari-
+ants exhibit a pronounced shift toward a narrow set
+of cultural references. Across all examined model
+families, instruction tuning results in a sharp in-
+crease in references to Japan and the United States,
+often making these the two dominant regions by a
+large margin. On average, references to Japan and
+the US increase in instruction-tuned models, while
+references to India, China, Russia, Egypt, and Latin
+American countries decline substantially. This con-
+centration is accompanied by a consistent reduction
+in normalized entropy, indicating a loss of cultural
+diversity. Notably, this trend holds across differ-
+ent architectures and parameter scales, including
+models developed in non-Western contexts (e.g.,
+Qwen with China), suggesting that instruction tun-
+ing exerts a homogenizing effect that overrides dif-
+ferences introduced during pretraining.
+Diversity metrics corroborate qualitative trends.
+The observed redistribution is quantitatively sup-
+ported by the diversity and entropy metrics. While
+diversity scores (Div) increase for instruction-tuned
+models due to higher total counts concentrated in
+fewer regions, entropy consistently decreases, re-
+flecting a more peaked and less balanced distribu-
+tion.
+Possible implications.Taken together, these re-
+sults demonstrate that instruction tuning systemat-
+ically reduces cultural diversity in model outputs,
+steering responses toward a limited set of cultur-
+ally dominant perspectives, particularly those as-
+sociated with the United States and Japan. This
+finding has important implications for the deploy-
+ment of instruction-tuned models in cross-cultural
+or global applications, where preserving diverse
+cultural viewpoints may be critical.
+G Models’ Analysis Across Post-training
+Stages
+Table 15 reports a controlled comparison between
+base, supervised fine-tuned (SFT), and instruction-
+aligned (Inst.) variants of open-weight models that
+provide multiple alignment stages. The analysis
+focuses exclusively on English prompts, enabling
+us to isolate the effect of alignment from multilin-
+gual prompting effects. By including OLMo-2 (7B,
+20
+
+<!-- page 21 -->
+
+Model NAJP US IN CN FR IT GB DE MX BR RU EGDiv Ent
+Olmo-3-7B
+Base 608 3518643 27 25 18 28 13 12 11 7 9 114 0.74
+SFT 85395212 97 26 109 64 39 30 28 22 26 10 145 0.66
+Inst. 41478171 89 19 86 78 43 39 44 11 27 5 124 0.64
+Olmo-3-7B-Think
+Base 608 3518643 27 25 18 28 13 12 11 7 9 114 0.74
+SFT 88453213 105 40 18 32 32 22 32 22 2 13 121 0.66
+Inst. 200386289 179 52 32 46 44 36 47 29 2 25 127 0.68
+OLMo-2-7B
+Base 109 649784 76 46 57 38 35 30 29 26 35 102 0.84
+SFT 252 13052067 29 54 40 52 13 18 35 4 13 151 0.63
+Inst. 53 16356679 34 65 62 31 20 20 29 11 18 158 0.64
+OLMo-2-32B
+Base 155 61216119 54 38 44 34 34 28 26 17 9 88 0.77
+SFT 33 36139051 20 62 36 34 29 16 31 2 16 151 0.65
+Inst. 44 22136881 32 74 40 42 33 18 29 8 6 161 0.71
+Table 15: Comparison of Base, SFT, and Instruct variants over English questions. NA: denotes missing responses.
+Referenced countries: Japan (JP), USA (US), India (IN), China (CN), France (FR), Italy (IT), United Kingdom
+(GB), Germany (DE), Mexico (MX), Brazil (BR), Russia (RU), Egypt (EG). Bold values indicate the highest count
+for each country per model. Div: diversity scores. Ent: normalized entropy values.
+32B) and OLMo-3 (7B, 7B-Think), which expose
+intermediate SFT checkpoints, the table allows us
+to disentangle the impact of supervised fine-tuning
+from that of final instruction alignment.
+Base models: higher entropy and weaker ge-
+ographic priors.Across all architectures and
+scales, base models exhibit the highest entropy
+values and comparatively balanced country distri-
+butions. While some geographic preferences are
+already present (notably toward the US), these pref-
+erences remain moderate and are spread across a
+broader set of countries. For example, OLMo-2-7B
+Base achieves the highest entropy in the table, indi-
+cating minimal concentration on any single country.
+However, base models also show higher rates of
+missing or underspecified responses (NA), partic-
+ularly in OLMo-3, reflecting lower controllability
+rather than alignment-induced bias.
+Supervised fine-tuning sharply amplifies cul-
+tural bias.The transition from Base to SFT in-
+troduces the largest shift in geographic skew across
+all models. SFT variants consistently display dra-
+matic increases in counts for a small number of
+dominant countries (United States and Japan) ac-
+companied by substantial drops in normalized en-
+tropy. For instance, OLMo-2-7B SFT increases
+US-associated outputs, while entropy drops. Simi-
+lar patterns appear in both OLMo-3 variants, where
+Japan becomes the dominant country after SFT.
+These results indicate that supervised alignment
+data strongly reinforces cultural priors present in
+instruction datasets, amplifying bias beyond what
+is observed in pretraining alone.
+Instruction tuning moderates but does not elim-
+inate alignment bias.Instruction-tuned models
+partially attenuate the extreme peaks introduced
+during SFT, but do not recover the diversity of base
+models. In several cases, entropy remains close
+to or below SFT levels, suggesting that dominant-
+country preferences become stabilized during align-
+ment. Overall, instruction tuning acts as a smooth-
+ing mechanism rather than a corrective one.
+Diversity and entropy: misleading signals.
+While diversity scores (Div) often increase after
+SFT and instruction tuning, this increase does not
+correspond to more balanced outputs. Instead,
+higher diversity frequently co-occurs with lower en-
+tropy, reflecting broader but highly uneven country
+coverage dominated by a few regions.
+H Prompt Analysis for RQ3
+H.1 Prompting for Base Models
+Since foundational Large Language Models
+(LLMs) are originally trained with a self-
+supervised next-token prediction objective, they
+are not inherently designed to perform specific QA
+tasks without guidance. Unlike instruction-tuned
+models, base models often lack the alignment nec-
+essary to interpret a raw query as a command to
+provide a factual answer. To address this limitation,
+we employ In-Context Learning (ICL), a method
+that leverages explicit reasoning over background
+knowledge to guide the model’s inference process
+(Brown et al., 2020). By providing the model with
+21
+
+<!-- page 22 -->
+
+relevant context and demonstrations within the in-
+put window, we effectively transform the genera-
+tive completion task into a structured QA format,
+allowing the base model to infer the desired output
+pattern without the need for parameter updates.
+Question: Who wrote'1984'?
+Answer: George Orwell.
+Question: What is the chemical symbol for
+water?
+Answer: H2O.
+Question: What is the dominant religion
+(in region/place)?
+Answer: I'll choose {Country1}. The dominant
+religion in {Country1} is {Country1_Religion}.
+Question: What sacred texts are studied
+(in region/place)?
+Answer: I'll choose {Country2}. In {Country2},
+the sacred texts studied depend primarily on
+the religious community, as the country has
+a diverse religious landscape.
+Question: {Input Question}
+Answer:
+Figure 10: Prompt given to the Base models in order to
+follow instructions.
+We operationalize this approach using the
+prompt structure illustrated in Figure 10. To ensure
+the model adheres to the correct output format, the
+prompt includes both general QA demonstrations
+and task-specific examples that explicitly condi-
+tion the model to respond with a country or geo-
+graphic region. The template is constructed with
+strategic placeholders to facilitate this: two slots
+are reserved for preselected countries—including a
+specific attribute for religion in the first instance to
+demonstrate cultural reasoning, while a final place-
+holder is designated for the target culture-related
+question. This few-shot setup serves to constrain
+the model’s generation, ensuring it focuses on the
+relevant cultural entity.
+To maintain a rigorous evaluation, we implement
+a post-processing filter once the judge model ex-
+tracts the mentioned regions or countries from the
+output. We specifically identify instances where
+the LLM simply replicates the example regions
+provided in the few-shot prompt rather than gen-
+erating an original response to the cultural query.
+These cases are classified as "Non-Answered," as
+they represent a failure of the model to general-
+ize beyond the immediate context. Consequently,
+Figure 11: Outputs from the Base and Instruct vari-
+ants ofOlmo3-7B,Olmo2-7BandOlmo2-32Bmodels.
+The Instruct models are shown in two modes:Ins.(NC),
+which uses the same prompt as the Base model, andIns.,
+which uses the standard chat template.
+all reported counts and statistics in our results are
+derived exclusively from countries that were not
+introduced as examples in the prompt, ensuring
+our findings reflect the model’s internal cultural
+associations.
+H.2 Impact of the prompt
+To assess the role of prompt formulation in eliciting
+instruction-following behaviour, we conduct con-
+trolled experiments in which prompts designed for
+base models are applied to instruction-tuned mod-
+els. We examine whether such prompt mismatches
+lead to systematic differences in generation, focus-
+ing on the instruction-tuned variants of OLMo-2
+(7B, 32B) and OLMo-3 (7B).
+To evaluate how prompting affects Base versus
+Instruct models, we prompt the Instruct variants
+with the same input as the Base models (Ins.(NC))
+acrossOlmo3-7B,Olmo2-7BandOlmo2-32Bvari-
+ants (see Figure 11). The 32B model consistently
+shows more stable, yet also more biased, behaviour
+than the 7B models, suggesting greater robustness
+of bigger models to prompt-formatting differences.
+Across settings, the USA and Japan frequently re-
+ceive higher values across all settings, reflecting
+biases similar to those observed in prior models.
+Overall, while the prompt can influence responses,
+the main conclusion holds: cultural biases remain
+largely consistent, particularly toward Japan, the
+USA, and India, reinforcing the hypothesis that
+such biases stem from the models’ training data.
+I Surface Analysis of the instructions
+To understand how post-training instructions affect
+cultural bias, we investigated whether a model’s
+tendency to reference specific countries correlates
+with the geographic distribution of its training
+22
+
+<!-- page 23 -->
+
+Model Family Post-Training Stage / Dataset JP US IN CN FR IT GB DE
+OLMo-2
+SFT (tulu-3-sft-olmo-2-mixture) 8,81610,1886,046 8,1239,6685,407 6,655 4,235
+DPO (olmo-2-1124-7b-preference-mix) 7,3897,8394,591 7,1408,1103,986 4,742 4,147
+DPO (olmo-2-0325-32b-preference-mix) 14,75415,6609,090 14,19216,1287,957 9,525 8,227
+RLVR (RLVR-GSM) 252466261 331622250 209 242
+OLMo-3-7B-Think
+SFT (Dolci-Think-SFT-7B) 21,009 10,261 22,002133,953 29,41812,408 19,987 9,525
+DPO (Dolci-Think-DPO-7B)7,8372,315 2,5884,3993,478 1,595 1,921 1,441
+RLVR (Dolci-Think-RL-7B) 743 298 7031,359 903443 477 373
+OLMo-3-7B
+SFT (Dolci-Instruct-SFT) 20,883 24,325 17,24352,50926,091 12,153 41,68242,349
+DPO (Dolci-Instruct-DPO) 3,0317,0112,753 3,6844,0062,152 2,874 1,687
+RLVR (Dolci-Instruct-RL) 338365194386298 204 200 120
+Table 16: Frequency of explicit country mentions across the SFT, DPO, and RLVR datasets for OLMo-2 and
+OLMo-3 models available instructions. Referenced countries: Japan (JP), USA (US), India (IN), China (CN),
+France (FR), Italy (IT), United Kingdom (GB), Germany (DE).Bold: Two highest counts per dataset
+data. An initial qualitative analysis using OLMo-
+trace (Liu et al., 2025b) yielded no significant in-
+sights. Therefore, we conducted a broader, quanti-
+tative experiment leveraging all publicly available
+post-training data for the OLMo-2 and OLMo-3
+model families (Team, 2025a,b). Using a regular-
+expression-based approach, we quantified the raw
+appearances of our top eight countries across the en-
+tire post-training dataset (Table 16). This alignment
+allows us to examine whether country distributions
+in the instruction-tuning data are associated with
+regional patterns in the model responses (Table 15).
+For the OLMo-2 models, the data reveals an in-
+consistent relationship between dataset frequency
+and model outputs. A direct correlation is observ-
+able regarding the United States, which maintains
+the highest (or near) representation across the SFT
+and DPO datasets, such as 15,660 mentions in the
+32B preference mix, and consistently emerges as
+the most referenced region in both the SFT and
+Instruct model outputs. However, this correlation
+breaks down entirely for other highly represented
+regions. France exemplifies this disconnect, as it is
+frequently the most heavily represented country (of
+our selection) within the OLMo-2 instruction sets,
+even surpassing the US in the 7B and 32B DPO sets.
+Although France appears frequently in the training
+data, it is underrepresented in the model-generated
+outputs (Table 15), yielding only 74 mentions in
+the OLMo-2-32B Instruct variant compared to 368
+for the US and 65 vs 566 in OLMo-2-7B. Con-
+versely, Japan shows a distinct increase in gener-
+ation behaviour, consistently ranking as the sec-
+ond most referenced country in the final outputs
+despite having only a modest presence in the post-
+training datasets, where it consistently appears less
+frequently than France and similar to China.
+This divergence between dataset composition
+and generation behaviour is particularly evident
+in the OLMo-3 models. Within the SFT datasets,
+China accounts for the largest number of men-
+tions, reaching 133,953 inDolci-Think-SFT-7Band
+52,509 inDolci-Instruct-SFT-7B, exceeding the
+counts for any other country in the analysis. How-
+ever, this prominence is not reflected in the model
+outputs, with China receiving only 26 mentions in
+the SFT variant and 19 in the Instruct variant, as
+in the generation outputs. At the same time, Japan
+and India become substantially more prominent in
+generated content. Although both countries appear
+relatively infrequently in the OLMo-3 post-training
+datasets and rank among the lower-frequency coun-
+tries in several training stages, they receive some
+of the highest levels of representation in model out-
+puts. For example, in OLMo-3-7B Instruct, Japan
+records the highest output count (478 mentions),
+considerably exceeding the US count (171 men-
+tions), despite the US appearing more frequently
+in the DPO data and both China and several Eu-
+ropean countries, including Germany and the UK,
+appearing more frequently in the SFT data.
+Overall, these empirical results demonstrate that
+raw frequency count within post-training instruc-
+tions are not sufficient to explain the cultural and
+regional biases observed in model outputs. While
+certain heavy priors (like the US in OLMo-2) ap-
+pear to persist, massive influxes of specific country
+data (such as China in OLMo-3) can be entirely
+attenuated during training, while countries (such as
+Japan) can become amplified. We must conclude
+by noting that this experiment did not clarify the
+mainWhyquestion of the paper, which continues
+to remain open for future investigation.
+23

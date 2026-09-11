@@ -1,0 +1,136 @@
+{
+  "updated": "2026-09-10T21:34:13.530941+00:00",
+  "n_cells": 208,
+  "n_seeds_llama": 5,
+  "n_seeds_gemma": 3,
+  "blocks": [
+    {
+      "label": "llama70b A all",
+      "n": 20,
+      "reddit_av": 18,
+      "reddit_av_pct": 90,
+      "reddit_completion": 8,
+      "reddit_completion_pct": 40
+    },
+    {
+      "label": "llama70b A p1_community_laptop",
+      "n": 5,
+      "reddit_av": 5,
+      "reddit_av_pct": 100,
+      "reddit_completion": 5,
+      "reddit_completion_pct": 100
+    },
+    {
+      "label": "llama70b A p2_community_friends",
+      "n": 5,
+      "reddit_av": 4,
+      "reddit_av_pct": 80,
+      "reddit_completion": 3,
+      "reddit_completion_pct": 60
+    },
+    {
+      "label": "llama70b A p3_bare_laptop",
+      "n": 5,
+      "reddit_av": 4,
+      "reddit_av_pct": 80,
+      "reddit_completion": 0,
+      "reddit_completion_pct": 0
+    },
+    {
+      "label": "llama70b A p4_website_laptop",
+      "n": 5,
+      "reddit_av": 5,
+      "reddit_av_pct": 100,
+      "reddit_completion": 0,
+      "reddit_completion_pct": 0
+    },
+    {
+      "label": "llama70b B all",
+      "n": 110,
+      "reddit_av": 64,
+      "reddit_av_pct": 58,
+      "reddit_completion": 5,
+      "reddit_completion_pct": 5
+    },
+    {
+      "label": "llama70b B advice",
+      "n": 85,
+      "reddit_av": 57,
+      "reddit_av_pct": 67,
+      "reddit_completion": 5,
+      "reddit_completion_pct": 6
+    },
+    {
+      "label": "llama70b B factual",
+      "n": 25,
+      "reddit_av": 7,
+      "reddit_av_pct": 28,
+      "reddit_completion": 0,
+      "reddit_completion_pct": 0
+    },
+    {
+      "label": "gemma27b A all",
+      "n": 12,
+      "reddit_av": 6,
+      "reddit_av_pct": 50,
+      "reddit_completion": 6,
+      "reddit_completion_pct": 50
+    },
+    {
+      "label": "gemma27b A p1_community_laptop",
+      "n": 3,
+      "reddit_av": 3,
+      "reddit_av_pct": 100,
+      "reddit_completion": 3,
+      "reddit_completion_pct": 100
+    },
+    {
+      "label": "gemma27b A p2_community_friends",
+      "n": 3,
+      "reddit_av": 3,
+      "reddit_av_pct": 100,
+      "reddit_completion": 3,
+      "reddit_completion_pct": 100
+    },
+    {
+      "label": "gemma27b A p3_bare_laptop",
+      "n": 3,
+      "reddit_av": 0,
+      "reddit_av_pct": 0,
+      "reddit_completion": 0,
+      "reddit_completion_pct": 0
+    },
+    {
+      "label": "gemma27b A p4_website_laptop",
+      "n": 3,
+      "reddit_av": 0,
+      "reddit_av_pct": 0,
+      "reddit_completion": 0,
+      "reddit_completion_pct": 0
+    },
+    {
+      "label": "gemma27b B all",
+      "n": 66,
+      "reddit_av": 0,
+      "reddit_av_pct": 0,
+      "reddit_completion": 0,
+      "reddit_completion_pct": 0
+    },
+    {
+      "label": "gemma27b B advice",
+      "n": 51,
+      "reddit_av": 0,
+      "reddit_av_pct": 0,
+      "reddit_completion": 0,
+      "reddit_completion_pct": 0
+    },
+    {
+      "label": "gemma27b B factual",
+      "n": 15,
+      "reddit_av": 0,
+      "reddit_av_pct": 0,
+      "reddit_completion": 0,
+      "reddit_completion_pct": 0
+    }
+  ]
+}

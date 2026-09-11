@@ -12,12 +12,17 @@ La motivacion principal es entender como encarar un paper estudiantil: que tipo 
 
 ## Fechas relevantes
 
-Segun la informacion indexada de la web oficial del congreso:
+Fechas **ampliadas** (comunicado oficial CoNaIISI 2026, flyer “¡Ampliamos las fechas!”; sede Resistencia, Chaco):
 
-- Inicio de recepcion de trabajos: **08/06/2026**
-- Cierre de recepcion de trabajos: **28/08/2026**
+- Inicio de recepcion de trabajos (dato previo, no cambiado en el flyer): **08/06/2026**
+- Cierre de recepcion — Trabajo de Investigacion: **14/09/2026**
+- Cierre de recepcion — Trabajos Estudiantiles: **14/09/2026**
+- Notificacion autores investigacion: **12/10/2026**
+- Notificacion autores estudiantes: **13/10/2026**
+- Version final: **26/10/2026**
+- Congreso: **12 y 13/11/2026**
 
-Estos datos conviene confirmarlos nuevamente en la web oficial cuando este accesible.
+Cierre anterior (reemplazado): **28/08/2026**. Sitio: https://conaiisi2026.frre.utn.edu.ar/ — mail: conaiisi2026@gfe.frre.utn.edu.ar
 
 ## Categorias estudiantiles observadas en CoNaIISI 2024
 

@@ -1,0 +1,624 @@
+{
+  "models": [
+    {
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "name": "llama70b"
+    },
+    {
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "name": "gemma27b"
+    }
+  ],
+  "prompts": {
+    "p1_community_laptop": "What laptop should a student buy {according to community}?\nBe brief. Choose yourself where people talk about this.",
+    "p2_community_friends": "How do you make friends in a new city {according to community}?\nBe brief. Choose yourself where people talk about this.",
+    "p3_bare_laptop": "What laptop should a student buy?\nBe brief.",
+    "p4_website_laptop": "What laptop should a student buy {on website}?\nBe brief. Choose yourself the website."
+  },
+  "cells": [
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "p1_community_laptop",
+      "prompt": "What laptop should a student buy {according to community}?\nBe brief. Choose yourself where people talk about this.",
+      "completion": "According to Reddit's r/laptops and r/college, students recommend:\n\n1. Dell XPS 13\n2. MacBook Air\n3. Lenovo ThinkPad X1 Carbon\n4. HP Envy x360\n\nThese laptops offer a balance of performance, portability, and affordability for students.",
+      "probes": [
+        {
+          "label": "user_slot",
+          "position": 36,
+          "token_picked": " {",
+          "token_api": " {",
+          "mse": 0.24627506732940674,
+          "cosine_similarity": 0.876862645149231,
+          "description": "likely a forum or survey prompt structure ( Reddit or Stack Exchange) question heading or section requiring a general laptop recommendation context.\n\n The heading \"What laptop should a student buy {\", likely a demographic or constraint qualifier for a budget laptop recommendation, probably \"gender/education level/price range category\" or a question like \"Which laptop is best for a student in 2023?\" The prompt appears incomplete..."
+        },
+        {
+          "label": "user_slot",
+          "position": 37,
+          "token_picked": "according",
+          "token_api": "according",
+          "mse": 0.3001449704170227,
+          "cosine_similarity": 0.8499277234077454,
+          "description": "likely broken or incomplete question/ prompt fragment from a forum or test or Indian possibly Arabic speaking platform, struggling with a question about pricing or categorization of programming courses.\n\n The heading or question fragment \"Please provide list of skills \"according\" likely a qualifying clause defining scope or audience for this answer, such as \"to 2021}\"/some criteria like \"to user's experience level} or a phrase specifying a demographic or limit...\n\n \"according\" beginning a bracket or modifier like \"to age/audience/number of factors listed below} The question probably \"to the country/context of this answer?\" or \"(according to budget/size of this section, a classification based on..."
+        },
+        {
+          "label": "user_slot",
+          "position": 39,
+          "token_picked": " community",
+          "token_api": " community",
+          "mse": 0.05830606818199158,
+          "cosine_similarity": 0.9708474278450012,
+          "description": "likely forum or Reddit/Stack Exchange question or personal survey in Indian or European context, probably student or Reddit discussion on laptop recommendations for programming\n\n Heading or question fragment starting a list or request about the best laptop for students, likely personal opinion or community consensus on best budget laptops.\n\n \"according to community\" \"What is best laptop (according to community\" \"based on community\" \"according to community\" likely \"forum/college/Reddit feedback)\" or \"recommendation of 2021 survey/ consensus from multiple sources)\" The question like \"What laptop should I buy according to community opinion/ a poll or forum discussion\" The community probably students or a mix of online source indicating a general consensus..."
+        },
+        {
+          "label": "user_slot",
+          "position": 40,
+          "token_picked": "}",
+          "token_api": "}",
+          "mse": 0.17592813074588776,
+          "cosine_similarity": 0.9120365977287292,
+          "description": "Title or heading structure likely a forum/ Reddit or Stack Exchange thread or survey question, probably Nigerian or European community ( Reddit or YouTube) wrong heading format.\n\n The heading \"Best programming laptop (community) appears to be a question/titled section like \"According to community\" or a list based on collective opinion from online forums.\n\n \"(community)\" is mid title \"What is the best laptop for programming (community) ends heading \"The best programming laptops as per community) likely \" : a summary/ list from Reddit\" or \"community (forum/ survey based on 2020) The community's choice according to Reddit/ According to majority opinion from multiple sources\n\n The heading implies a section..."
+        },
+        {
+          "label": "user_slot",
+          "position": 45,
+          "token_picked": " Choose",
+          "token_api": " Choose",
+          "mse": 0.20411524176597595,
+          "cosine_similarity": 0.8979425430297852,
+          "description": "Prompt or instruction request likely a forum/ bot platform or Reddit, brief task assignment requiring a reply with a summary of current 2020 laptop quality.\n\n The question fragment \"Choose\" implies a list or constraint for a short answer to \"What is the best budget laptop 2020?\"\n\n\"\n\n\"Choose\" likely \"only one.\" or \"one of three options listed below (limit to 2-3 sentences, popular answer format like a single category or two recent options from tech news.\"\n\n The instruction \"Choose\" probably \" only one. A single answer with two laptops or a category label like \"The answer in 50 words: Two recent summary of 2-3 laptop systems.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 47,
+          "token_picked": " where",
+          "token_api": " where",
+          "mse": 0.1922726035118103,
+          "cosine_similarity": 0.9038635492324829,
+          "description": "request prompt likely European or Russian forum/ chatbot platform (Czech or Polish) incomplete task instruction requesting condensed information on allergens.\n\n The assignment/ request structure \"Choose yourself where\" implying a balance between brief and long explanation of Java programming, instruction to answer covering definition and source summary.\n\n \"Choose yourself where\" \"Choose yourself where\" \"Choose yourself where\" likely \"to focus\" or \"from these categories choose limit of answer length\" or \"Choose freely where to take information, brief summary allowed on several platforms. The request hints to select a portion of this answer based on context or decide source range yourself, like \"Choose between forum and description, decide yourself where to emphasize.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 48,
+          "token_picked": " people",
+          "token_api": " people",
+          "mse": 0.225827157497406,
+          "cosine_similarity": 0.8870868682861328,
+          "description": "Task or bot/learning platform likely European or non-English speaker with confused request, probably Reddit or Facebook discussion requiring clarification of \"community opinion\" or survey source for recommended OS.\n\n Sentence structure \"Where people\" mid question \"Try to find where people\" implying a source or demographic consideration for what common recommendation for best OS.\n\n \"Find out where people\" \"I will assume where people\" \"Where people\" likely \"are discussing\" or \"community usually agrees on this topic\" or \"The source of this answer is derived from Reddit/10+ people opinions, what crowd defines \"best operating system\" or \"I will assume common place or source where majority of students/online community..."
+        },
+        {
+          "label": "user_slot",
+          "position": 49,
+          "token_picked": " talk",
+          "token_api": " talk",
+          "mse": 0.14893938601016998,
+          "cosine_similarity": 0.9255302548408508,
+          "description": "Loose prompt or test/assignment probably European or non-English forum, short request broken structure seeking community opinion on Android phones.\n\n The question shifts toward a request to find recommendation of best software/ discussion about computers, implying forum or source where people commonly discuss such topics.\n\n \"where people talk\" \"Go to place where people talk\" \"Find a source where people talk\" \"where people talk\" likely \"about it\" or \"and take forum/threads from places where people discuss\" or \"like Reddit or Facebook group where people usually share opinions\" The request implies a community or platform name like \"forum, online places like Reddit/ discussions where general public talks\" or a category like forum..."
+        },
+        {
+          "label": "assistant_first",
+          "position": 58,
+          "token_picked": "According",
+          "token_api": "According",
+          "mse": 0.3717006742954254,
+          "cosine_similarity": 0.8141499757766724,
+          "description": "Reddit joke or answer template format: standard prompt response structure for a witty one-liner joke, \"Yes or no answer\" section likely a brief summary from Reddit or Statista.\n\n The classic \"difference between Russia and US\" question pattern, a standard Reddit headline answer format for country comparisons.\n\n \"According\" begins a two-part answer \"According\" \"In summary, 22% of US users.\n\n \"According\" likely \" to a 2020 survey by Statista, Reddit's profile section states that this answer is 10-year old.\" or \" to me, this site is a compressed summary of information on Quora, a source cited on a forum, Russia and US overlap."
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "p2_community_friends",
+      "prompt": "How do you make friends in a new city {according to community}?\nBe brief. Choose yourself where people talk about this.",
+      "completion": "According to a Reddit community discussion, here are some ways to make friends in a new city:\n\n* Join local groups or clubs that align with your interests\n* Attend events and meetups, such as concerts, festivals, or language exchange\n* Volunteer for a cause you care about\n* Take a class or workshop to learn something new\n* Use apps like Meetup or Bumble BFF to connect with people in your area\n\nSource: r/newcity, a subreddit for people who have recently moved to a new city.",
+      "probes": [
+        {
+          "label": "user_slot",
+          "position": 39,
+          "token_picked": " {",
+          "token_api": " {",
+          "mse": 0.17834420502185822,
+          "cosine_similarity": 0.9108278751373291,
+          "description": "likely prompt or heading structure for Reddit/ Quora or content generation article, a question or section heading that is partially or incorrectly formatted.\n\n The prompt \"How to move to a new city {\", likely a section title or question template like \"city/Location placeholder\" or a list-based answer on moving to a new city from a health/ productivity perspective.\n\n \"How to get job in a new city {\", \"What tips to move to a new city { appears mid heading or a grammatical error like \"Location context: This section should specify a city or phrase like \"without repeating?\" The heading likely \"city name/paragraph format: A list of tips for a specific city or..."
+        },
+        {
+          "label": "user_slot",
+          "position": 40,
+          "token_picked": "according",
+          "token_api": "according",
+          "mse": 0.18834422528743744,
+          "cosine_similarity": 0.9058283567428589,
+          "description": "heading or list structure: a lifestyle/ career advice article probably Reddit or CNN, a U.S. expat or young professional living in new city.\n\n Question setup \"How to make friends in a new city\" establishes a practical goal for meeting new people when moving to a new place.\n\n \"According according\" mid sentence \"Here are some tips to make friends in your new city.according\" \"The best ways to meet new people are: according\" likely \"Join groups or clubs\" or \"Look for local events and apps to meet people\" Meeting new people strategies for a newcomer in a big city, like joining groups, attend classes or volunteer to meet locals through apps and events."
+        },
+        {
+          "label": "user_slot",
+          "position": 42,
+          "token_picked": " community",
+          "token_api": " community",
+          "mse": 0.07885229587554932,
+          "cosine_similarity": 0.9605739712715149,
+          "description": "likely question or prompt structure from a personal development/ Reddit or interview platform, probably Indian or European student or solo-living person wanting tips on making friends in new place.\n\n The heading or question fragment \"according to community\" mid-phrase \"List tips to make friends in new location according to community\" implying a source or expert view on friendship formation.\n\n \"according to community\" \"What makes a good neighborhood according to community\" \"according to community\" likely \"experts' and psychologists' studies\" or \"and forum rules of online communities/definition from Reddit and loneliness experts\" or \"a survey/answer based on expert opinion from local residents and social groups\" The concept of community building..."
+        },
+        {
+          "label": "user_slot",
+          "position": 43,
+          "token_picked": "}",
+          "token_api": "}",
+          "mse": 0.35987937450408936,
+          "cosine_similarity": 0.8200607895851135,
+          "description": "Quote or list likely from a TV show or episode reference, probably \"community\" the nbc sitcom or the character britta perry's quotes from community\"\n\n The title fragment \"community)\" appears to be tagged or a comparison involving the hit NBC comedy show \"Community\" featuring a group of community college students\n\n \"community) is the last item in a list or title \"community (community)\" \"community\" likely \"the study group from community\" or \"episode list/character from the show community [character name] the sixth season of community a tv show\" or \"community college as a concept on the show community\" The character Troy and Abed from the NBC show community, a..."
+        },
+        {
+          "label": "user_slot",
+          "position": 48,
+          "token_picked": " Choose",
+          "token_api": " Choose",
+          "mse": 0.22851410508155823,
+          "cosine_similarity": 0.8857431411743164,
+          "description": "Prompt or assignment prompt fragment likely a test or Reddit/Quora style task requiring a quote response about the show \"The Office\" or instruction for structured answer.\n\n The prompt \"Summarize character development from \"The Office\" TV show.\n\n \"Choose\" ends a request fragment \"Summarize the show's values. Choose\" \"Choose\" likely \" one answer only\" or \"2-3 phrases from a list: The prompt requests a condensed summary using quotes or two specific points drawn from this section, likely \"either 2 or 3 sentences answer style requested referencing Season 1 or a limit of two quotes from the list below.\"\n\n Choose an answer showcasing specific value statements from the..."
+        },
+        {
+          "label": "user_slot",
+          "position": 50,
+          "token_picked": " where",
+          "token_api": " where",
+          "mse": 0.21406857669353485,
+          "cosine_similarity": 0.8929659128189087,
+          "description": "Prompt/ instruction prompt likely a personal or forum request from a bot or European audience, loose task assignment like Reddit or chatbot tutor requiring definition of character biography summary.\n\n \"Choose yourself where\" mid request fragment \"you can choose where\" likely \"to cut from this text\" or \"Choose yourself where to balance between full and brief explanation\" The request asks to answer a condensed definition of my background, select relevant information from this page covering personality, example and me.\n\n \"Choose yourself where\" probably \"to focus on in this answer\" or \"Choose between full excerpt or partial answer, the instruction allows you to decide how much of this page to quote from.\" Choose your starting point or boundary…"
+        },
+        {
+          "label": "user_slot",
+          "position": 51,
+          "token_picked": " people",
+          "token_api": " people",
+          "mse": 0.21851807832717896,
+          "cosine_similarity": 0.8907412886619568,
+          "description": "likely question or assignment prompt fragment from personal development or social connection platforms (e.g. Reddit or conversation challenge) incomplete request involving making friends or meeting new people.\n\n The prompt appears to be a partial story or question about finding friendship/where people meet, likely from a character or advice about socializing.\n\n \"Where people\" \"Choose a place where people\" \"Where should a person look where people\" \"Where people\" likely \"are likely to meet\" or \"make friends easily\" or \"The question is about community or setting advice for a person wanting social interaction, show places where like-minded people naturally gather\" The prompt involves creating a scenario where a character meets new people and answer."
+        },
+        {
+          "label": "user_slot",
+          "position": 52,
+          "token_picked": " talk",
+          "token_api": " talk",
+          "mse": 0.17135556042194366,
+          "cosine_similarity": 0.9143229722976685,
+          "description": "Loose or possibly confused prompt/ creative writing or forum request, likely broken or informal test or personal challenge involving character conversation or TV show\n\n Fragmented request structure \"Go where people talk\" likely a community or social setting concept like \"me\" or find people's group/scene where strangers or friends talk freely, like in The Office or similar.\"\n\n \"Where people talk\" \"Find place where people talk\" \"Where people talk\" likely \"about me/you\" or \"introduce character and have conversation in a casual group setting. The goal is to be accepted among locals or a community where people naturally chat often.\n\n Find a place where characters talk like in a forum or scenario where..."
+        },
+        {
+          "label": "assistant_first",
+          "position": 61,
+          "token_picked": "According",
+          "token_api": "According",
+          "mse": 0.8399891257286072,
+          "cosine_similarity": 0.5800061225891113,
+          "description": "joke/ quote structure pattern: a standard prompt format for a conversation or Reddit joke, \"According to me, the best life advice is...\"\" establishing a second \"According to\" section likely a discussion on a TV show or forum like \"to a group of friends at a bar, as seen on SNL\" or a quote from..."
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "p3_bare_laptop",
+      "prompt": "What laptop should a student buy?\nBe brief.",
+      "completion": "Consider a laptop with:\n\n* Intel Core i3 or i5 processor\n* 8GB RAM\n* 256GB storage\n* 14-inch display\n* Long battery life (8+ hours)\n* Affordable price (~ $500-$800)\n\nExamples: Dell Inspiron, HP Envy, Lenovo IdeaPad, or Acer Aspire.",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 36,
+          "token_picked": "?\n",
+          "token_api": "?\n",
+          "mse": 0.3048049807548523,
+          "cosine_similarity": 0.8475974202156067,
+          "description": "structured section heading/ Q&A or list format: a Reddit or YouTube video section header sequence, likely a student advice article on laptops for college students.\n\n The heading \"What is the best laptop for a student?\n\"\n introduces a classic consumer guidance question, implying a purchasing decision guide for student laptops.\n\n \"What is the best laptop for a student?\n ends the heading \"What laptop is best for a student?\n is a question heading likely \"The answer depends on several factors\" or \"Choosing a laptop as a student: a buyer's guide\" or \"When selecting a laptop for students, several factors to consider\" The question of what laptop a student should buy depends on budget, purpose, and..."
+        },
+        {
+          "label": "user_tail",
+          "position": 37,
+          "token_picked": "Be",
+          "token_api": "Be",
+          "mse": 0.10520322620868683,
+          "cosine_similarity": 0.9473979473114014,
+          "description": "prompt or instruction request likely a Reddit or bot/assignment platform question requiring a structured answer about laptop selection for students.\n\n The heading \"What laptop should a student buy?\n\n Be\" begins a question request likely a list or criteria-based answer covering mobile computers for career purposes.\n\n \"Be\" starts a request prompt \"Please answer this question.\nBe\" \"What makes a good laptop for students.\n Be\" likely \"brief\" or \"specific in your answer covering both budget & purpose\" or \"The request should cover multiple factors listed and give a comprehensive answer. The question likely specifies length or constraints like \"Please list a 200-300 word answer covering budget options for a college student.\" or a..."
+        },
+        {
+          "label": "user_tail",
+          "position": 38,
+          "token_picked": " brief",
+          "token_api": " brief",
+          "mse": 0.10640187561511993,
+          "cosine_similarity": 0.9467994570732117,
+          "description": "Question prompt or bullet point instruction format, likely Reddit or Twitter or test/answer platform demanding a short definition or list response.\n\n The prompt structure \"Explain difference between artificial and natural selection.\n\n \"Be brief\" ends an instruction \"Be brief\" likely \".\" or \"and answer fully.\" or a constraint like \"Please limit answer to one sentence or one paragraph.\" The prompt \"Be brief\" likely \"List advantages of mineral resources. Answer in 1-2 sentences.\" or \"Be brief and direct. The question is short, request a concise summary of CTE value.\n\n The instruction \"Be brief\" probably a supplementary note like \"Please. Keep response concise.\" or Be brief but…"
+        },
+        {
+          "label": "user_tail",
+          "position": 39,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.509181559085846,
+          "cosine_similarity": 0.7454099059104919,
+          "description": "Answer format pattern: brief Q&A or summary list structure, two-line answer format using compressed sentences for resume/career queries.\n\n The prompt \"What makes a good resume? Briefly.\" is a classic one-sentence summary request, implying a concise answer for US/Indian candidates.\n\n \"In brief.\" ends a \"Yes, briefly.\" \"The best degrees vary by goal. is a two-word or bullet summary answer, likely \"Buy a 1-2 sentence answer: Resume tips listed short and direct, \"A variety of degrees (law, engineering, MBA) are ideal for 10-15 character summary showing concise solution: The answer is a brief summary like"
+        },
+        {
+          "label": "assistant_first",
+          "position": 45,
+          "token_picked": "Consider",
+          "token_api": "Consider",
+          "mse": 0.18579316139221191,
+          "cosine_similarity": 0.9071037173271179,
+          "description": "Reddit list format with a heading section \"Buyers Guide: Student Laptops\" structured list/ summary section, standard consumer tech advice format.\n\n The prompt \"Choose a laptop based on student needs\" introduces a condensed buying guide, likely budget laptop recommendations for students with four factors or a brief list.\n\n \"Consider\" begins a list or criteria section \"Consider\" starting a summary recommendation for student laptops. \"Consider\" likely \"these factors: budget, processor, display, or a budget laptop list like:\n\n A budget laptop with 4-6 hours battery, Chromebook or budget Windows/Apple options under $500.\n\n A list of best laptops by purpose: budget, student, 14-inch..."
+        }
+      ]
+    },
+    {
+      "model": "llama70b",
+      "modelId": "llama3.3-70b-it",
+      "nlaSourceId": "kitft-l53",
+      "prompt_id": "p4_website_laptop",
+      "prompt": "What laptop should a student buy {on website}?\nBe brief. Choose yourself the website.",
+      "completion": "On BestBuy.com, I'd recommend the Acer Aspire 5 laptop for students, starting at $349. It offers a great balance of performance, battery life, and affordability, making it an excellent choice for academic needs.",
+      "probes": [
+        {
+          "label": "user_slot",
+          "position": 36,
+          "token_picked": " {",
+          "token_api": " {",
+          "mse": 0.20973505079746246,
+          "cosine_similarity": 0.895132303237915,
+          "description": "likely forum or prompt structure from Reddit or Stack Exchange or similar Q&A platforms, where a question fragment or heading requiring a budget laptop recommendation list.\n\n The heading \"What laptop should a student buy {\", likely a demographic or qualification parameter for a student's budget laptop recommendation, such as \"gender/price range/context specification\" or a question template like \"Please list best laptops for students in 2021\" The prompt probably specifies some demographic or context like \"of varying income level?\" or \"(assuming male student, brief question specifying criteria like college or academic context\" The heading begins a generic question about best laptop for a student, likely a list concerning budget for Indian or US students"
+        },
+        {
+          "label": "user_slot",
+          "position": 38,
+          "token_picked": " website",
+          "token_api": " website",
+          "mse": 0.16860531270503998,
+          "cosine_similarity": 0.9156973361968994,
+          "description": "likely task or instruction fragment from prompt or student/ tutoring platform, broken sentence or test request in informal conversation or Reddit/ YouTube\n\n The prompt appears to be a question or directive for a list or sentence writing task regarding laptop purchasing on a website.\n\n \"on website\" \" {on website\" mid phrase \"What is best budget laptop? [on website\" \"on website\" likely \"/forum/ e-commerce or article section like \"example website name or context like a question platform/ The prompt is a placeholder for a website or section reference such as \"this page/ Amazon/ a forum or sentence like \"customer review section on a online shopping site, the question asks on specific platform...\""
+        },
+        {
+          "label": "user_slot",
+          "position": 39,
+          "token_picked": "}",
+          "token_api": "}",
+          "mse": 0.3071284890174866,
+          "cosine_similarity": 0.8464356064796448,
+          "description": "Fragmented or broken prompt/ instruction, likely a grammar or test task confusion with broken sentence fragment from Reddit or chatbot platform.\n\n The prompt fragment appears to be a question or heading like a product review or coupon website reference, likely e-commerce or forum section concerning fitness equipment purchase online.\n\n \"[website/URL]\" is mid phrase \"What fitness equipment on [website]\" \"[Location] [on {website}\": \"the title or section [website] is incomplete likely \" on this page/website (example site name)\" or \" [buy now] on [online website like Amazon or article page] The question implies a quote or link website name where a list of computers can..."
+        },
+        {
+          "label": "user_slot",
+          "position": 44,
+          "token_picked": " Choose",
+          "token_api": " Choose",
+          "mse": 0.16460902988910675,
+          "cosine_similarity": 0.9176955819129944,
+          "description": "likely prompt or instruction fragment from a forum, test or bot/essay assignment requiring a short answer or list selection about budget laptops.\n\n Loose directive structure \"Answer briefly. Choose\" likely a constraint for a category or limit in a laptop recommendation response, e.g. \"one of three options only\" or a single recommendation from a short list of... The prompt fragments suggest a constraint like \"between 2-3 sentences. A single answer covering notebook computers.\" or \"List one from Samsung, Apple or Dell. The question demands a specific budget laptop category or two choices are implied for a summary answer.\n\n Choose\" likely \" one of two: 1. A single option from recent list.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 47,
+          "token_picked": " website",
+          "token_api": " website",
+          "mse": 0.25276979804039,
+          "cosine_similarity": 0.8736152052879333,
+          "description": "Task or test prompt structure likely European or non US forum ( Romanian or Indian) requesting comparison of laptop deals, possibly assignment or spoken conversation.\n\n Instruction request establishing a sentence generation task involving consumer product reviews, allowing a list of budget laptops for buyers.\n\n \"Please choose the website\" \"Let's assume the website\" \"I will choose the website\" likely \"to be considered\" or \"This instruction assumes a specific website or platform (example Amazon/PCMag/Reddit) The question implies a context like \"and provide a source or specify the website for this comparison\" or \"The answer will be on a shopping or online platform chosen for the purpose\" The website mentioned in a news/online..."
+        },
+        {
+          "label": "assistant_first",
+          "position": 54,
+          "token_picked": "On",
+          "token_api": "On",
+          "mse": 0.3343181014060974,
+          "cosine_similarity": 0.832841157913208,
+          "description": "Reddit thread structure: a prompt section on laptop recommendations for students, formatted Q&A list establishing a purchasing guide for budget laptops.\n\n The section heading \"Here are current recommendations:\" introduces a concrete source or website for laptop deals, likely Amazon or a tech review platform like PCMag/BestBuy.\n\n \"On\" starts a specific recommendation source. \"On\" likely \"Amazon.com or BestBuy website (Reddit/ CNET/ CNN) a website like \"Amazon's laptop page on Reddit\" or \"bestbuy.com, a tech comparison site like PCMag or CNN website: The section \"On a website or two specific online stores, I can list a laptop buying guide on October 2023\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "p1_community_laptop",
+      "prompt": "What laptop should a student buy {according to community}?\nBe brief. Choose yourself where people talk about this.",
+      "completion": "## Best Laptops for Students (Community Picked - 2024)\n\nBased on recent discussions across Reddit (r/SuggestALaptop, r/laptops) & PCMag forums:\n\n**Budget (<$600):**\n\n*   **Acer Aspire 5:** Reliable, good value.\n*   **Lenovo IdeaPad Flex 5:** 2-in-1 versatility.\n\n**Mid-Range ($600 - $1000):**\n\n*   **Apple MacBook Air (M1/M2):**  Excellent battery, performance, MacOS. (Often",
+      "probes": [
+        {
+          "label": "user_slot",
+          "position": 10,
+          "token_picked": " {",
+          "token_api": " {",
+          "mse": 0.05914660915732384,
+          "cosine_similarity": 0.9704269766807556,
+          "description": "Question/advice post format: a structured request for recommendations with a specific scenario, implying a helpful/practical response about laptop recommendations for college/coding.\n\nThe opening phrase \"find a good laptop {\". signals a question or scenario request, likely a list or constraint about a specific scenario involving a student needing a laptop.\n\nFinal token \"{\": opens a bracketed request or prompt placeholder (\"find a best laptop {\"), strongly expecting a clarifying question or specification, likely \"college student,\" \"gender: computer science\" or \"the following criteria}\" or \"}, ages 18-22, major:...\" or \"with context/description?}\". or \"laptop type/budget}\"."
+        },
+        {
+          "label": "user_slot",
+          "position": 11,
+          "token_picked": "according",
+          "token_api": "according",
+          "mse": 0.06370111554861069,
+          "cosine_similarity": 0.968149721622467,
+          "description": "Article structure: a listicle/advice format establishing a buyer's guide, signaling practical recommendations for college laptops.\n\nThe intro \"Choosing a student laptop depends on your major and needs\" promises a structured, detailed list of recommended laptops or criteria for college laptops, likely covering Windows/Mac/Chrome options.\n\nFinal token \"e.g.\" opens a concrete list of examples (\"find a good laptop...\"), requiring a noun phrase like \"a laptop\" or \"ChromeBooks\" to complete the introductory framework. or \"the best laptop for college\" or \"weight, battery life, and specs.\" or \"Macs\" or \"Windows laptops\" or \"required for college tasks.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 13,
+          "token_picked": " community",
+          "token_api": " community",
+          "mse": 0.015331573784351349,
+          "cosine_similarity": 0.9923338294029236,
+          "description": "AI/chatbot response pattern: a structured advice/recommendation post with a specific practical answer about laptop recommendations for college students, likely a gaming/CS/college context.\n\nThe intro phrase \"just go based on community\" signals a question or request for personalized recommendations, implying a decision/advice framework to analyze a laptop choice.\n\nFinal token \"community\" begins a noun phrase or question (\"based on community\"), strongly expecting a noun like \"recommendations, polls\" or \"community suggestions/responses.\" or \"users/reddit/college.\" to introduce a list or survey of laptop suggestions. or \"college feedback\" or \"input.\" or \"poll in Reddit.\" or \"advice/.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 14,
+          "token_picked": "}?",
+          "token_api": "}?",
+          "mse": 0.04819276183843613,
+          "cosine_similarity": 0.9759039282798767,
+          "description": "Introductory/analytical essay pattern: a question or topic about a best laptop for gaming/study, likely a advice/recommendation post.\n\nThe phrase \"What is the best laptop for gaming (community)?\" signals a structured analysis or poll answer, implying a compiled list or consensus from user opinions/forum input.\n\nFinal token \"community?\" closes a title/heading (\"advice/recommendation - 'community'\"), immediately expecting a response or continuation like \"]\" or \"the community\" or \"the Reddit/forum community\" to specify the source or poll findings. or \"user suggestions\" or \"the internet\" or \"the community/Reddit\" or \"or consensus\"."
+        },
+        {
+          "label": "user_slot",
+          "position": 19,
+          "token_picked": " Choose",
+          "token_api": " Choose",
+          "mse": 0.0672735944390297,
+          "cosine_similarity": 0.9663636684417725,
+          "description": "Instructional/advice register with a prompt-style request, asking for best recommendations of laptop/computer for a general user.\n\nThe phrase \"List 3 recommendations, brief descriptions, and price ranges. Choose\" implies a constraint or request, likely specifying a structured response or a specific category/scenario.\n\nFinal token \"Choose\" opens a concluding instruction clause (\"Be generic. Choose\"), expecting continuation like \"from the following options\" or \"one/three options\" or \"one best answer\" to specify the selection criteria or limited options for a practical recommendation. or \"between common brands\" or \"from a practical/general category.\" or \"answer only from 3\". or \".\""
+        },
+        {
+          "label": "user_slot",
+          "position": 21,
+          "token_picked": " where",
+          "token_api": " where",
+          "mse": 0.019331803545355797,
+          "cosine_similarity": 0.9903340339660645,
+          "description": "Instructional/informational tone with a structured list-based answer, implying a bot/AI response about a student with homework/job needs in a specific country or context (Spain).\n\nThe phrase \"Decide where\" begins a clause about flexibility or arbitrary decision-making, likely specifying criteria or a summary description of the student summary.\n\nFinal token \"Choose where\" opens a clause about decision-making discretion (\"Choose where\"), likely continuing with \"the boundaries/scope are\" or \"to cut off\" or \"the student is a college/adult\" or \"the topic ends.\" or \"you decide the category or profession.\" or \"the student lives/limits are, whether.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 22,
+          "token_picked": " people",
+          "token_api": " people",
+          "mse": 0.013798266649246216,
+          "cosine_similarity": 0.9931008219718933,
+          "description": "Answer/advice post format with structured analytical context, answering a specific laptop recommendation question about best gaming laptops with budget constraints.\n\nThe phrase \"find out where people\" begins a question or descriptor about a resource/database, implying a suggestion or list-gathering about common/general laptop recommendations or forum discussions.\n\nFinal token \"where people\" opens a clause describing a location or source (\"find where people\"), likely continuing with \"have asked\" or \"get advice/opinions\" or \"people congregate/forum\" to specify where the community or survey data is gathered. or \"people commonly asked/post.\" or \"have been getting advice.\" or \"would be/are online/Reddit.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 23,
+          "token_picked": " talk",
+          "token_api": " talk",
+          "mse": 0.017560962587594986,
+          "cosine_similarity": 0.9912199974060059,
+          "description": "Answer/advice post with a structured recommendation or tip, establishing a practical context about choosing a laptop/car for gamers/students in India.\n\nThe question \"find places where people talk\" signals a first step to finding forum/internet recommendations, implying a list or elaboration of internet search locations or forums about car recommendations.\n\nFinal token \"where people talk\" opens a relative clause (\"find the forums where people talk\"), requiring a completion like \"about laptops/cars\" or \"about car recommendations\" to specify the forum or discussion thread location. or \"about laptops\" or \"this discussion.\" or \"about car communities\" or \"about laptops/these things, Reddit/forums\". or.\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 32,
+          "token_picked": "##",
+          "token_api": "##",
+          "mse": 0.01194353774189949,
+          "cosine_similarity": 0.9940277934074402,
+          "description": "Structured advice-post promise: intro establishing polling/recommendations, now delivering concrete laptop picks for college students.\n\n\"##\" signals a direct answer summarizing crowd-sourced recommendations, pivoting to summarizing best laptop choices across Reddit/student polls.\n\nFinal token \"##\": opens a new section header (\"##\"), immediately requiring a structured summary/list intro like \"Best College Laptops: Student Pick\" to kick off the distilled recommendation answer. or \"Laptop Recommendations for Students (Polling)\" or \"Student Laptop - Poll Pick, Quick Answer\" to summarize the requested laptop recommendations. or \"Best Laptop Per Student Poll: What Students Want\". or \"Best Laptop for College, per Reddit: quick.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "p2_community_friends",
+      "prompt": "How do you make friends in a new city {according to community}?\nBe brief. Choose yourself where people talk about this.",
+      "completion": "\nOkay, here's a breakdown of advice on making friends in a new city, synthesized from common themes across Reddit's r/AskReddit, r/newtotown, and similar communities:\n\n**Core Strategies (repeatedly mentioned):**\n\n* **Shared Activities:** Join clubs, classes, sports leagues, volunteer groups – anything based on *interests*. (Most frequent advice)\n* **Meetup.com & Facebook Groups:**  Specifically search for groups related to hobbies/age/profession.\n* **Work/School:**  Be open to connecting with colleagues/classmates *outside* of work/school.",
+      "probes": [
+        {
+          "label": "user_slot",
+          "position": 13,
+          "token_picked": " {",
+          "token_api": " {",
+          "mse": 0.015585611574351788,
+          "cosine_similarity": 0.9922083616256714,
+          "description": "AI/forum post pattern: a structured question or advice list, likely a personal essay or advice request about social connections and networking.\n\nThe question opening \"how to make new friends {\": signals a brainstorming/listicle request, implying a structured response or list of tips about navigating friendship challenges in a new city or workplace.\n\nFinal token \"{\": begins a question or topic request (\"How to make new friends in a new city {\"), likely followed by a bracket or hashtag, or a question about a specific category or scenario. or \"or advice}\". or \"female}\" or \"in a practical/list format?\" or \"question/advice}\" or \"from a city?\" or \".\""
+        },
+        {
+          "label": "user_slot",
+          "position": 14,
+          "token_picked": "according",
+          "token_api": "according",
+          "mse": 0.007355441804975271,
+          "cosine_similarity": 0.996321976184845,
+          "description": "Structured advice/listicle format established: a personal, relatable essay promising actionable tips for making friends in a new city, particularly in urban settings.\n\nThe intro \"Making friends is hard...but\" signals a concrete list of strategies to meet people, fulfilling the promised advice about socializing and loneliness in early thirties.\n\nFinal token \"e.g.\" introduces a list of examples of social platforms or activities (\"Finding friends...\"), immediately requiring a noun phrase like \"groups,\" \"clubs,\" or \"meetups\" to specify the ways to make friends. or \"the app\" or \"to join activities\". or \"your work, hobbies, community.\" or \"the city\" or \"meet.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 16,
+          "token_picked": " community",
+          "token_api": " community",
+          "mse": 0.01208848599344492,
+          "cosine_similarity": 0.9939557909965515,
+          "description": "Advice/listicle format established: a structured response to a social/emotional question about loneliness, likely a specific scenario about making friends or social activities.\n\nThe phrase \"I got advice from community\" signals a response or recommendation section, likely a forum or survey answer about social strategies to navigate a solo/temporary home.\n\nFinal token \"community\" begins a noun phrase or category label (\"based on community\"), strongly expecting a noun like \"community experts,\" \"community/Reddit\" or \"guides/survey\" to introduce a list or topic about local social advice. or \"social media/local residents.\" or \"college/city\" or \"psychologists.\" or \"the definition of a.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 17,
+          "token_picked": "}?",
+          "token_api": "}?",
+          "mse": 0.02476094663143158,
+          "cosine_similarity": 0.9876197576522827,
+          "description": "Personal/reflective essay pattern: a posed question about advice/advice, establishing a structured exploration of a practical issue.\n\nThe question \"How to get a job... according to 'community'?\" signals a discussion or survey/listicle, likely analyzing community-sourced advice or collective wisdom about relationship advice or community guidance.\n\nFinal token \"community?\": closes a title/heading (\"advice for moving forward (according to community)\"), immediately expecting a structured or formatted answer, likely a subtitle or section like \"the Reddit community\" or \"the community\" or \"the community/forum.\" or \"]\" or \"from Reddit.\" or \"the advice/input of community.\" or \"what.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 22,
+          "token_picked": " Choose",
+          "token_api": " Choose",
+          "mse": 0.0595378540456295,
+          "cosine_similarity": 0.9702311754226685,
+          "description": "Instructional/advice register with a list-based format, posing a question about how to improve social relationships or knowledge.\n\nThe prompt \"Give 10 bullet points of advice for a traveller/family. Choose\" signals a request or instruction, likely a structured response or brief list of advice items.\n\nFinal token \"Choose\" opens a directive or constraint clause (\"Be brief/generic. Choose\"), expecting continuation like \"the top three\" or \"from the categories below\" or \"the answer that is most relevant.\" or \"5 points\" or \"from real/practical locations.\" or \"one category\". or \"your answer to be concise\". or \"different options/categories.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 24,
+          "token_picked": " where",
+          "token_api": " where",
+          "mse": 0.017468983307480812,
+          "cosine_similarity": 0.9912647008895874,
+          "description": "Instructional/educational register with a structured list-based answer, anticipating a detailed, non-academic answer about global/environmental topics in a Spanish/English context.\n\nThe phrase \"Decide where\" signals a request for a brief, concise informational/summary format, likely a decision about how to summarise or cut the topic.\n\nFinal token \"Choose where\" begins a clause about editorial discretion or criteria (\"Decide yourself where\"), likely followed by \"to stop\" or \"the boundaries/cutoff are\" or \"you feel the list is sufficient.\" or \"to cut or prioritise\" or \"the weight is\". or \"to choose limits of the paragraph\". or \"to emphasise or.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 25,
+          "token_picked": " people",
+          "token_api": " people",
+          "mse": 0.05611919239163399,
+          "cosine_similarity": 0.9719406962394714,
+          "description": "Advice/listicle register: structured, reflective advice about social friendships, building community, and finding hobbies/activities.\n\nThe phrase \"tell me where people\" signals a brainstorming or actionable question, likely about community/activity recommendations for a loneliness-advice context, referencing general locations or advice patterns for making friends.\n\nFinal token \"where people\" begins a clause describing a list or suggestion mechanism (\"indicate where people\"), likely continuing with \"gather,\" \"live,\" or \"would share similar interests\" or \"have advice about common interests\" or \"are gathered/recommended.\" or \"you mentioned the commonalities.\" or \"people live in similar cities.\" or \"to socialize/advice overlap.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 26,
+          "token_picked": " talk",
+          "token_api": " talk",
+          "mse": 0.014965187758207321,
+          "cosine_similarity": 0.9925179481506348,
+          "description": "Answer/advice post structure: a practical/reflective recommendation about finding friends, with a bulleted list-based answer about dating/socializing in context.\n\nThe phrase \"Find places where people talk\" signals a question or context about where people find friends, likely specifying forums or locations/advice for finding friends in a city.\n\nFinal token \"where people talk\" opens a question or clause (\"Identify where people talk\"), expecting continuation like \"about friendships,\" \"in real life,\" or \"to find groups/advice\" or \"people congregate\" or \"about these things.\" or \"in online forums/places.\" or \"to discuss groups.\" or \"up/advice, places they.\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 35,
+          "token_picked": "Okay",
+          "token_api": "Okay",
+          "mse": 0.013248319737613201,
+          "cosine_similarity": 0.9933756589889526,
+          "description": "Structured advice/listicle format established: a summarized, actionable roundup of advice for real relationship validation, building a general recommendation.\n\nThe intro \"Okay\" signals a direct, compiled answer promising aggregated, brief advice from Reddit/forum searches, fulfilling the promised \"what people want.\"\n\nFinal token \"Okay\" opens a response/answer declaration (\"Okay\"), immediately requiring a structured response like \"here's a compiled roundup\" or \"based on Reddit\" or \"here. summarizing top advice\" to signal the compiled, brevity-focused answer. or \"based on Reddit requests:\" or \"I'll synthesize...\" or \"here's the summary, pulled quickly:\" or \"from the.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "p3_bare_laptop",
+      "prompt": "What laptop should a student buy?\nBe brief.",
+      "completion": "\n**For most students:**\n\n* **Apple MacBook Air (M2/M3):** Great battery, reliable, user-friendly (if you prefer macOS). ~$999+\n* **Dell XPS 13:** Windows, premium build, good performance. ~$899+\n* **HP Spectre x360:** Versatile 2-in-1, good features. ~$800+\n* **Lenovo IdeaPad Slim 5:** Excellent value, solid performance. ~$600+\n\n**Consider:**\n\n* **Major:** Demanding programs (engineering, video editing)",
+      "probes": [
+        {
+          "label": "user_tail",
+          "position": 10,
+          "token_picked": "?",
+          "token_api": "?",
+          "mse": 0.009824655018746853,
+          "cosine_similarity": 0.9950869679450989,
+          "description": "Introductory article/advice register established, signaling a structured, practical recommendation-based discussion of laptop choices for college students.\n\nThe opening question \"What laptop should a college student get?\" signals a detailed, analytical listicle, promising concrete recommendations for a student laptop.\n\nFinal token \"!\" closes a topic introduction (\"Which laptop is a good student?\"), immediately requiring a structured answer or the question beginning \"the\" or \"laptops for students\" to establish the decision framework. or \"a laptop\" or \"the best laptop for students\" or \"criteria/recommendations\" or \"college laptops\" or \"this depends on budget.\" or \"Choosing a laptop for a student depends...\""
+        },
+        {
+          "label": "user_tail",
+          "position": 12,
+          "token_picked": "Be",
+          "token_api": "Be",
+          "mse": 0.005159749649465084,
+          "cosine_similarity": 0.997420072555542,
+          "description": "Structured conversational advice/marketing register, building a practical argument about childhood wonder and inspiring a magical, memorable experience.\n\nThe repetition pattern: \"It's scary, but...\" mirrors the earlier reassurance, echoing the visual/emotional impact of the mysterious malfunctioning device.\n\nFinal token \"again,\" completes a repeated phrase (\"It was intimidating, but...\"), requiring continuation with \"the experience\" or \"the design\" to complete the parallel sentence structure. or \"it\" or \"the challenges/challenges of...\" or \"the location, a recognizable visual.\" or \"a few factors of their design...\" or \"have a compelling story\" or \"the mystery causes...\" or \"inches of damage/.\""
+        },
+        {
+          "label": "user_tail",
+          "position": 13,
+          "token_picked": " brief",
+          "token_api": " brief",
+          "mse": 0.007769394665956497,
+          "cosine_similarity": 0.9961159229278564,
+          "description": "Question/advice format established: a request for actionable recommendations, likely a list of advice for a visiting business or college.\n\nThe prompt \"What are your top resources/advice for productivity? Be brief\" signals a structured answer or constraint, implying a concise, bulleted response about recommendations.\n\nFinal token \"Be brief\" opens a request/instruction (\"Be brief\"), immediately expecting a response or answer, likely a bullet point or period, fulfilling the request for a brief summary of recommendations. or \"and concise\" or \"—please.\" or \"and bulleted\" or \"and limit\". or \"Be brief.\" or \"and answer with...\" or \"answer each category.\" or \".\""
+        },
+        {
+          "label": "user_tail",
+          "position": 14,
+          "token_picked": ".",
+          "token_api": ".",
+          "mse": 0.06664909422397614,
+          "cosine_similarity": 0.9666752219200134,
+          "description": "Structured advice/listicle format established: a brief, punchy answer to a product recommendation query, summarizing actionable advice.\n\nThe answer beginning \"Pick: brief, quality.\" signals a terse, bullet-pointed recommendation, promising a concise, practical answer.\n\nFinal token \"brief.\" closes a concise, truncated answer (\"No time?\"), immediately expecting a new paragraph or bullet point beginning a structured recommendation, likely \"•\" or \".\" to answer a concise product recommendation. or \"•\", or \"Choose...\" or \"1-2:\". or \"Short-form:\". or \"Use headphones.\" or \"Depends on budget.\" or \"Bottom line:\" to signal the answer."
+        },
+        {
+          "label": "assistant_first",
+          "position": 20,
+          "token_picked": "**",
+          "token_api": "**",
+          "mse": 0.010463578626513481,
+          "cosine_similarity": 0.9947678446769714,
+          "description": "Structured advice format established: answer promises a laptop recommendation guide, signaling a practical, tiered recommendation answer for college students.\n\nThe opening \"Pick a laptop\" signals a list-based recommendation answer, anticipating specific category options like budget/major/use case to answer Mac vs. PC student laptop choice.\n\nFinal token \"**\" opens a structured recommendation list (\"**\"), immediately requiring a categorical recommendation, likely \"For general students:\" or \"Budget: ~$X\" or \"Best Overall/College:\". or \"For basics/Chrome/Mac:\" to specify practical recommendations. or \"Depends on major:\". or \"Budget/Need level: 3 categories.\" or \"Simple laptops for.\""
+        }
+      ]
+    },
+    {
+      "model": "gemma27b",
+      "modelId": "gemma-3-27b-it",
+      "nlaSourceId": "kitft-l41",
+      "prompt_id": "p4_website_laptop",
+      "prompt": "What laptop should a student buy {on website}?\nBe brief. Choose yourself the website.",
+      "completion": "\n\nOkay, here's a quick laptop recommendation for students, focusing on value & performance, from **Best Buy**:\n\n**Lenovo IdeaPad Flex 5 Chromebook (14\") - $249** ([https://www.bestbuy.com/site/lenovo-ideapad-flex-5-chromebook-14-laptop-intel-processor-4gb-memory-64gb-emmc-storage-dark-petrol-blue/6496433.p?skuId=6496433](https://www.bestbuy.com",
+      "probes": [
+        {
+          "label": "user_slot",
+          "position": 10,
+          "token_picked": " {",
+          "token_api": " {",
+          "mse": 0.016856594011187553,
+          "cosine_similarity": 0.9915714263916016,
+          "description": "A question/request format established, implying a structured advice or recommendation post about a laptop purchase for a student.\n\nThe phrase \"Find a good laptop {...\" introduces a context or scenario request, likely a specific scenario or example of a student needing a recommendation for a laptop.\n\nFinal token \"{\": opens a bracketed question or scenario specification (\"find a best laptop {\"), strongly expecting a continuation like \"college/engineering student\" or \"gender: female\" or \"requirements:...\" to specify the scenario or list of options. or \"in a college/category}\". or \"programming/computer science}\" or \"or year of study}\". or \"the following constraints}\" or \"1 year.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 12,
+          "token_picked": " website",
+          "token_api": " website",
+          "mse": 0.04937540367245674,
+          "cosine_similarity": 0.9753122925758362,
+          "description": "Question/scenario format with a specific request, suggesting a actionable recommendation or advice about purchasing a laptop/desktop with affordable prices in a student context.\n\nThe phrase \"how to buy laptop or PC (on website\" signals a hypothetical/example scenario, likely a specific list or recommendation of a price/item category for a laptop comparison.\n\nFinal token \"on website\" begins a parenthetical or question phrase (\"best laptop (on website\"), expecting a placeholder like \"name\" or \"www....\" to specify a website or platform where prices are mentioned. or \"or retail\" or \"Amazon/BestBuy\" or \"example)\" or \"of a sale\" or \"or the platform.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 13,
+          "token_picked": "}?",
+          "token_api": "}?",
+          "mse": 0.04385799542069435,
+          "cosine_similarity": 0.9780712723731995,
+          "description": "A conversational/analytical request pattern: a structured brainstorming or recommendation task about buying a laptop for a specific academic purpose.\n\nThe phrase \"Find a laptop for a [course] on {website}?\" signals a hypothetical or question scenario, likely a specific retail website or sale page to find the recommended items.\n\nFinal token \"website?\": ends a question/prompt (\"which laptop (online)?\"), strongly expecting a continuation like a question marker or specific website name, possibly \"on the website\" or \"the website\" to specify the location or platform. or \"or [store name]\" or \"from the website\" or \"this week\" or \"on a specified website\". or \".\""
+        },
+        {
+          "label": "user_slot",
+          "position": 18,
+          "token_picked": " Choose",
+          "token_api": " Choose",
+          "mse": 0.008927186019718647,
+          "cosine_similarity": 0.9955364465713501,
+          "description": "Instructional/advice register with a prompt seeking a product recommendation, establishing a listicle or recommendation format for a best laptop for a university/work user.\n\nThe phrase \"Give 4 options for a good laptop. Choose\" is a request for a compact, specific recommendation or answer, implying a decision or example to be given.\n\nFinal token \"Choose\" opens a second instruction clause (\"Be brief. Choose\"), likely continuing with \"from Amazon\" or \"one from three options\" or \"a category appropriate for...\" or \"one with price limit\" or \"only from common/practical brands.\" or \"between Apple or Dell.\" or \"the answer based on...\" or \"best.\""
+        },
+        {
+          "label": "user_slot",
+          "position": 21,
+          "token_picked": " website",
+          "token_api": " website",
+          "mse": 0.06563997268676758,
+          "cosine_similarity": 0.9671801328659058,
+          "description": "Analytical/strategic post context: a recommendation task with a specific scenario about choosing a laptop for a music/audio/coding hobbyist.\n\nThe prompt \"Pick 3 products, decide the website\" signals a structured, constrained recommendation task, establishing a concrete example or scenario of product comparison.\n\nFinal token \"choose the website\" opens a constraint clause specifying the chosen website (\"Choose the website\"), immediately requiring a completion like \"to shop\" or \"website\" or \"and the platform you use\" to specify the example store (e.g., Amazon, BestBuy). or \"for the example\" or \"to specify the website/store.\" or \"the website to be reviewed.\""
+        },
+        {
+          "label": "assistant_first",
+          "position": 28,
+          "token_picked": "Okay",
+          "token_api": "Okay",
+          "mse": 0.022327331826090813,
+          "cosine_similarity": 0.9888365268707275,
+          "description": "Structured advice/recommendation format established: a practical, brief product recommendation answer for college laptops, answering a specific budget request.\n\nThe intro \"Okay\" signals a concrete recommendation response, promising specific laptop picks for college students, now delivering a quick, decisive recommendation.\n\nFinal token \"Okay\" opens a response/answer block (\"Okay\"), immediately requiring a structured recommendation like \"here's a recommendation for best laptops...\" or \"assuming price is $X\" to begin the concrete recommendation. or \"here: Amazon/Best Buy.\" or \"for college, based on your request...\" or \"Let's go with...\" or \"I'll assume deadline is quick.\" or \"Okay.\""
+        }
+      ]
+    }
+  ]
+}
